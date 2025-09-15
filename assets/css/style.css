@@ -1302,6 +1302,10 @@ section {
     background: #003366;
     color: white;
     padding: 3rem 0 1rem;
+    position: relative;
+    z-index: 100;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 .footer-content {
@@ -1522,6 +1526,43 @@ section {
         grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
     }
+    
+    /* Mobile Footer Fixes */
+    .main-footer {
+        padding: 2rem 0 1rem;
+        margin-top: 2rem;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        text-align: center;
+    }
+    
+    .footer-section {
+        padding: 1rem 0;
+    }
+    
+    .footer-section h3,
+    .footer-section h4 {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .footer-section ul li {
+        margin: 0.8rem 0;
+    }
+    
+    .footer-section ul li a {
+        font-size: 0.9rem;
+        display: block;
+        padding: 0.3rem 0;
+    }
+    
+    .footer-bottom {
+        padding-top: 1.5rem;
+        font-size: 0.9rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1571,5 +1612,33 @@ section {
     .nav-menu {
         top: 70px;
         height: calc(100vh - 70px);
+    }
+    
+    /* Extra Small Screen Footer */
+    .main-footer {
+        padding: 1.5rem 0 1rem;
+    }
+    
+    .footer-content {
+        gap: 1rem;
+    }
+    
+    .footer-section {
+        padding: 0.8rem 0;
+    }
+    
+    .footer-section h3,
+    .footer-section h4 {
+        font-size: 1rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .footer-section ul li a {
+        font-size: 0.85rem;
+    }
+    
+    .footer-bottom {
+        padding-top: 1rem;
+        font-size: 0.8rem;
     }
 }
