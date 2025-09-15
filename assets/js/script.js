@@ -1,130 +1,115 @@
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize navigation
+    console.log('DOM loaded, initializing...');
+    
+    // Initialize navigation first
     initializeNavigation();
     
-    // Initialize navbar scroll effects
+    // Initialize other features
     initializeNavbarEffects();
-    
-    // Initialize contact form
     initializeContactForm();
-    
-    // Initialize smooth scrolling
     initializeSmoothScroll();
-    
-    // Initialize animations
     initializeAnimations();
-    
-    // Initialize AOS (Animate On Scroll)
     initializeAOS();
-    
-    // Initialize counter animations
     initializeCounters();
-    
-    // Initialize advanced animations
     initializeAdvancedAnimations();
-    
-    // Track page visits
     trackPageVisit();
 });
 
-// Initialize navigation functionality
+// Initialize navigation functionality - SIMPLIFIED VERSION
 function initializeNavigation() {
-    const navToggle = document.getElementById('nav-toggle');
-    const navMenu = document.getElementById('nav-menu');
+    console.log('Starting navigation initialization...');
     
-    console.log('Initializing navigation...', { 
-        navToggle: !!navToggle, 
+    // Use more specific selectors and add fallbacks
+    const navToggle = document.querySelector('.nav-toggle') || document.getElementById('nav-toggle');
+    const navMenu = document.querySelector('.nav-menu') || document.getElementById('nav-menu');
+    
+    console.log('Navigation elements found:', {
+        navToggle: !!navToggle,
         navMenu: !!navMenu,
-        navToggleId: navToggle?.id,
-        navMenuId: navMenu?.id 
+        navToggleClasses: navToggle ? navToggle.className : 'not found',
+        navMenuClasses: navMenu ? navMenu.className : 'not found'
     });
     
     if (navToggle && navMenu) {
-        console.log('Navigation elements found, adding event listeners');
+        console.log('Both elements found, setting up event listeners...');
         
-        navToggle.addEventListener('click', () => {
-            console.log('Nav toggle clicked - current state:', {
-                menuActive: navMenu.classList.contains('active'),
-                toggleActive: navToggle.classList.contains('active')
-            });
+        // Simple click handler
+        function toggleMenu() {
+            console.log('Toggle menu called');
+            const isActive = navMenu.classList.contains('active');
+            console.log('Current state - Menu active:', isActive);
             
-            navMenu.classList.toggle('active');
-            navToggle.classList.toggle('active');
-            
-            console.log('Nav toggle after click - new state:', {
-                menuActive: navMenu.classList.contains('active'),
-                toggleActive: navToggle.classList.contains('active')
-            });
-            
-            // Prevent body scroll when menu is open
-            if (navMenu.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-                console.log('Menu opened, body scroll disabled');
-            } else {
+            if (isActive) {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
                 document.body.style.overflow = '';
-                console.log('Menu closed, body scroll enabled');
+                console.log('Menu closed');
+            } else {
+                navMenu.classList.add('active');
+                navToggle.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                console.log('Menu opened');
             }
-        });
+        }
         
-        // Add touch event for better mobile support
-        navToggle.addEventListener('touchstart', (e) => {
+        // Add multiple event listeners for better compatibility
+        navToggle.addEventListener('click', function(e) {
             e.preventDefault();
-            console.log('Touch event on nav toggle');
-            navMenu.classList.toggle('active');
-            navToggle.classList.toggle('active');
-            
-            if (navMenu.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = '';
-            }
+            e.stopPropagation();
+            console.log('Click event triggered');
+            toggleMenu();
         });
         
-        // Close menu when clicking on a link
+        navToggle.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Touch event triggered');
+            toggleMenu();
+        });
+        
+        // Close menu when clicking nav links
         const navLinks = navMenu.querySelectorAll('.nav-link');
         console.log('Found nav links:', navLinks.length);
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                console.log('Nav link clicked');
-                if (navMenu) {
-                    navMenu.classList.remove('active');
-                }
-                if (navToggle) {
-                    navToggle.classList.remove('active');
-                }
+        
+        navLinks.forEach((link, index) => {
+            link.addEventListener('click', function() {
+                console.log('Nav link clicked:', index);
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
                 document.body.style.overflow = '';
             });
         });
         
         // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
+        document.addEventListener('click', function(e) {
             if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
-                if (navMenu) {
+                if (navMenu.classList.contains('active')) {
+                    console.log('Clicked outside, closing menu');
                     navMenu.classList.remove('active');
-                }
-                if (navToggle) {
                     navToggle.classList.remove('active');
+                    document.body.style.overflow = '';
                 }
-                document.body.style.overflow = '';
             }
         });
         
         // Handle escape key
-        document.addEventListener('keydown', (e) => {
+        document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+                console.log('Escape pressed, closing menu');
                 navMenu.classList.remove('active');
                 navToggle.classList.remove('active');
                 document.body.style.overflow = '';
             }
         });
+        
+        console.log('Navigation setup complete');
     } else {
-        console.error('Navigation elements not found:', { 
-            navToggle: !!navToggle, 
-            navMenu: !!navMenu,
-            allElementsWithNavToggleId: document.querySelectorAll('#nav-toggle'),
-            allElementsWithNavMenuId: document.querySelectorAll('#nav-menu')
-        });
+        console.error('Navigation elements not found!');
+        console.log('Available elements with nav-toggle class:', document.querySelectorAll('.nav-toggle'));
+        console.log('Available elements with nav-menu class:', document.querySelectorAll('.nav-menu'));
+        console.log('Available elements with id nav-toggle:', document.querySelectorAll('#nav-toggle'));
+        console.log('Available elements with id nav-menu:', document.querySelectorAll('#nav-menu'));
     }
     
     // Set active navigation link
@@ -149,6 +134,8 @@ function setActiveNavLink() {
 // Initialize navbar scroll effects
 function initializeNavbarEffects() {
     const header = document.querySelector('.main-header');
+    if (!header) return;
+    
     let lastScrollY = window.scrollY;
     
     window.addEventListener('scroll', () => {
@@ -185,6 +172,7 @@ function initializeNavbarEffects() {
         });
     });
 }
+
 // Initialize contact form functionality
 function initializeContactForm() {
     const contactForm = document.getElementById('contactForm');
@@ -217,7 +205,7 @@ function initializeContactForm() {
                 return;
             }
             
-            // Simulate form submission (in a real scenario, this would be sent to a server)
+            // Simulate form submission
             submitContactForm(formData);
         });
     }
@@ -250,9 +238,7 @@ function submitContactForm(formData) {
         // Reset form
         document.getElementById('contactForm').reset();
         
-        // Log submission (for demonstration purposes)
         console.log('Contact form submitted:', formData);
-        console.log('Total contacts:', contacts.length);
         
     } catch (error) {
         console.error('Error submitting form:', error);
@@ -290,7 +276,7 @@ function initializeSmoothScroll() {
             const targetElement = document.getElementById(targetId);
             
             if (targetElement) {
-                const offsetTop = targetElement.offsetTop - 100; // Account for fixed header
+                const offsetTop = targetElement.offsetTop - 100;
                 
                 window.scrollTo({
                     top: offsetTop,
@@ -303,7 +289,6 @@ function initializeSmoothScroll() {
 
 // Initialize animations and scroll effects
 function initializeAnimations() {
-    // Enhanced scroll animations
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -100px 0px'
@@ -317,7 +302,6 @@ function initializeAnimations() {
         });
     }, observerOptions);
     
-    // Observe elements for animation
     const animatedElements = document.querySelectorAll('.service-card, .benefit-item, .value-item, .service-detail, .stat-item');
     animatedElements.forEach(element => {
         element.classList.add('animate-ready');
@@ -360,8 +344,8 @@ function initializeCounters() {
             if (entry.isIntersecting) {
                 const counter = entry.target;
                 const target = parseInt(counter.getAttribute('data-count'));
-                const duration = 2000; // 2 seconds
-                const increment = target / (duration / 16); // 60fps
+                const duration = 2000;
+                const increment = target / (duration / 16);
                 let current = 0;
                 
                 const updateCounter = () => {
@@ -393,22 +377,6 @@ function trackPageVisit() {
     localStorage.setItem('oakglobal_visits', (visits + 1).toString());
 }
 
-// Utility function to get all stored contacts (for demonstration)
-function getStoredContacts() {
-    return JSON.parse(localStorage.getItem('oakglobal_contacts') || '[]');
-}
-
-// Utility function to clear all stored contacts (for demonstration)
-function clearStoredContacts() {
-    localStorage.removeItem('oakglobal_contacts');
-    console.log('All stored contacts cleared');
-}
-
-// Get page visit count
-function getPageVisits() {
-    return parseInt(localStorage.getItem('oakglobal_visits') || '0');
-}
-
 // Initialize advanced animations
 function initializeAdvancedAnimations() {
     // Parallax effect for hero section
@@ -428,36 +396,6 @@ function initializeAdvancedAnimations() {
         card.classList.add('animate-ready');
     });
     
-    // Floating animation for benefit icons
-    const benefitIcons = document.querySelectorAll('.benefit-icon');
-    benefitIcons.forEach((icon, index) => {
-        icon.style.animationDelay = `${index * 0.5}s`;
-        icon.style.animation = `float 3s ease-in-out infinite ${index * 0.5}s`;
-    });
-    
-    // Typewriter effect for hero title (on homepage)
-    const heroTitle = document.querySelector('.hero h1');
-    if (heroTitle && window.location.pathname.includes('index')) {
-        const text = heroTitle.textContent;
-        heroTitle.textContent = '';
-        heroTitle.style.borderRight = '2px solid white';
-        
-        let i = 0;
-        const typeWriter = () => {
-            if (i < text.length) {
-                heroTitle.textContent += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 100);
-            } else {
-                setTimeout(() => {
-                    heroTitle.style.borderRight = 'none';
-                }, 1000);
-            }
-        };
-        
-        setTimeout(typeWriter, 1000);
-    }
-    
     // Mouse follow effect for buttons
     const buttons = document.querySelectorAll('.cta-button, .secondary-button');
     buttons.forEach(button => {
@@ -471,7 +409,22 @@ function initializeAdvancedAnimations() {
         });
     });
 }
-// Add some console methods for development/demonstration
+
+// Utility functions
+function getStoredContacts() {
+    return JSON.parse(localStorage.getItem('oakglobal_contacts') || '[]');
+}
+
+function clearStoredContacts() {
+    localStorage.removeItem('oakglobal_contacts');
+    console.log('All stored contacts cleared');
+}
+
+function getPageVisits() {
+    return parseInt(localStorage.getItem('oakglobal_visits') || '0');
+}
+
+// Global object for debugging
 window.oakGlobal = {
     getContacts: getStoredContacts,
     clearContacts: clearStoredContacts,
@@ -479,56 +432,5 @@ window.oakGlobal = {
     version: '1.0.0'
 };
 
-// Add CSS for animations
-const animationCSS = `
-.animate-ready {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.animate-in {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-}
-
-[data-aos] {
-    opacity: 0;
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-[data-aos="fade-up"] {
-    transform: translateY(30px);
-}
-
-[data-aos="fade-left"] {
-    transform: translateX(30px);
-}
-
-[data-aos="fade-right"] {
-    transform: translateX(-30px);
-}
-
-[data-aos="zoom-in"] {
-    transform: scale(0.8);
-}
-
-[data-aos="flip-left"] {
-    transform: rotateY(-90deg);
-}
-
-.aos-animate {
-    opacity: 1 !important;
-    transform: none !important;
-}
-`;
-
-// Inject animation CSS
-const styleSheet = document.createElement('style');
-styleSheet.textContent = animationCSS;
-document.head.appendChild(styleSheet);
-
-// Log initialization
-console.log('OAK Global website initialized');
+console.log('OAK Global website script loaded');
 console.log('Available methods: oakGlobal.getContacts(), oakGlobal.clearContacts(), oakGlobal.getVisits()');
-console.log('Enhanced animations and effects loaded');
