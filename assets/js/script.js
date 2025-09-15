@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Load header and footer includes
 function loadIncludes() {
     // Load header
-    fetch('includes/header.html')
+    fetch('./includes/header.html')
         .then(response => response.text())
         .then(data => {
             document.getElementById('header-container').innerHTML = data;
@@ -45,15 +45,37 @@ function loadIncludes() {
                 setActiveNavLink();
             }, 100);
         })
-        .catch(error => console.error('Error loading header:', error));
+        .catch(error => {
+            console.error('Error loading header:', error);
+            // Fallback: try without ./ prefix
+            fetch('includes/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+                    setTimeout(() => {
+                        initializeNavigation();
+                        setActiveNavLink();
+                    }, 100);
+                })
+                .catch(err => console.error('Header fallback failed:', err));
+        });
     
     // Load footer
-    fetch('includes/footer.html')
+    fetch('./includes/footer.html')
         .then(response => response.text())
         .then(data => {
             document.getElementById('footer-container').innerHTML = data;
         })
-        .catch(error => console.error('Error loading footer:', error));
+        .catch(error => {
+            console.error('Error loading footer:', error);
+            // Fallback: try without ./ prefix
+            fetch('includes/footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-container').innerHTML = data;
+                })
+                .catch(err => console.error('Footer fallback failed:', err));
+        });
 }
 
 // Initialize navigation functionality
