@@ -33,15 +33,47 @@ function initializeNavigation() {
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');
     
-    console.log('Initializing navigation...', { navToggle, navMenu });
+    console.log('Initializing navigation...', { 
+        navToggle: !!navToggle, 
+        navMenu: !!navMenu,
+        navToggleId: navToggle?.id,
+        navMenuId: navMenu?.id 
+    });
     
     if (navToggle && navMenu) {
+        console.log('Navigation elements found, adding event listeners');
+        
         navToggle.addEventListener('click', () => {
-            console.log('Nav toggle clicked');
+            console.log('Nav toggle clicked - current state:', {
+                menuActive: navMenu.classList.contains('active'),
+                toggleActive: navToggle.classList.contains('active')
+            });
+            
             navMenu.classList.toggle('active');
             navToggle.classList.toggle('active');
             
+            console.log('Nav toggle after click - new state:', {
+                menuActive: navMenu.classList.contains('active'),
+                toggleActive: navToggle.classList.contains('active')
+            });
+            
             // Prevent body scroll when menu is open
+            if (navMenu.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+                console.log('Menu opened, body scroll disabled');
+            } else {
+                document.body.style.overflow = '';
+                console.log('Menu closed, body scroll enabled');
+            }
+        });
+        
+        // Add touch event for better mobile support
+        navToggle.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            console.log('Touch event on nav toggle');
+            navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active');
+            
             if (navMenu.classList.contains('active')) {
                 document.body.style.overflow = 'hidden';
             } else {
@@ -87,7 +119,12 @@ function initializeNavigation() {
             }
         });
     } else {
-        console.error('Navigation elements not found:', { navToggle, navMenu });
+        console.error('Navigation elements not found:', { 
+            navToggle: !!navToggle, 
+            navMenu: !!navMenu,
+            allElementsWithNavToggleId: document.querySelectorAll('#nav-toggle'),
+            allElementsWithNavMenuId: document.querySelectorAll('#nav-menu')
+        });
     }
     
     // Set active navigation link

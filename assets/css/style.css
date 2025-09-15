@@ -349,6 +349,8 @@ p {
     transition: background-color 0.2s ease;
     z-index: 1001;
     position: relative;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
 }
 
 .nav-toggle:hover {
@@ -365,6 +367,20 @@ p {
 }
 
 .nav-toggle:hover .bar {
+    background-color: #0066cc;
+}
+
+.nav-toggle.active .bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+    background-color: #0066cc;
+}
+
+.nav-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle.active .bar:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
     background-color: #0066cc;
 }
 
@@ -1390,18 +1406,20 @@ section {
     
     .nav-menu {
         position: fixed;
-        left: -110%;
+        left: -100%;
         top: 80px;
         flex-direction: column;
         background-color: white;
         width: 100%;
         text-align: center;
-        transition: left 0.4s ease-in-out;
+        transition: left 0.3s ease-in-out;
         box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
         z-index: 999;
         height: calc(100vh - 80px);
         overflow-y: auto;
         border-top: 1px solid #eee;
+        visibility: hidden;
+        opacity: 0;
     }
 
     .nav-menu.active {
@@ -1434,6 +1452,7 @@ section {
         color: #003366;
         transition: all 0.3s ease;
         border-radius: 0;
+        -webkit-tap-highlight-color: transparent;
     }
     
     .nav-link:hover {
@@ -1455,20 +1474,6 @@ section {
         background-color: rgba(0, 102, 204, 0.1);
     }
 
-    .nav-toggle.active .bar:nth-child(2) {
-        opacity: 0;
-    }
-
-    .nav-toggle.active .bar:nth-child(1) {
-        transform: translateY(6px) rotate(45deg);
-        background-color: #0066cc;
-    }
-
-    .nav-toggle.active .bar:nth-child(3) {
-        transform: translateY(-6px) rotate(-45deg);
-        background-color: #0066cc;
-    }
-    
     .bar {
         transition: all 0.3s ease;
     }
