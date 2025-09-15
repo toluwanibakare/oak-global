@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - OAK Global International Business Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <h2>Admin Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="cta-button">Login</button>
+                <div id="loginError" class="error-message"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="adminPanel" class="admin-panel" style="display: none;">
+        <header class="admin-header">
+            <div class="container">
+                <h1>OAK Global Admin Panel</h1>
+                <button id="logoutBtn" class="secondary-button">Logout</button>
+            </div>
+        </header>
+
+        <div class="admin-container">
+            <nav class="admin-nav">
+                <ul>
+                    <li><a href="#dashboard" class="nav-link active" data-section="dashboard">Dashboard</a></li>
+                    <li><a href="#contacts" class="nav-link" data-section="contacts">Contact Messages</a></li>
+                    <li><a href="#content" class="nav-link" data-section="content">Content Management</a></li>
+                    <li><a href="#settings" class="nav-link" data-section="settings">Settings</a></li>
+                </ul>
+            </nav>
+
+            <main class="admin-main">
+                <!-- Dashboard Section -->
+                <section id="dashboard" class="admin-section active">
+                    <h2>Dashboard</h2>
+                    <div class="dashboard-stats">
+                        <div class="stat-card">
+                            <h3>Total Messages</h3>
+                            <div class="stat-number" id="totalMessages">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>New Messages Today</h3>
+                            <div class="stat-number" id="todayMessages">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Website Visits</h3>
+                            <div class="stat-number" id="websiteVisits">1,247</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Active Services</h3>
+                            <div class="stat-number">5</div>
+                        </div>
+                    </div>
+
+                    <div class="recent-activity">
+                        <h3>Recent Activity</h3>
+                        <div id="recentActivity" class="activity-list">
+                            <!-- Recent activity will be populated here -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Contacts Section -->
+                <section id="contacts" class="admin-section">
+                    <h2>Contact Messages</h2>
+                    <div class="section-controls">
+                        <button id="refreshContacts" class="secondary-button">Refresh</button>
+                        <button id="clearAllContacts" class="danger-button">Clear All</button>
+                    </div>
+                    <div id="contactsList" class="contacts-list">
+                        <!-- Contact messages will be populated here -->
+                    </div>
+                </section>
+
+                <!-- Content Management Section -->
+                <section id="content" class="admin-section">
+                    <h2>Content Management</h2>
+                    <div class="content-editor">
+                        <h3>Edit Homepage Hero Section</h3>
+                        <form id="heroContentForm">
+                            <div class="form-group">
+                                <label for="heroTitle">Hero Title:</label>
+                                <input type="text" id="heroTitle" name="heroTitle" value="Driving Business Performance Through ISO Excellence">
+                            </div>
+                            <div class="form-group">
+                                <label for="heroSubtitle">Hero Subtitle:</label>
+                                <textarea id="heroSubtitle" name="heroSubtitle" rows="3">We guide you through every step, ensuring global performance, compliance and operational excellence.</textarea>
+                            </div>
+                            <button type="submit" class="cta-button">Update Content</button>
+                        </form>
+
+                        <h3>Company Information</h3>
+                        <form id="companyInfoForm">
+                            <div class="form-group">
+                                <label for="companyName">Company Name:</label>
+                                <input type="text" id="companyName" name="companyName" value="OAK Global International Business Solutions">
+                            </div>
+                            <div class="form-group">
+                                <label for="companyDescription">Company Description:</label>
+                                <textarea id="companyDescription" name="companyDescription" rows="4">OAK Global International Business Solutions is a leading consultancy firm specializing in business performance management, ISO compliance, and operational excellence.</textarea>
+                            </div>
+                            <button type="submit" class="cta-button">Update Information</button>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section id="settings" class="admin-section">
+                    <h2>Settings</h2>
+                    <div class="settings-grid">
+                        <div class="setting-group">
+                            <h3>Site Configuration</h3>
+                            <form id="siteSettingsForm">
+                                <div class="form-group">
+                                    <label for="siteName">Site Name:</label>
+                                    <input type="text" id="siteName" name="siteName" value="OAK Global International Business Solutions">
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactEmail">Contact Email:</label>
+                                    <input type="email" id="contactEmail" name="contactEmail" value="info@oakglobal.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="businessHours">Business Hours:</label>
+                                    <input type="text" id="businessHours" name="businessHours" value="Monday - Friday: 9:00 AM - 6:00 PM">
+                                </div>
+                                <button type="submit" class="cta-button">Save Settings</button>
+                            </form>
+                        </div>
+
+                        <div class="setting-group">
+                            <h3>Admin Account</h3>
+                            <form id="passwordChangeForm">
+                                <div class="form-group">
+                                    <label for="currentPassword">Current Password:</label>
+                                    <input type="password" id="currentPassword" name="currentPassword" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newPassword">New Password:</label>
+                                    <input type="password" id="newPassword" name="newPassword" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirmPassword">Confirm New Password:</label>
+                                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                                </div>
+                                <button type="submit" class="cta-button">Change Password</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="assets/js/admin.js"></script>
+</body>
+</html>
