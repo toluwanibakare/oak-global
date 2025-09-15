@@ -33,22 +33,35 @@ function initializeNavigation() {
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');
     
+    console.log('Initializing navigation...', { navToggle, navMenu });
+    
     if (navToggle && navMenu) {
         navToggle.addEventListener('click', () => {
+            console.log('Nav toggle clicked');
             navMenu.classList.toggle('active');
             navToggle.classList.toggle('active');
+            
+            // Prevent body scroll when menu is open
+            if (navMenu.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
         });
         
         // Close menu when clicking on a link
         const navLinks = navMenu.querySelectorAll('.nav-link');
+        console.log('Found nav links:', navLinks.length);
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
+                console.log('Nav link clicked');
                 if (navMenu) {
                     navMenu.classList.remove('active');
                 }
                 if (navToggle) {
                     navToggle.classList.remove('active');
                 }
+                document.body.style.overflow = '';
             });
         });
         
@@ -61,8 +74,20 @@ function initializeNavigation() {
                 if (navToggle) {
                     navToggle.classList.remove('active');
                 }
+                document.body.style.overflow = '';
             }
         });
+        
+        // Handle escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    } else {
+        console.error('Navigation elements not found:', { navToggle, navMenu });
     }
     
     // Set active navigation link

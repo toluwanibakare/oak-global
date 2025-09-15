@@ -1390,21 +1390,24 @@ section {
     
     .nav-menu {
         position: fixed;
-        left: -100%;
+        left: -110%;
         top: 80px;
         flex-direction: column;
         background-color: white;
         width: 100%;
         text-align: center;
-        transition: 0.3s;
+        transition: left 0.4s ease-in-out;
         box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
         z-index: 999;
         height: calc(100vh - 80px);
         overflow-y: auto;
+        border-top: 1px solid #eee;
     }
 
     .nav-menu.active {
-        left: 0;
+        left: 0 !important;
+        visibility: visible;
+        opacity: 1;
     }
 
     .nav-list {
@@ -1413,11 +1416,13 @@ section {
         padding: 2rem 0;
         height: 100%;
         justify-content: flex-start;
+        width: 100%;
     }
 
     .nav-item {
         margin: 1rem 0;
         width: 100%;
+        border-bottom: 1px solid #f0f0f0;
     }
     
     .nav-link {
@@ -1427,12 +1432,27 @@ section {
         text-align: center;
         font-size: 1rem;
         color: #003366;
+        transition: all 0.3s ease;
+        border-radius: 0;
+    }
+    
+    .nav-link:hover {
+        background-color: #f8f9fa;
+        color: #0066cc;
     }
 
     .nav-toggle {
         display: flex;
         position: relative;
         z-index: 1001;
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+    }
+    
+    .nav-toggle:hover {
+        background-color: rgba(0, 102, 204, 0.1);
     }
 
     .nav-toggle.active .bar:nth-child(2) {
@@ -1440,11 +1460,17 @@ section {
     }
 
     .nav-toggle.active .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
+        transform: translateY(6px) rotate(45deg);
+        background-color: #0066cc;
     }
 
     .nav-toggle.active .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
+        transform: translateY(-6px) rotate(-45deg);
+        background-color: #0066cc;
+    }
+    
+    .bar {
+        transition: all 0.3s ease;
     }
 
     .hero h1 {
