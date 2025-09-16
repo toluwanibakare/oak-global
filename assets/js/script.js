@@ -1,51 +1,49 @@
+// OAK Global International Business Solutions - JavaScript
+// Enhanced mobile navigation and website functionality
+
+console.log('OAK Global script loading...');
+
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded, initializing...');
+    console.log('DOM loaded, initializing OAK Global website...');
     
-    // Initialize navigation first
+    // Initialize all functionality
     initializeNavigation();
-    
-    // Initialize other features
     initializeNavbarEffects();
-    initializeContactForm();
     initializeSmoothScroll();
     initializeAnimations();
-    initializeAOS();
     initializeCounters();
     initializeAdvancedAnimations();
-    trackPageVisit();
 });
 
-// Initialize navigation functionality - SIMPLIFIED VERSION
+// Initialize mobile navigation - ENHANCED VERSION
 function initializeNavigation() {
-    console.log('Starting navigation initialization...');
+    console.log('Initializing navigation...');
     
-    // Use more specific selectors and add fallbacks
-    const navToggle = document.querySelector('.nav-toggle') || document.getElementById('nav-toggle');
-    const navMenu = document.querySelector('.nav-menu') || document.getElementById('nav-menu');
+    const navToggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
     
-    console.log('Navigation elements found:', {
+    console.log('Navigation elements:', {
         navToggle: !!navToggle,
-        navMenu: !!navMenu,
-        navToggleClasses: navToggle ? navToggle.className : 'not found',
-        navMenuClasses: navMenu ? navMenu.className : 'not found'
+        navMenu: !!navMenu
     });
     
     if (navToggle && navMenu) {
-        console.log('Both elements found, setting up event listeners...');
+        console.log('Setting up mobile navigation...');
         
-        // Simple click handler
-        function toggleMenu() {
-            console.log('Toggle menu called');
+        // Enhanced toggle function
+        function toggleMobileMenu() {
             const isActive = navMenu.classList.contains('active');
-            console.log('Current state - Menu active:', isActive);
+            console.log('Toggling menu. Currently active:', isActive);
             
             if (isActive) {
+                // Close menu
                 navMenu.classList.remove('active');
                 navToggle.classList.remove('active');
                 document.body.style.overflow = '';
                 console.log('Menu closed');
             } else {
+                // Open menu
                 navMenu.classList.add('active');
                 navToggle.classList.add('active');
                 document.body.style.overflow = 'hidden';
@@ -53,19 +51,20 @@ function initializeNavigation() {
             }
         }
         
-        // Add multiple event listeners for better compatibility
+        // Multiple event listeners for better compatibility
         navToggle.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            console.log('Click event triggered');
-            toggleMenu();
+            console.log('Nav toggle clicked');
+            toggleMobileMenu();
         });
         
-        navToggle.addEventListener('touchend', function(e) {
+        // Touch events for mobile
+        navToggle.addEventListener('touchstart', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            console.log('Touch event triggered');
-            toggleMenu();
+            console.log('Nav toggle touched');
+            toggleMobileMenu();
         });
         
         // Close menu when clicking nav links
@@ -103,13 +102,9 @@ function initializeNavigation() {
             }
         });
         
-        console.log('Navigation setup complete');
+        console.log('Mobile navigation setup complete');
     } else {
         console.error('Navigation elements not found!');
-        console.log('Available elements with nav-toggle class:', document.querySelectorAll('.nav-toggle'));
-        console.log('Available elements with nav-menu class:', document.querySelectorAll('.nav-menu'));
-        console.log('Available elements with id nav-toggle:', document.querySelectorAll('#nav-toggle'));
-        console.log('Available elements with id nav-menu:', document.querySelectorAll('#nav-menu'));
     }
     
     // Set active navigation link
@@ -118,12 +113,12 @@ function initializeNavigation() {
 
 // Set active navigation link based on current page
 function setActiveNavLink() {
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const currentPage = window.location.pathname.split('/').pop() || 'index.php';
     const navLinks = document.querySelectorAll('.nav-link');
     
     navLinks.forEach(link => {
         const href = link.getAttribute('href');
-        if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+        if (href === currentPage || (currentPage === '' && href === 'index.php')) {
             link.classList.add('active');
         } else {
             link.classList.remove('active');
@@ -173,97 +168,6 @@ function initializeNavbarEffects() {
     });
 }
 
-// Initialize contact form functionality
-function initializeContactForm() {
-    const contactForm = document.getElementById('contactForm');
-    const formMessage = document.getElementById('form-message');
-    
-    if (contactForm && formMessage) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = {
-                name: document.getElementById('name').value.trim(),
-                email: document.getElementById('email').value.trim(),
-                company: document.getElementById('company').value.trim(),
-                service: document.getElementById('service').value,
-                message: document.getElementById('message').value.trim(),
-                timestamp: new Date().toISOString()
-            };
-            
-            // Basic validation
-            if (!formData.name || !formData.email || !formData.message) {
-                showFormMessage('Please fill in all required fields.', 'error');
-                return;
-            }
-            
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(formData.email)) {
-                showFormMessage('Please enter a valid email address.', 'error');
-                return;
-            }
-            
-            // Simulate form submission
-            submitContactForm(formData);
-        });
-    }
-}
-
-// Simulate form submission and store in localStorage
-function submitContactForm(formData) {
-    try {
-        // Get existing contacts from localStorage
-        let contacts = JSON.parse(localStorage.getItem('oakglobal_contacts') || '[]');
-        
-        // Add new contact
-        contacts.push({
-            id: Date.now(),
-            name: formData.name,
-            email: formData.email,
-            company: formData.company || '',
-            service: formData.service || '',
-            message: formData.message,
-            timestamp: formData.timestamp,
-            read: false
-        });
-        
-        // Save back to localStorage
-        localStorage.setItem('oakglobal_contacts', JSON.stringify(contacts));
-        
-        // Show success message
-        showFormMessage('Thank you for your message! We will get back to you within 24 hours.', 'success');
-        
-        // Reset form
-        document.getElementById('contactForm').reset();
-        
-        console.log('Contact form submitted:', formData);
-        
-    } catch (error) {
-        console.error('Error submitting form:', error);
-        showFormMessage('There was an error sending your message. Please try again.', 'error');
-    }
-}
-
-// Show form message
-function showFormMessage(message, type) {
-    const formMessage = document.getElementById('form-message');
-    if (formMessage) {
-        formMessage.textContent = message;
-        formMessage.className = `form-message ${type}`;
-        formMessage.style.display = 'block';
-        
-        // Hide message after 5 seconds
-        setTimeout(() => {
-            formMessage.style.display = 'none';
-        }, 5000);
-        
-        // Scroll to message
-        formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-}
-
 // Initialize smooth scrolling for anchor links
 function initializeSmoothScroll() {
     const links = document.querySelectorAll('a[href^="#"]');
@@ -309,32 +213,6 @@ function initializeAnimations() {
     });
 }
 
-// Initialize AOS-like animations
-function initializeAOS() {
-    const aosElements = document.querySelectorAll('[data-aos]');
-    
-    const aosObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const element = entry.target;
-                const animation = element.getAttribute('data-aos');
-                const delay = element.getAttribute('data-aos-delay') || 0;
-                
-                setTimeout(() => {
-                    element.classList.add('aos-animate');
-                }, delay);
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    });
-    
-    aosElements.forEach(element => {
-        aosObserver.observe(element);
-    });
-}
-
 // Initialize counter animations
 function initializeCounters() {
     const counters = document.querySelectorAll('[data-count]');
@@ -371,12 +249,6 @@ function initializeCounters() {
     });
 }
 
-// Track page visits for admin dashboard
-function trackPageVisit() {
-    const visits = parseInt(localStorage.getItem('oakglobal_visits') || '0');
-    localStorage.setItem('oakglobal_visits', (visits + 1).toString());
-}
-
 // Initialize advanced animations
 function initializeAdvancedAnimations() {
     // Parallax effect for hero section
@@ -410,27 +282,11 @@ function initializeAdvancedAnimations() {
     });
 }
 
-// Utility functions
-function getStoredContacts() {
-    return JSON.parse(localStorage.getItem('oakglobal_contacts') || '[]');
-}
-
-function clearStoredContacts() {
-    localStorage.removeItem('oakglobal_contacts');
-    console.log('All stored contacts cleared');
-}
-
-function getPageVisits() {
-    return parseInt(localStorage.getItem('oakglobal_visits') || '0');
-}
-
 // Global object for debugging
 window.oakGlobal = {
-    getContacts: getStoredContacts,
-    clearContacts: clearStoredContacts,
-    getVisits: getPageVisits,
-    version: '1.0.0'
+    version: '2.0.0',
+    type: 'PHP Website'
 };
 
-console.log('OAK Global website script loaded');
-console.log('Available methods: oakGlobal.getContacts(), oakGlobal.clearContacts(), oakGlobal.getVisits()');
+console.log('OAK Global PHP website script loaded successfully');
+console.log('Version:', window.oakGlobal.version);
