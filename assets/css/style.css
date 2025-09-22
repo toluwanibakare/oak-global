@@ -1095,10 +1095,6 @@ section {
     background-color: #959fcc;
 }
 
-.contact-text, p {
-    color: white;
-}
-
 .contact-item:hover {
     transform: translateX(8px);
     box-shadow: var(--shadow-md);
