@@ -131,6 +131,71 @@ p {
     transform: rotate(5deg) scale(1.1);
 }
 
+/* Contact Header */
+.contact-header {
+    background: var(--text-primary);
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1001;
+    transition: all var(--transition-normal);
+}
+
+.contact-info-top {
+    display: flex;
+    justify-content: flex-end;
+    gap: 2rem;
+    align-items: center;
+    transition: gap var(--transition-normal);
+}
+
+.contact-item-top {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all var(--transition-normal);
+}
+
+.contact-item-top i {
+    color: var(--secondary-color);
+    font-size: 0.75rem;
+    transition: font-size var(--transition-normal);
+}
+
+/* Adjust main header position when contact header is visible */
+.main-header {
+    top: 40px; /* Height of contact header */
+    transition: top var(--transition-normal);
+}
+
+
+.page-hero {
+    margin-top: 120px; /* Adjust for contact header + main header height */
+    transition: margin-top var(--transition-normal);
+}
+
+
+/* Mobile Responsiveness for Contact Header */
+@media (max-width: 768px) {
+    .contact-header {
+        display: none; /* Hide on mobile to save space */
+    }
+    
+    .main-header {
+        top: 0; /* Reset top position when contact header is hidden */
+    }
+    
+    .page-hero {
+        margin-top: 80px; /* Reset to original margin for mobile */
+    }
+}
+
 .logo-text {
     display: flex;
     flex-direction: column;
