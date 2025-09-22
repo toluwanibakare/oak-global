@@ -4,16 +4,15 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main: 'index.php',
-        about: 'about.php',
-        services: 'services.php',
-        contact: 'contact.php'
+        main: 'index.html',
+        about: 'about.html',
+        services: 'services.html',
+        contact: 'contact.html'
       }
     }
   },
   server: {
-    proxy: {
-      '/api': 'http://localhost:8080'
-    }
+    port: 3000,
+    open: true
   }
 })

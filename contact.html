@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - OAK Global International Business Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="index.html">
+                        <div class="logo">
+                            <div class="logo-icon">
+                                <i class="fas fa-tree"></i>
+                            </div>
+                            <div class="logo-text">
+                                <span class="brand-name">OAK Global</span>
+                                <span class="brand-subtitle">International Business Solutions</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="about.html" class="nav-link">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="services.html" class="nav-link">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link active">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="nav-toggle" id="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="hero-background">
+            <div class="hero-image" style="background-image: url('https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop');"></div>
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <div class="container">
+                <div class="hero-text">
+                    <div class="section-label">Get In Touch</div>
+                    <h1 class="hero-title">Let's Discuss Your Business Needs</h1>
+                    <p class="hero-subtitle">Ready to transform your business performance? Our expert team is here to help you achieve operational excellence and global recognition.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Content -->
+    <section class="contact-content">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h2>Connect With Our Experts</h2>
+                    <p class="lead-text">Ready to take your business performance to the next level? Our team of experts is here to help you achieve operational excellence and global recognition.</p>
+                    
+                    <div class="contact-image">
+                        <img src="https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Contact OAK Global" class="main-image">
+                    </div>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Business Hours</h4>
+                                <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+                                <p>Saturday: 10:00 AM - 4:00 PM</p>
+                                <p>Sunday: Closed</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-reply"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Response Time</h4>
+                                <p>We typically respond to all inquiries within 24 hours during business days.</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Free Consultation</h4>
+                                <p>Schedule a complimentary consultation to discuss your business needs and objectives.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Global Reach</h4>
+                                <p>Serving clients worldwide with international standards and best practices.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-container">
+                    <div class="form-header">
+                        <h2>Send us a Message</h2>
+                        <p>Fill out the form below and we'll get back to you as soon as possible.</p>
+                    </div>
+                    
+                    <div id="form-messages"></div>
+                    
+                    <form id="contact-form" class="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name *</label>
+                                <input type="text" id="name" name="name" required>
+                                <div class="form-icon">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required>
+                                <div class="form-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="company">Company Name</label>
+                            <input type="text" id="company" name="company">
+                            <div class="form-icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="service">Service Interest</label>
+                            <select id="service" name="service">
+                                <option value="">Select a service</option>
+                                <option value="business-performance">Business Performance Management</option>
+                                <option value="strategic-planning">Strategic Planning & Execution</option>
+                                <option value="operational-improvement">Operational Improvement</option>
+                                <option value="performance-monitoring">Performance Monitoring</option>
+                                <option value="strategy-assessment">Strategy Maturity Assessment</option>
+                                <option value="management-systems">Management Systems Assessment</option>
+                                <option value="regulatory-compliance">Regulatory Compliance</option>
+                                <option value="iso-excellence">ISO Excellence</option>
+                                <option value="risk-management">Risk Management & Compliance</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <div class="form-icon">
+                                <i class="fas fa-cog"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Please tell us about your business needs and how we can help you achieve your goals."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="cta-button primary form-submit">
+                            <span>Send Message</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Benefits -->
+    <section class="contact-benefits">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Why Contact Us</div>
+                <h2 class="section-title">What You Can Expect</h2>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <div class="icon-bg">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                    </div>
+                    <div class="benefit-content">
+                        <h3>Expert Consultation</h3>
+                        <p>Get personalized advice from our experienced consultants who understand your industry challenges.</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <div class="icon-bg">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                    </div>
+                    <div class="benefit-content">
+                        <h3>Tailored Solutions</h3>
+                        <p>Receive customized recommendations designed specifically for your organization's unique needs.</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <div class="icon-bg">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                    </div>
+                    <div class="benefit-content">
+                        <h3>Fast Implementation</h3>
+                        <p>Benefit from our proven methodologies that deliver results quickly and efficiently.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <div class="logo">
+                            <div class="logo-icon">
+                                <i class="fas fa-tree"></i>
+                            </div>
+                            <div class="logo-text">
+                                <span class="brand-name">OAK Global</span>
+                                <span class="brand-subtitle">International Business Solutions</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="footer-description">
+                        Driving Business Performance Through Global Practices. 
+                        Your trusted partner for operational excellence and compliance solutions.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services.html">Business Performance Management</a></li>
+                        <li><a href="services.html">Strategic Planning & Execution</a></li>
+                        <li><a href="services.html">ISO Excellence</a></li>
+                        <li><a href="services.html">Risk Management</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-building"></i> Professional Business Solutions</p>
+                        <p><i class="fas fa-calendar"></i> Available Monday - Friday</p>
+                        <p><i class="fas fa-clock"></i> 9:00 AM - 6:00 PM</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 OAK Global International Business Solutions. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

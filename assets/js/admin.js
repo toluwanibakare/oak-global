@@ -380,9 +380,9 @@ function showNotification(message, type) {
     document.body.appendChild(notification);
     
     // Remove notification after 3 seconds
-    setTimeout(() => {
+    window.setTimeout(() => {
         notification.style.animation = 'slideOutRight 0.3s ease-out';
-        setTimeout(() => {
+        window.setTimeout(() => {
             document.body.removeChild(notification);
         }, 300);
     }, 3000);
