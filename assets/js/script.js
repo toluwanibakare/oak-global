@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeAnimations();
     initializeCounters();
     initializeContactForm();
+    initializeVideoControls();
     
     console.log('🚀 OAK Global website fully initialized');
 });
@@ -303,6 +304,59 @@ function initializeContactForm() {
     console.log('✅ Contact form initialized');
 }
 
+// Video Controls for About Page
+function initializeVideoControls() {
+    console.log('🎥 Initializing video controls...');
+    
+    const video = document.querySelector('.responsive-video');
+    const overlay = document.getElementById('videoOverlay');
+    const unmuteBtn = document.getElementById('unmuteBtn');
+    
+    if (!video || !overlay || !unmuteBtn) {
+        console.log('ℹ️ Video elements not found on this page');
+        return;
+    }
+    
+    // Ensure video starts muted
+    video.muted = true;
+    
+    // Handle unmute button click
+    unmuteBtn.addEventListener('click', function() {
+        console.log('🔊 Unmuting video...');
+        
+        // Unmute the video
+        video.muted = false;
+        
+        // Play the video (in case it paused)
+        video.play().catch(e => {
+            console.warn('Video play failed:', e);
+        });
+        
+        // Hide the overlay with animation
+        overlay.classList.add('hidden');
+        
+        // Remove overlay from DOM after animation
+        setTimeout(() => {
+            if (overlay.parentNode) {
+                overlay.style.display = 'none';
+            }
+        }, 300);
+    });
+    
+    // Handle video ended (for non-looping scenarios)
+    video.addEventListener('ended', function() {
+        console.log('📹 Video ended');
+    });
+    
+    // Handle video errors
+    video.addEventListener('error', function(e) {
+        console.error('❌ Video error:', e);
+        // Hide overlay if video fails to load
+        overlay.style.display = 'none';
+    });
+    
+    console.log('✅ Video controls initialized');
+}
 // Performance monitoring
 function logPerformance() {
     if (typeof window !== 'undefined' && window.performance) {
@@ -330,7 +384,9 @@ window.oakGlobal = {
         'Scroll Animations',
         'Counter Animations',
         'Contact Form',
-        'Performance Monitoring'
+        'Performance Monitoring',
+        'Video Controls',
+        'MSAT Assessment Tool Promo'
     ]
 };
 
