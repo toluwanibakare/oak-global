@@ -1326,6 +1326,17 @@ section {
     line-height: 1.6;
 }
 
+.contact-text a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.contact-text a:hover {
+    color: #2563eb;
+    text-decoration: underline;
+}
+
 /* Contact Form */
 .contact-form-container {
     background: var(--surface);
