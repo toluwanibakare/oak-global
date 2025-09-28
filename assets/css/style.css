@@ -7,9 +7,9 @@
 
 :root {
     --primary-color: #1a1a1a;
-    --secondary-color: #2563eb;
-    --accent-color: #059669;
-    --success-color: #10b981;
+    --secondary-color: #1e40af;
+    --accent-color: #047857;
+    --success-color: #059669;
     --text-primary: #1a1a1a;
     --text-secondary: #6b7280;
     --text-light: #9ca3af;
@@ -20,9 +20,9 @@
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-    --gradient-primary: linear-gradient(135deg, #059669 0%, #2563eb 100%);
-    --gradient-secondary: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
-    --gradient-accent: linear-gradient(135deg, #34d399 0%, #60a5fa 100%);
+    --gradient-primary: linear-gradient(135deg, #047857 0%, #1e40af 100%);
+    --gradient-secondary: linear-gradient(135deg, #059669 0%, #2563eb 100%);
+    --gradient-accent: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
     --transition-fast: 0.15s ease-out;
     --transition-normal: 0.3s ease-out;
     --transition-slow: 0.5s ease-out;
@@ -100,12 +100,12 @@ p {
 }
 
 .contact-item-top:hover {
-    color: var(--accent-color);
+    color: #10b981;
     transform: translateY(-1px);
 }
 
 .contact-item-top i {
-    color: var(--accent-color);
+    color: #10b981;
     font-size: 0.75rem;
     transition: all var(--transition-normal);
 }
@@ -183,7 +183,7 @@ p {
 .brand-name {
     font-size: 1.5rem;
     font-weight: 800;
-    color: var(--accent-color);
+    color: #047857;
     line-height: 1;
     transition: color var(--transition-normal);
 }
@@ -232,8 +232,8 @@ p {
 
 .nav-link:hover,
 .nav-link.active {
-    color: var(--secondary-color);
-    background: rgba(37, 99, 235, 0.05);
+    color: var(--accent-color);
+    background: rgba(4, 120, 87, 0.08);
 }
 
 .nav-link:hover::after,
@@ -253,7 +253,7 @@ p {
 }
 
 .nav-toggle:hover {
-    background: rgba(37, 99, 235, 0.05);
+    background: rgba(4, 120, 87, 0.08);
 }
 
 .bar {
@@ -347,7 +347,7 @@ p {
 }
 
 .highlight {
-    background: var(--gradient-accent);
+    background: linear-gradient(135deg, #10b981 0%, #1e40af 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -512,7 +512,7 @@ p {
 
 .learn-more-btn:hover {
     gap: 1rem;
-    color: var(--accent-color);
+    color: var(--secondary-color);
 }
 
 /* Sections */
@@ -532,7 +532,7 @@ section {
 .section-label {
     display: inline-block;
     padding: 0.5rem 1rem;
-    background: rgba(5, 150, 105, 0.1);
+    background: rgba(4, 120, 87, 0.15);
     color: var(--accent-color);
     border-radius: 20px;
     font-size: 0.875rem;
@@ -540,7 +540,7 @@ section {
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-bottom: 1rem;
-    border: 1px solid rgba(5, 150, 105, 0.2);
+    border: 1px solid rgba(4, 120, 87, 0.3);
 }
 
 .section-title {
@@ -636,7 +636,7 @@ section {
 .mission-card:hover {
     transform: translateY(-8px);
     box-shadow: var(--shadow-xl);
-    border-color: rgba(5, 150, 105, 0.2);
+    border-color: rgba(4, 120, 87, 0.3);
 }
 
 .card-header {
@@ -687,7 +687,7 @@ section {
 .service-card:hover {
     transform: translateY(-8px);
     box-shadow: var(--shadow-xl);
-    border-color: rgba(5, 150, 105, 0.2);
+    border-color: rgba(4, 120, 87, 0.3);
 }
 
 .service-icon {
@@ -763,7 +763,7 @@ section {
 
 .service-link:hover {
     gap: 1rem;
-    color: var(--accent-color);
+    color: var(--secondary-color);
 }
 
 .services-cta {
@@ -774,7 +774,7 @@ section {
 /* MSAT Tool Promo */
 .tool-promo {
     padding: 6rem 0;
-    background: linear-gradient(135deg, #ecfdf5 0%, #dbeafe 100%);
+    background: linear-gradient(135deg, #ecfdf5 0%, #eff6ff 100%);
     position: relative;
     overflow: hidden;
 }
@@ -786,7 +786,7 @@ section {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(5,150,105,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(37,99,235,0.05)"/><circle cx="40" cy="80" r="1.5" fill="rgba(5,150,105,0.1)"/><circle cx="90" cy="90" r="1" fill="rgba(37,99,235,0.05)"/></svg>') repeat;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(4,120,87,0.15)"/><circle cx="80" cy="40" r="1" fill="rgba(30,64,175,0.1)"/><circle cx="40" cy="80" r="1.5" fill="rgba(4,120,87,0.15)"/><circle cx="90" cy="90" r="1" fill="rgba(30,64,175,0.1)"/></svg>') repeat;
     animation: float 20s ease-in-out infinite;
 }
 
@@ -805,7 +805,7 @@ section {
 }
 
 .promo-content .section-label {
-    background: rgba(5, 150, 105, 0.15);
+    background: rgba(4, 120, 87, 0.2);
     color: var(--accent-color);
     margin-bottom: 1.5rem;
 }
@@ -1094,7 +1094,7 @@ section {
 .contact-item:hover {
     transform: translateX(8px);
     box-shadow: var(--shadow-md);
-    border-color: rgba(5, 150, 105, 0.2);
+    border-color: rgba(4, 120, 87, 0.3);
 }
 
 .contact-icon {
@@ -1129,7 +1129,7 @@ section {
 }
 
 .contact-text a:hover {
-    color: var(--accent-color);
+    color: var(--secondary-color);
     text-decoration: underline;
 }
 
@@ -1139,7 +1139,7 @@ section {
     padding: 3rem;
     border-radius: 20px;
     box-shadow: var(--shadow-lg);
-    border: 1px solid rgba(5, 150, 105, 0.1);
+    border: 1px solid rgba(4, 120, 87, 0.15);
 }
 
 .form-header {
@@ -1196,8 +1196,8 @@ section {
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: var(--secondary-color);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(4, 120, 87, 0.15);
 }
 
 .form-group textarea {
@@ -1273,7 +1273,7 @@ section {
 .benefit-card:hover {
     transform: translateY(-8px);
     box-shadow: var(--shadow-xl);
-    border-color: rgba(5, 150, 105, 0.2);
+    border-color: rgba(4, 120, 87, 0.3);
 }
 
 .benefit-icon {
@@ -1326,7 +1326,7 @@ section {
 }
 
 .footer-logo .brand-name {
-    color: var(--accent-color);
+    color: #10b981;
 }
 
 .footer-logo .brand-subtitle {
@@ -1373,7 +1373,7 @@ section {
 }
 
 .contact-info i {
-    color: var(--accent-color);
+    color: #10b981;
     width: 16px;
 }
 
