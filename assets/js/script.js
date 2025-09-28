@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeCounters();
     initializeContactForm();
     initializeLoadingStates();
+    initializeVisionMissionCards();
     
     console.log('🚀 OAK Global website fully initialized');
 });
@@ -464,6 +465,7 @@ function initializeVisionMissionCards() {
         });
         
         currentCard = index;
+        console.log('Card changed to:', index);
     }
     
     function nextCard() {
@@ -477,27 +479,53 @@ function initializeVisionMissionCards() {
     }
     
     function startAutoPlay() {
-        autoPlayInterval = setInterval(nextCard, 15000); // 15 seconds
+        stopAutoPlay(); // Clear any existing interval
+        autoPlayInterval = setInterval(() => {
+            console.log('Auto-advancing to next card');
+            nextCard();
+        }, 15000); // 15 seconds
     }
     
     function stopAutoPlay() {
         if (autoPlayInterval) {
             clearInterval(autoPlayInterval);
+            autoPlayInterval = null;
         }
     }
     
     // Event listeners
     if (nextBtn) {
-        nextBtn.addEventListener('click', nextCard);
+        nextBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            console.log('Next button clicked');
+            stopAutoPlay();
+            nextCard();
+            startAutoPlay();
+        });
     }
     
     if (prevBtn) {
-        prevBtn.addEventListener('click', prevCard);
+        prevBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            console.log('Previous button clicked');
+            stopAutoPlay();
+            prevCard();
+            startAutoPlay();
+        });
     }
     
     indicators.forEach((indicator, index) => {
-        indicator.addEventListener('click', () => showCard(index));
+        indicator.addEventListener('click', (e) => {
+            e.preventDefault();
+            console.log('Indicator clicked:', index);
+            stopAutoPlay();
+            showCard(index);
+            startAutoPlay();
+        });
     });
+    
+    // Initialize first card
+    showCard(0);
     
     // Start auto-play
     startAutoPlay();
@@ -506,10 +534,12 @@ function initializeVisionMissionCards() {
     const cardsContainer = document.querySelector('.cards-container');
     if (cardsContainer) {
         cardsContainer.addEventListener('mouseenter', () => {
+            console.log('Mouse entered - pausing autoplay');
             stopAutoPlay();
         });
         
         cardsContainer.addEventListener('mouseleave', () => {
+            console.log('Mouse left - resuming autoplay');
             startAutoPlay();
         });
     }
@@ -528,11 +558,15 @@ function initializeVisionMissionCards() {
             const diff = startX - endX;
             
             if (Math.abs(diff) > 50) { // Minimum swipe distance
+                stopAutoPlay();
                 if (diff > 0) {
+                    console.log('Swiped left - next card');
                     nextCard();
                 } else {
+                    console.log('Swiped right - previous card');
                     prevCard();
                 }
+                startAutoPlay();
             }
         }, { passive: true });
     }
