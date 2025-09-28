@@ -446,6 +446,7 @@ function initializeVisionMissionCards() {
     }
     
     let currentCard = 0;
+    let autoPlayInterval;
     
     function showCard(index) {
         // Remove active class from all cards and indicators
@@ -475,6 +476,16 @@ function initializeVisionMissionCards() {
         showCard(prev);
     }
     
+    function startAutoPlay() {
+        autoPlayInterval = setInterval(nextCard, 15000); // 15 seconds
+    }
+    
+    function stopAutoPlay() {
+        if (autoPlayInterval) {
+            clearInterval(autoPlayInterval);
+        }
+    }
+    
     // Event listeners
     if (nextBtn) {
         nextBtn.addEventListener('click', nextCard);
@@ -488,18 +499,18 @@ function initializeVisionMissionCards() {
         indicator.addEventListener('click', () => showCard(index));
     });
     
-    // Auto-play functionality
-    let autoPlayInterval = setInterval(nextCard, 5000);
+    // Start auto-play
+    startAutoPlay();
     
     // Pause auto-play on hover
     const cardsContainer = document.querySelector('.cards-container');
     if (cardsContainer) {
         cardsContainer.addEventListener('mouseenter', () => {
-            clearInterval(autoPlayInterval);
+            stopAutoPlay();
         });
         
         cardsContainer.addEventListener('mouseleave', () => {
-            autoPlayInterval = setInterval(nextCard, 5000);
+            startAutoPlay();
         });
     }
     
