@@ -22,7 +22,7 @@
                 </div>
                 <div class="contact-item-top">
                     <i class="fas fa-phone"></i>
-                    <span>+2348133061881</span>
+                    <span>+234 802 364 4148</span>
                 </div>
             </div>
         </div>
@@ -145,39 +145,52 @@
     </section>
 
     <!-- Vision Mission -->
-    <section class="vision-mission">
+    <section class="vision-mission-cards">
         <div class="container">
             <div class="section-header">
                 <div class="section-label">Our Foundation</div>
-                <h2 class="section-title">Vision & Mission</h2>
-                <p class="section-subtitle">The driving forces behind everything we do at OAK Global.</p>
+                <h2 class="section-title">Our Vision & Mission</h2>
             </div>
             
-            <div class="vision-mission-grid">
-                <div class="vision-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-eye"></i>
+            <div class="cards-container">
+                <div class="swipeable-cards">
+                    <div class="card vision-card active">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <h3>Our Vision</h3>
                         </div>
-                        <h3>Our Vision</h3>
+                        <div class="card-content">
+                            <p><strong>To be the leading partner in delivering world-class business support that equips organizations with winning strategies for visibility and access to the global markets.</strong></p>
+                        </div>
                     </div>
-                    <div class="card-content">
-                        <p><strong>To be the leading partner in delivering world-class business support that equips organizations with winning strategies for visibility and access to the global markets.</strong></p>
-                        <p>We envision a world where businesses of all sizes can achieve international recognition and sustainable success through strategic excellence and operational optimization.</p>
+
+                    <div class="card mission-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <h3>Our Mission</h3>
+                        </div>
+                        <div class="card-content">
+                            <p><strong>To provide business performance solutions that empower organizations to achieve excellence, ensure compliance and drive sustainable growth.</strong></p>
+                        </div>
                     </div>
                 </div>
-
-                <div class="mission-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-bullseye"></i>
-                        </div>
-                        <h3>Our Mission</h3>
-                    </div>
-                    <div class="card-content">
-                        <p><strong>To provide business performance solutions that empower organizations to achieve excellence, ensure compliance and drive sustainable growth.</strong></p>
-                        <p>Through our comprehensive approach to performance management, compliance validation, and strategic assessment, we help our clients build resilient, efficient, and compliant operations.</p>
-                    </div>
+                
+                <div class="card-indicators">
+                    <button class="indicator active" data-card="0"></button>
+                    <button class="indicator" data-card="1"></button>
+                </div>
+                
+                <div class="card-navigation">
+                    <button class="nav-btn prev-btn" id="prevCard">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="nav-btn next-btn" id="nextCard">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
                 </div>
             </div>
         </div>
