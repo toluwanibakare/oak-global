@@ -1,6 +1,22 @@
 // OAK Global International Business Solutions - JavaScript
 console.log('🌳 OAK Global - Professional Website Loading...');
 
+// Supabase configuration
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+let supabase = null;
+
+// Initialize Supabase if credentials are available
+if (SUPABASE_URL && SUPABASE_ANON_KEY) {
+    try {
+        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        console.log('✅ Supabase initialized successfully');
+    } catch (error) {
+        console.warn('⚠️ Supabase initialization failed:', error);
+    }
+}
+
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
     console.log('✅ DOM loaded, initializing website...');
@@ -11,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeAnimations();
     initializeCounters();
     initializeContactForm();
-    initializeVideoControls();
+    initializeLoadingStates();
     
     console.log('🚀 OAK Global website fully initialized');
 });
@@ -141,7 +157,9 @@ function initializeAnimations() {
                 
                 // Add staggered animation for grid items
                 if (entry.target.classList.contains('service-card') || 
-                    entry.target.classList.contains('benefit-card')) {
+                    entry.target.classList.contains('benefit-card') ||
+                    entry.target.classList.contains('value-card') ||
+                    entry.target.classList.contains('process-step')) {
                     const siblings = Array.from(entry.target.parentNode.children);
                     const index = siblings.indexOf(entry.target);
                     entry.target.style.transitionDelay = `${index * 0.1}s`;
@@ -161,7 +179,10 @@ function initializeAnimations() {
         .process-step,
         .value-card,
         .expertise-item,
-        .contact-item
+        .contact-item,
+        .vision-card,
+        .mission-card,
+        .promo-content
     `);
     
     animatedElements.forEach(element => {
@@ -214,7 +235,7 @@ function initializeCounters() {
     console.log(`✅ ${counters.length} counters initialized`);
 }
 
-// Contact Form Handling
+// Contact Form Handling with Supabase
 function initializeContactForm() {
     console.log('📧 Initializing contact form...');
     
@@ -226,18 +247,18 @@ function initializeContactForm() {
         return;
     }
     
-    contactForm.addEventListener('submit', function(e) {
+    contactForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
         // Get form data
         const formData = new FormData(this);
-        const name = formData.get('name');
-        const email = formData.get('email');
-        const company = formData.get('company');
+        const name = formData.get('name')?.trim();
+        const email = formData.get('email')?.trim();
+        const company = formData.get('company')?.trim();
         const service = formData.get('service');
-        const message = formData.get('message');
+        const message = formData.get('message')?.trim();
         
-        // Simple validation
+        // Validation
         if (!name || !email || !message) {
             showMessage('Please fill in all required fields.', 'error');
             return;
@@ -250,118 +271,179 @@ function initializeContactForm() {
             return;
         }
         
-        // Simulate form submission
+        // Message length validation
+        if (message.length < 10) {
+            showMessage('Please provide a more detailed message (at least 10 characters).', 'error');
+            return;
+        }
+        
         const submitButton = this.querySelector('.form-submit');
         const originalText = submitButton.innerHTML;
         
         // Show loading state
-        submitButton.innerHTML = '<span>Sending...</span><i class="fas fa-spinner fa-spin"></i>';
+        submitButton.innerHTML = '<span>Sending...</span><div class="spinner"></div>';
         submitButton.disabled = true;
+        submitButton.classList.add('loading');
         
-        // Simulate API call
-        setTimeout(() => {
-            // Store in localStorage (simulating database)
-            const contacts = JSON.parse(localStorage.getItem('oakglobal_contacts') || '[]');
-            const newContact = {
-                id: Date.now(),
-                name: name,
-                email: email,
-                company: company,
-                service: service,
-                message: message,
-                timestamp: new Date().toISOString(),
-                read: false
-            };
-            contacts.push(newContact);
-            localStorage.setItem('oakglobal_contacts', JSON.stringify(contacts));
+        try {
+            let success = false;
             
-            console.log('✅ Contact saved successfully:', newContact);
+            // Try Supabase first
+            if (supabase) {
+                console.log('📤 Attempting to save to Supabase...');
+                
+                const { data, error } = await supabase
+                    .from('contacts')
+                    .insert([
+                        {
+                            name: name,
+                            email: email,
+                            company: company || null,
+                            service: service || null,
+                            message: message
+                        }
+                    ]);
+                
+                if (error) {
+                    console.error('❌ Supabase error:', error);
+                    throw error;
+                } else {
+                    console.log('✅ Contact saved to Supabase successfully');
+                    success = true;
+                }
+            }
             
-            // Show success message
-            showMessage('Thank you for your message! We will get back to you within 24 hours.', 'success');
+            // Fallback to localStorage if Supabase fails or isn't available
+            if (!success) {
+                console.log('📤 Saving to localStorage as fallback...');
+                
+                const contacts = JSON.parse(localStorage.getItem('oakglobal_contacts') || '[]');
+                const newContact = {
+                    id: Date.now(),
+                    name: name,
+                    email: email,
+                    company: company,
+                    service: service,
+                    message: message,
+                    timestamp: new Date().toISOString(),
+                    read: false
+                };
+                contacts.push(newContact);
+                localStorage.setItem('oakglobal_contacts', JSON.stringify(contacts));
+                
+                console.log('✅ Contact saved to localStorage successfully');
+                success = true;
+            }
             
-            // Reset form
-            contactForm.reset();
+            if (success) {
+                // Show success message
+                showMessage('Thank you for your message! We will get back to you within 24 hours.', 'success');
+                
+                // Reset form
+                contactForm.reset();
+                
+                // Track form submission
+                trackFormSubmission(name, email, service);
+            }
             
+        } catch (error) {
+            console.error('❌ Form submission error:', error);
+            showMessage('Sorry, there was an error sending your message. Please try again or contact us directly.', 'error');
+        } finally {
             // Reset button
             submitButton.innerHTML = originalText;
             submitButton.disabled = false;
+            submitButton.classList.remove('loading');
             
             // Scroll to message
             if (messageDiv) {
                 messageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
-        }, 1500);
+        }
     });
     
     function showMessage(text, type) {
         if (messageDiv) {
-            messageDiv.innerHTML = '<div class="form-message ' + type + '"><i class="fas fa-' + (type === 'success' ? 'check-circle' : 'exclamation-circle') + '"></i>' + text + '</div>';
+            const icon = type === 'success' ? 'check-circle' : 'exclamation-triangle';
+            messageDiv.innerHTML = `
+                <div class="form-message ${type}">
+                    <i class="fas fa-${icon}"></i>
+                    ${text}
+                </div>
+            `;
             messageDiv.style.display = 'block';
+            
+            // Auto-hide success messages after 5 seconds
+            if (type === 'success') {
+                setTimeout(() => {
+                    messageDiv.style.display = 'none';
+                }, 5000);
+            }
+        }
+    }
+    
+    // Track form submissions for analytics
+    function trackFormSubmission(name, email, service) {
+        try {
+            // Update visit counter
+            const visits = parseInt(localStorage.getItem('oakglobal_visits') || '0') + 1;
+            localStorage.setItem('oakglobal_visits', visits.toString());
+            
+            // Log submission details (for debugging)
+            console.log('📊 Form submission tracked:', {
+                name: name,
+                email: email,
+                service: service,
+                timestamp: new Date().toISOString()
+            });
+        } catch (error) {
+            console.warn('⚠️ Analytics tracking failed:', error);
         }
     }
     
     console.log('✅ Contact form initialized');
 }
 
-// Video Controls for About Page
-function initializeVideoControls() {
-    console.log('🎥 Initializing video controls...');
+// Loading States
+function initializeLoadingStates() {
+    console.log('⏳ Initializing loading states...');
     
-    const video = document.querySelector('.responsive-video');
-    const overlay = document.getElementById('videoOverlay');
-    const unmuteBtn = document.getElementById('unmuteBtn');
+    // Add loading states to all buttons
+    const buttons = document.querySelectorAll('.cta-button, .learn-more-btn');
     
-    if (!video || !overlay || !unmuteBtn) {
-        console.log('ℹ️ Video elements not found on this page');
-        return;
-    }
-    
-    // Ensure video starts muted
-    video.muted = true;
-    
-    // Handle unmute button click
-    unmuteBtn.addEventListener('click', function() {
-        console.log('🔊 Unmuting video...');
-        
-        // Unmute the video
-        video.muted = false;
-        
-        // Play the video (in case it paused)
-        video.play().catch(e => {
-            console.warn('Video play failed:', e);
-        });
-        
-        // Hide the overlay with animation
-        overlay.classList.add('hidden');
-        
-        // Remove overlay from DOM after animation
-        setTimeout(() => {
-            if (overlay.parentNode) {
-                overlay.style.display = 'none';
+    buttons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            // Don't add loading state to external links
+            if (this.getAttribute('href')?.startsWith('http') && this.getAttribute('target') === '_blank') {
+                return;
             }
-        }, 300);
+            
+            // Add subtle loading effect for internal navigation
+            if (this.getAttribute('href')?.endsWith('.html')) {
+                this.style.opacity = '0.8';
+                setTimeout(() => {
+                    this.style.opacity = '1';
+                }, 300);
+            }
+        });
     });
     
-    // Handle video ended (for non-looping scenarios)
-    video.addEventListener('ended', function() {
-        console.log('📹 Video ended');
-    });
-    
-    // Handle video errors
-    video.addEventListener('error', function(e) {
-        console.error('❌ Video error:', e);
-        // Hide overlay if video fails to load
-        overlay.style.display = 'none';
-    });
-    
-    console.log('✅ Video controls initialized');
+    console.log('✅ Loading states initialized');
 }
+
 // Performance monitoring
 function logPerformance() {
     if (typeof window !== 'undefined' && window.performance) {
         const loadTime = window.performance.timing.loadEventEnd - window.performance.timing.navigationStart;
         console.log(`⚡ Page loaded in ${loadTime}ms`);
+        
+        // Track page views
+        try {
+            const visits = parseInt(localStorage.getItem('oakglobal_visits') || '0') + 1;
+            localStorage.setItem('oakglobal_visits', visits.toString());
+        } catch (error) {
+            console.warn('⚠️ Visit tracking failed:', error);
+        }
     } else {
         console.log('❌ Performance API not available');
     }
@@ -375,19 +457,52 @@ window.addEventListener('error', function(e) {
     console.error('❌ JavaScript Error:', e.error);
 });
 
+// Utility functions
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+function throttle(func, limit) {
+    let inThrottle;
+    return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    }
+}
+
 // Export for debugging
 window.oakGlobal = {
-    version: '4.0.0',
-    type: 'Professional HTML Website',
+    version: '5.0.0',
+    type: 'Professional HTML Website with Supabase Integration',
+    theme: 'Green & Blue Professional',
     features: [
         'Enhanced Mobile Navigation',
         'Scroll Animations',
         'Counter Animations',
-        'Contact Form',
+        'Supabase Contact Form',
         'Performance Monitoring',
-        'Video Controls',
-        'MSAT Assessment Tool Promo'
-    ]
+        'MSAT Assessment Tool Integration',
+        'Vision & Mission Display',
+        'Professional Green/Blue Theme',
+        'Loading States',
+        'Error Handling'
+    ],
+    supabase: supabase ? 'Connected' : 'Not Available'
 };
 
-console.log('🌳 OAK Global Professional Website v4.0.0 Ready!');
+console.log('🌳 OAK Global Professional Website v5.0.0 Ready!');
+console.log('🎨 Theme: Professional Green & Blue');
+console.log('🗄️ Database:', supabase ? 'Supabase Connected' : 'LocalStorage Fallback');
