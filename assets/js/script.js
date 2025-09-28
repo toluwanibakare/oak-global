@@ -447,9 +447,16 @@ function initializeVisionMissionCards() {
     }
     
     let currentCard = 0;
-    let autoPlayInterval;
+    let autoPlayInterval = null;
+    
+    console.log('Found cards:', cards.length);
+    console.log('Found indicators:', indicators.length);
+    console.log('Found prev button:', prevBtn ? 'Yes' : 'No');
+    console.log('Found next button:', nextBtn ? 'Yes' : 'No');
     
     function showCard(index) {
+        console.log('Showing card:', index);
+        
         // Remove active class from all cards and indicators
         cards.forEach((card, i) => {
             card.classList.remove('active', 'prev');
@@ -465,29 +472,32 @@ function initializeVisionMissionCards() {
         });
         
         currentCard = index;
-        console.log('Card changed to:', index);
     }
     
     function nextCard() {
         const next = (currentCard + 1) % cards.length;
+        console.log('Moving to next card:', next);
         showCard(next);
     }
     
     function prevCard() {
         const prev = (currentCard - 1 + cards.length) % cards.length;
+        console.log('Moving to previous card:', prev);
         showCard(prev);
     }
     
     function startAutoPlay() {
-        stopAutoPlay(); // Clear any existing interval
+        stopAutoPlay();
+        console.log('Starting auto-play...');
         autoPlayInterval = setInterval(() => {
-            console.log('Auto-advancing to next card');
+            console.log('Auto-play: advancing to next card');
             nextCard();
-        }, 15000); // 15 seconds
+        }, 15000);
     }
     
     function stopAutoPlay() {
         if (autoPlayInterval) {
+            console.log('Stopping auto-play...');
             clearInterval(autoPlayInterval);
             autoPlayInterval = null;
         }
@@ -495,8 +505,10 @@ function initializeVisionMissionCards() {
     
     // Event listeners
     if (nextBtn) {
+        console.log('Adding next button event listener');
         nextBtn.addEventListener('click', (e) => {
             e.preventDefault();
+            e.stopPropagation();
             console.log('Next button clicked');
             stopAutoPlay();
             nextCard();
@@ -505,8 +517,10 @@ function initializeVisionMissionCards() {
     }
     
     if (prevBtn) {
+        console.log('Adding prev button event listener');
         prevBtn.addEventListener('click', (e) => {
             e.preventDefault();
+            e.stopPropagation();
             console.log('Previous button clicked');
             stopAutoPlay();
             prevCard();
@@ -517,6 +531,7 @@ function initializeVisionMissionCards() {
     indicators.forEach((indicator, index) => {
         indicator.addEventListener('click', (e) => {
             e.preventDefault();
+            e.stopPropagation();
             console.log('Indicator clicked:', index);
             stopAutoPlay();
             showCard(index);
@@ -525,14 +540,17 @@ function initializeVisionMissionCards() {
     });
     
     // Initialize first card
+    console.log('Initializing first card...');
     showCard(0);
     
     // Start auto-play
+    console.log('Starting initial auto-play...');
     startAutoPlay();
     
     // Pause auto-play on hover
     const cardsContainer = document.querySelector('.cards-container');
     if (cardsContainer) {
+        console.log('Adding hover event listeners to cards container');
         cardsContainer.addEventListener('mouseenter', () => {
             console.log('Mouse entered - pausing autoplay');
             stopAutoPlay();
@@ -549,6 +567,7 @@ function initializeVisionMissionCards() {
     let endX = 0;
     
     if (cardsContainer) {
+        console.log('Adding touch event listeners');
         cardsContainer.addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;
         }, { passive: true });
