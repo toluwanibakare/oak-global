@@ -1686,6 +1686,37 @@ section {
         gap: 2rem;
     }
 
+    .vision-mission-cards {
+        padding: 4rem 0;
+    }
+    
+    .swipeable-cards {
+        height: 350px;
+        margin: 0 1rem;
+    }
+    
+    .swipeable-cards .card {
+        padding: 3rem 2rem;
+    }
+    
+    .swipeable-cards .card h3 {
+        font-size: 1.5rem;
+    }
+    
+    .swipeable-cards .card .card-content p {
+        font-size: 1.125rem;
+    }
+    
+    .card-navigation {
+        padding: 0 0.5rem;
+    }
+    
+    .nav-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
     .vision-card,
     .mission-card {
         padding: 2rem;

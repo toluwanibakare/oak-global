@@ -431,6 +431,104 @@ function initializeLoadingStates() {
     console.log('✅ Loading states initialized');
 }
 
+// Vision Mission Cards
+function initializeVisionMissionCards() {
+    console.log('🎴 Initializing vision mission cards...');
+    
+    const cards = document.querySelectorAll('.swipeable-cards .card');
+    const indicators = document.querySelectorAll('.indicator');
+    const prevBtn = document.getElementById('prevCard');
+    const nextBtn = document.getElementById('nextCard');
+    
+    if (cards.length === 0) {
+        console.log('ℹ️ No vision mission cards found on this page');
+        return;
+    }
+    
+    let currentCard = 0;
+    
+    function showCard(index) {
+        // Remove active class from all cards and indicators
+        cards.forEach((card, i) => {
+            card.classList.remove('active', 'prev');
+            if (i < index) {
+                card.classList.add('prev');
+            } else if (i === index) {
+                card.classList.add('active');
+            }
+        });
+        
+        indicators.forEach((indicator, i) => {
+            indicator.classList.toggle('active', i === index);
+        });
+        
+        currentCard = index;
+    }
+    
+    function nextCard() {
+        const next = (currentCard + 1) % cards.length;
+        showCard(next);
+    }
+    
+    function prevCard() {
+        const prev = (currentCard - 1 + cards.length) % cards.length;
+        showCard(prev);
+    }
+    
+    // Event listeners
+    if (nextBtn) {
+        nextBtn.addEventListener('click', nextCard);
+    }
+    
+    if (prevBtn) {
+        prevBtn.addEventListener('click', prevCard);
+    }
+    
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => showCard(index));
+    });
+    
+    // Auto-play functionality
+    let autoPlayInterval = setInterval(nextCard, 5000);
+    
+    // Pause auto-play on hover
+    const cardsContainer = document.querySelector('.cards-container');
+    if (cardsContainer) {
+        cardsContainer.addEventListener('mouseenter', () => {
+            clearInterval(autoPlayInterval);
+        });
+        
+        cardsContainer.addEventListener('mouseleave', () => {
+            autoPlayInterval = setInterval(nextCard, 5000);
+        });
+    }
+    
+    // Touch/swipe support for mobile
+    let startX = 0;
+    let endX = 0;
+    
+    if (cardsContainer) {
+        cardsContainer.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        }, { passive: true });
+        
+        cardsContainer.addEventListener('touchend', (e) => {
+            endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            
+            if (Math.abs(diff) > 50) { // Minimum swipe distance
+                if (diff > 0) {
+                    nextCard();
+                } else {
+                    prevCard();
+                }
+            }
+        }, { passive: true });
+    }
+    
+    console.log('✅ Vision mission cards initialized');
+}
+
 // Performance monitoring
 function logPerformance() {
     if (typeof window !== 'undefined' && window.performance) {
