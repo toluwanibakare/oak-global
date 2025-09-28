@@ -457,15 +457,23 @@ function initializeVisionMissionCards() {
     function showCard(index) {
         console.log('Showing card:', index);
         
-        // Remove active class from all cards and indicators
-        cards.forEach((card, i) => {
+        // Hide all cards first
+        cards.forEach(card => {
             card.classList.remove('active', 'prev');
-            if (i < index) {
-                card.classList.add('prev');
-            } else if (i === index) {
-                card.classList.add('active');
-            }
+            card.style.opacity = '0';
+            card.style.transform = 'translateX(100%)';
         });
+        
+        // Show the current card with animation
+        setTimeout(() => {
+            const currentCardElement = cards[index];
+            if (currentCardElement) {
+                currentCardElement.classList.add('active');
+                currentCardElement.style.opacity = '1';
+                currentCardElement.style.transform = 'translateX(0)';
+                console.log('Card activated:', index, currentCardElement.querySelector('h3')?.textContent);
+            }
+        }, 100);
         
         indicators.forEach((indicator, i) => {
             indicator.classList.toggle('active', i === index);
