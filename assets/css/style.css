@@ -795,6 +795,7 @@ section {
     justify-content: space-between;
     padding: 0 1rem;
     pointer-events: none;
+    z-index: 10;
 }
 
 .nav-btn {
@@ -810,6 +811,11 @@ section {
     box-shadow: var(--shadow-md);
     pointer-events: all;
     backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    visibility: visible;
 }
 
 .nav-btn:hover {
