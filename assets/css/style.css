@@ -155,46 +155,26 @@ p {
 .logo {
     display: flex;
     align-items: center;
-    gap: 12px;
-}
-
-.logo-icon {
-    width: 40px;
-    height: 40px;
-    background: var(--gradient-primary);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
     justify-content: center;
-    color: white;
-    font-size: 1.2rem;
+}
+
+.company-logo {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
     transition: all var(--transition-normal);
+    border-radius: 8px;
 }
 
-.nav-brand a:hover .logo-icon {
-    transform: rotate(5deg) scale(1.1);
+.nav-brand a:hover .company-logo {
+    transform: scale(1.05);
 }
 
-.logo-text {
-    display: flex;
-    flex-direction: column;
+.footer-logo-img {
+    height: 60px;
+    filter: brightness(1.2);
 }
 
-.brand-name {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: #047857;
-    line-height: 1;
-    transition: color var(--transition-normal);
-}
-
-.brand-subtitle {
-    font-size: 0.75rem;
-    color: var(--text-light);
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
 
 .nav-menu {
     display: flex;
@@ -1890,6 +1870,14 @@ section {
     .brand-subtitle {
         font-size: 0.7rem;
     }
+    
+    .company-logo {
+        height: 40px;
+    }
+    
+    .footer-logo-img {
+        height: 50px;
+    }
 
     .promo-content {
         padding: 3rem 2rem;
@@ -1934,6 +1922,14 @@ section {
 
     .brand-name {
         font-size: 1.125rem;
+    }
+    
+    .company-logo {
+        height: 35px;
+    }
+    
+    .footer-logo-img {
+        height: 45px;
     }
     
     .client-logos .section-header {
