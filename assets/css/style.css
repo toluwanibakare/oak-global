@@ -1637,7 +1637,7 @@ section {
     display: flex;
     align-items: center;
     gap: 4rem;
-    animation: marquee 60s linear infinite;
+    animation: marquee 30s linear infinite;
     width: max-content;
 }
 
@@ -1942,7 +1942,7 @@ section {
     
     .marquee-content {
         gap: 1.5rem;
-        animation-duration: 30s;
+        animation-duration: 15s;
     }
     
     .client-logo {
