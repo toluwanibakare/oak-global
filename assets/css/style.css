@@ -1751,7 +1751,12 @@ section {
     .nav-link {
         display: block;
         width: 100%;
-        padding: 1rem 2rem;
+        padding: 1.25rem 2rem;
+        font-size: 1.25rem;
+        justify-content: center;
+    }
+    
+    .nav-link i {
         font-size: 1.125rem;
     }
 
