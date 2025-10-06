@@ -167,8 +167,9 @@ p {
     justify-content: center;
 }
 
+/* INCREASED LOGO SIZE */
 .company-logo {
-    height: 120px;
+    height: 140px; /* Increased from 120px */
     width: auto;
     object-fit: contain;
     transition: all var(--transition-normal);
@@ -226,11 +227,12 @@ p {
     justify-content: flex-end;
 }
 
+/* INCREASED MENU LINK FONT SIZE */
 .nav-link {
     color: var(--text-primary);
     text-decoration: none;
     font-weight: 500;
-    font-size: 0.85rem; /* Reduced font size */
+    font-size: 0.95rem; /* Increased from 0.85rem */
     padding: 0.5rem 0.75rem; /* Reduced padding */
     border-radius: 8px;
     transition: all var(--transition-fast);
@@ -265,7 +267,7 @@ p {
 }
 
 .nav-link i {
-    font-size: 0.8rem; /* Reduced icon size */
+    font-size: 0.85rem; /* Increased from 0.8rem */
 }
 
 /* Mobile Navigation Toggle */
@@ -315,7 +317,7 @@ p {
     
     .nav-link {
         padding: 0.5rem 0.6rem;
-        font-size: 0.82rem;
+        font-size: 0.9rem; /* Increased from 0.82rem */
     }
     
     .brand-name {
@@ -327,13 +329,13 @@ p {
     }
     
     .company-logo {
-        height: 100px;
+        height: 120px; /* Increased from 100px */
     }
 }
 
 @media (max-width: 900px) {
     .nav-link {
-        font-size: 0.8rem;
+        font-size: 0.88rem; /* Increased from 0.8rem */
         padding: 0.5rem 0.5rem;
     }
     
@@ -346,7 +348,7 @@ p {
     }
     
     .company-logo {
-        height: 90px;
+        height: 110px; /* Increased from 90px */
     }
 }
 
@@ -439,7 +441,7 @@ p {
     }
     
     .company-logo {
-        height: 60px;
+        height: 70px; /* Increased from 60px */
     }
     
     .nav-brand a {
@@ -466,7 +468,7 @@ p {
     }
     
     .company-logo {
-        height: 50px;
+        height: 60px; /* Increased from 50px */
     }
     
     .nav-brand a {
@@ -486,7 +488,7 @@ p {
     }
     
     .company-logo {
-        height: 45px;
+        height: 55px; /* Increased from 45px */
     }
     
     .nav-brand a {
@@ -497,6 +499,8 @@ p {
         padding: 0 12px;
     }
 }
+
+/* ... rest of the CSS remains exactly the same ... */
 
 /* Hero Section */
 .hero {
