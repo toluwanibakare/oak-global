@@ -653,6 +653,32 @@ function throttle(func, limit) {
     }
 }
 
+// Video play functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const video = document.querySelector('.company-video');
+    const videoContainer = document.querySelector('.video-container');
+    const playBtn = document.querySelector('.video-play-btn');
+    
+    if (playBtn && video) {
+        playBtn.addEventListener('click', function() {
+            video.play();
+            videoContainer.classList.add('playing');
+        });
+        
+        video.addEventListener('play', function() {
+            videoContainer.classList.add('playing');
+        });
+        
+        video.addEventListener('pause', function() {
+            videoContainer.classList.remove('playing');
+        });
+        
+        video.addEventListener('ended', function() {
+            videoContainer.classList.remove('playing');
+        });
+    }
+});
+
 // Export for debugging
 window.oakGlobal = {
     version: '5.0.0',
