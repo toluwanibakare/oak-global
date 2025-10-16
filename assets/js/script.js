@@ -1,9 +1,24 @@
 // OAK Global International Business Solutions - JavaScript
 console.log('🌳 OAK Global - Professional Website Loading...');
 
-// Supabase configuration
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
+// Supabase configuration (guarded for environments without build-time env replacement)
+function getViteEnv(key) {
+    try {
+        // import.meta.env is only available when built with Vite; guard access to avoid runtime errors
+            // import.meta.env is only available when built with Vite; use eval to avoid parse-time errors
+            // eval('import.meta') will return the meta in ESM builds, and throw in non-ESM contexts — we catch that
+            const meta = eval('import.meta');
+            if (meta && meta.env && meta.env[key]) {
+                return meta.env[key];
+            }
+            return null;
+    } catch (err) {
+        return null;
+    }
+}
+
+const SUPABASE_URL = getViteEnv('VITE_SUPABASE_URL');
+const SUPABASE_ANON_KEY = getViteEnv('VITE_SUPABASE_ANON_KEY');
 
 let supabase = null;
 
@@ -206,34 +221,58 @@ function initializeCounters() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const counter = entry.target;
-                const target = parseInt(counter.getAttribute('data-count'));
+                const raw = counter.getAttribute('data-count');
+                const target = parseInt(raw, 10);
+                if (Number.isNaN(target) || target <= 0) {
+                    // If attribute is invalid, just show the raw value or 0
+                    counter.textContent = raw || '0';
+                    counterObserver.unobserve(counter);
+                    return;
+                }
+
                 const duration = 2000;
-                const increment = target / (duration / 16);
-                let current = 0;
-                
+                const fps = 60;
+                const totalFrames = Math.round((duration / 1000) * fps);
+                let frame = 0;
+
                 const updateCounter = () => {
-                    current += increment;
-                    if (current < target) {
-                        counter.textContent = Math.floor(current);
+                    frame++;
+                    const progress = frame / totalFrames;
+                    const value = Math.round(target * easeOutCubic(progress));
+                    counter.textContent = value;
+                    if (frame < totalFrames) {
                         requestAnimationFrame(updateCounter);
                     } else {
                         counter.textContent = target;
                     }
                 };
-                
+
                 updateCounter();
                 counterObserver.unobserve(counter);
             }
         });
     }, {
-        threshold: 0.5
+        // Lower threshold so counters start sooner on mobile
+        threshold: 0.15
     });
     
     counters.forEach(counter => {
         counterObserver.observe(counter);
     });
+    // Fallback: if IntersectionObserver doesn't trigger (old browsers), animate immediately
+    if (!('IntersectionObserver' in window)) {
+        counters.forEach(counter => {
+            const raw = counter.getAttribute('data-count');
+            counter.textContent = raw || '0';
+        });
+    }
     
     console.log(`✅ ${counters.length} counters initialized`);
+}
+
+// easing helper for counters
+function easeOutCubic(t) {
+    return 1 - Math.pow(1 - t, 3);
 }
 
 // Contact Form Handling with Supabase
@@ -455,6 +494,10 @@ function initializeVisionMissionCards() {
     console.log('Found next button:', nextBtn ? 'Yes' : 'No');
     
     function showCard(index) {
+        // normalize index
+        if (typeof index !== 'number' || isNaN(index)) index = 0;
+        if (index < 0) index = 0;
+        if (index >= cards.length) index = cards.length - 1;
         console.log('Showing card:', index);
         
         // Hide all cards first
@@ -475,9 +518,15 @@ function initializeVisionMissionCards() {
             }
         }, 100);
         
-        indicators.forEach((indicator, i) => {
-            indicator.classList.toggle('active', i === index);
-        });
+        if (indicators && indicators.length) {
+            indicators.forEach((indicator, i) => {
+                try {
+                    indicator.classList.toggle('active', i === index);
+                } catch (err) {
+                    // ignore malformed indicator
+                }
+            });
+        }
         
         currentCard = index;
     }
