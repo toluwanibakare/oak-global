@@ -1341,6 +1341,22 @@ section {
     transform: scale(1.1);
 }
 
+.social-links {
+    margin-top: 15px;
+}
+
+.social-links a {
+    color: #ffffff; /* adjust to fit your footer theme */
+    font-size: 18px;
+    margin-right: 12px;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #3A86FF; /* your brand accent color */
+}
+
+
 .service-overlay {
     position: absolute;
     top: 0;
