@@ -33,14 +33,14 @@
 
 /* Reduce logo size */
 .company-logo {
-    height: 70px;
+    height: 80px;
     transition: all var(--transition-normal);
 }
 
 /* Adjust hero section margin */
 .hero {
-    margin-top: 90px;
-    min-height: calc(100vh - 90px);
+    margin-top: 120px;
+    min-height: calc(100vh - 120px);
 }
 
 /* Mobile adjustments */
@@ -54,23 +54,23 @@
     }
     
     .company-logo {
-        height: 50px;
+        height: 60px;
     }
     
     .hero {
-        margin-top: 60px;
-        min-height: calc(100vh - 60px);
+        margin-top: 70px;
+        min-height: calc(100vh - 70px);
     }
     
     .page-hero {
-        margin-top: 60px;
+        margin-top: 70px;
         min-height: 40vh;
     }
 }
 
 @media (max-width: 480px) {
     .company-logo {
-        height: 45px;
+        height: 50px;
     }
 }
     </style>
@@ -82,7 +82,10 @@
             <div class="contact-info-top">
                 <div class="contact-item-top">
                     <i class="fas fa-envelope"></i>
-                    <span>info@oakglobal.com</span>
+                    
+                    <span>o.kolawole@oak-global.com.ng</span>
+                    <br>
+                    <span>e.abraham@oak-global.com.ng</span>
                 </div>
                 <div class="contact-item-top">
                     <i class="fas fa-phone"></i>
@@ -175,107 +178,92 @@
             <div class="section-header">
                 <div class="section-label">Business Assessment</div>
                 <h2 class="section-title">Choose Your Assessment Area</h2>
-                <p class="section-subtitle">Select from our comprehensive assessment categories to evaluate different aspects of your business performance.</p>
+                <p class="section-subtitle">Try our free assessment today to evaluate different aspects of your business performance.</p>
             </div>
             
             <div class="categories-grid">
-                <div class="category-card" data-category="finances">
+                <div class="category-card" data-category="risks">
                     <div class="category-icon">
                         <i class="fas fa-chart-pie"></i>
                     </div>
                     <div class="category-content">
-                        <h3>Financial Health</h3>
-                        <p>Assess your financial management, cash flow, profitability, and financial planning capabilities.</p>
+                        <h3>ADDRESSING RISKS AND OPPORTUNITIES</h3>
+                        <p>Identifying what could go wrong or right and planning how to manage both.</p>
                         <ul class="category-features">
-                            <li><i class="fas fa-check"></i> Cash Flow Management</li>
-                            <li><i class="fas fa-check"></i> Financial Planning</li>
-                            <li><i class="fas fa-check"></i> Cost Control</li>
-                            <li><i class="fas fa-check"></i> Revenue Optimization</li>
+                            <li><i class="fas fa-check"></i> Risk Identification</li>
+                            <li><i class="fas fa-check"></i> Risk Analysis</li>
+                            <li><i class="fas fa-check"></i> Opportunity Discovery</li>
+                            <li><i class="fas fa-check"></i> Response Planning</li>
                         </ul>
-                        <button class="assessment-btn" data-category="finances">
-                            <span>Start Financial Assessment</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </button>
+                        
                     </div>
                 </div>
 
-                <div class="category-card" data-category="customers">
+                <div class="category-card" data-category="business">
                     <div class="category-icon">
                         <i class="fas fa-users"></i>
                     </div>
                     <div class="category-content">
-                        <h3>Customer Relations</h3>
-                        <p>Evaluate your customer acquisition, retention, satisfaction, and relationship management strategies.</p>
+                        <h3>THE BUSINESS CONTEXT</h3>
+                        <p>The internal and external factors that influence how the organization operates.</p>
                         <ul class="category-features">
-                            <li><i class="fas fa-check"></i> Customer Satisfaction</li>
-                            <li><i class="fas fa-check"></i> Retention Strategies</li>
-                            <li><i class="fas fa-check"></i> Market Research</li>
-                            <li><i class="fas fa-check"></i> Customer Service</li>
+                            <li><i class="fas fa-check"></i> Organization Background</li>
+                            <li><i class="fas fa-check"></i> Market Environment</li>
+                            <li><i class="fas fa-check"></i> Stakeholder Needs</li>
+                            <li><i class="fas fa-check"></i> Regulatory Requirements</li>
                         </ul>
-                        <button class="assessment-btn" data-category="customers">
-                            <span>Start Customer Assessment</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </button>
+                        
+                    </div>
+                </div>
+
+                <div class="category-card" data-category="leadership">
+                    <div class="category-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="category-content">
+                        <h3>LEADERSHIP</h3>
+                        <p>Review your ability to guide the organization with clear direction, decisions and responsibility.</p>
+                        <ul class="category-features">
+                            <li><i class="fas fa-check"></i> Vision and Direction</li>
+                            <li><i class="fas fa-check"></i> Roles and Responsibilities</li>
+                            <li><i class="fas fa-check"></i> Decision Making</li>
+                            <li><i class="fas fa-check"></i> Communication Culture</li>
+                        </ul>
+                        
+                    </div>
+                </div>
+
+                <div class="category-card" data-category="resources">
+                    <div class="category-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="category-content">
+                        <h3>SUPPORTING RESOURCES</h3>
+                        <p>Identify tools, funds and information needed for the organization to function well.</p>
+                        <ul class="category-features">
+                            <li><i class="fas fa-check"></i> People and Skills</li>
+                            <li><i class="fas fa-check"></i> Tools and Technololgy</li>
+                            <li><i class="fas fa-check"></i> Budget and Finance</li>
+                            <li><i class="fas fa-check"></i> Document and Knowledge</li>
+                        </ul>
+                        
                     </div>
                 </div>
 
                 <div class="category-card" data-category="operations">
                     <div class="category-icon">
-                        <i class="fas fa-cogs"></i>
-                    </div>
-                    <div class="category-content">
-                        <h3>Operations</h3>
-                        <p>Review your operational efficiency, processes, technology, and resource management.</p>
-                        <ul class="category-features">
-                            <li><i class="fas fa-check"></i> Process Efficiency</li>
-                            <li><i class="fas fa-check"></i> Technology Integration</li>
-                            <li><i class="fas fa-check"></i> Resource Management</li>
-                            <li><i class="fas fa-check"></i> Quality Control</li>
-                        </ul>
-                        <button class="assessment-btn" data-category="operations">
-                            <span>Start Operations Assessment</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="category-card" data-category="compliance">
-                    <div class="category-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <div class="category-content">
-                        <h3>Compliance & Governance</h3>
-                        <p>Assess your regulatory compliance, governance structures, and legal risk management.</p>
-                        <ul class="category-features">
-                            <li><i class="fas fa-check"></i> Regulatory Compliance</li>
-                            <li><i class="fas fa-check"></i> Corporate Governance</li>
-                            <li><i class="fas fa-check"></i> Legal Risk Management</li>
-                            <li><i class="fas fa-check"></i> Policy Framework</li>
-                        </ul>
-                        <button class="assessment-btn" data-category="compliance">
-                            <span>Start Compliance Assessment</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="category-card" data-category="risk">
-                    <div class="category-icon">
                         <i class="fas fa-exclamation-triangle"></i>
                     </div>
                     <div class="category-content">
-                        <h3>Risk Management</h3>
-                        <p>Evaluate your risk identification, assessment, mitigation, and crisis management capabilities.</p>
+                        <h3>OPERATIONS</h3>
+                        <p>Evaluate the day-to-day processes that keep the organization running and delivering results.</p>
                         <ul class="category-features">
-                            <li><i class="fas fa-check"></i> Risk Identification</li>
-                            <li><i class="fas fa-check"></i> Risk Assessment</li>
-                            <li><i class="fas fa-check"></i> Mitigation Strategies</li>
-                            <li><i class="fas fa-check"></i> Crisis Management</li>
+                            <li><i class="fas fa-check"></i> Process Planning</li>
+                            <li><i class="fas fa-check"></i> Execution Activities</li>
+                            <li><i class="fas fa-check"></i> Quality Control </li>
+                            <li><i class="fas fa-check"></i> Service Delivery</li>
                         </ul>
-                        <button class="assessment-btn" data-category="risk">
-                            <span>Start Risk Assessment</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </button>
+                        
                     </div>
                 </div>
 
@@ -284,20 +272,24 @@
                         <i class="fas fa-bullseye"></i>
                     </div>
                     <div class="category-content">
-                        <h3>Strategic Planning</h3>
-                        <p>Review your strategic planning, goal setting, performance measurement, and growth strategies.</p>
+                        <h3>EVALUATION AND IMPROVEMENT</h3>
+                        <p>Checking performance and making continous adjustments for better outcomes.</p>
                         <ul class="category-features">
-                            <li><i class="fas fa-check"></i> Strategic Vision</li>
-                            <li><i class="fas fa-check"></i> Goal Setting</li>
-                            <li><i class="fas fa-check"></i> Performance Metrics</li>
-                            <li><i class="fas fa-check"></i> Growth Planning</li>
+                            <li><i class="fas fa-check"></i> Performance Measurement</li>
+                            <li><i class="fas fa-check"></i> Audit and Reviews</li>
+                            <li><i class="fas fa-check"></i> Feedback Collection</li>
+                            <li><i class="fas fa-check"></i> Continous Improvement Strategies</li>
                         </ul>
-                        <button class="assessment-btn" data-category="strategy">
-                            <span>Start Strategy Assessment</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </button>
+                        
                     </div>
                 </div>
+            </div>
+            
+            <div style="margin-top: 2rem; text-align: center;">
+                <button id="start-all-assessment" class="assessment-btn">
+                    <span>Start Assessment</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
             </div>
         </div>
     </section>
@@ -435,6 +427,12 @@
             <div class="promo-content">
                 <div class="section-label">Assessment Platform</div>
                 <h2 class="section-title">MSAT Assessment Tool</h2>
+                    <div class="promo-media" style="margin-bottom:1rem; text-align:center;">
+                        <video controls playsinline preload="metadata" style="width:100%; max-width:720px; border-radius:12px; display:block; margin:0 auto;">
+                            <source src="assets/video/MSAT%20video.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
                 <p class="section-description">
                     MSAT is an advanced assessment platform that helps organizations evaluate their maturity and performance across global practices. It provides insights, benchmarks, and improvement opportunities in compliance, governance, and strategy.
                 </p>
@@ -450,66 +448,58 @@
 
     <!-- Footer -->
     <footer class="main-footer">
-    <div class="container">
-        <div class="footer-content">
-            <div class="footer-section">
-                <div class="footer-logo">
-                    <div class="logo">
-                        <img src="assets/img/logo.png" alt="OAK Global International Business Solutions" class="company-logo footer-logo-img">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <div class="logo">
+                            <img src="assets/img/logo.png" alt="OAK Global International Business Solutions" class="company-logo footer-logo-img">
+                        </div>
+                    </div>
+                    <div class="footer-tagline">
+                        <p>...helping Organisations achieve and maintain global status for sustained success.</p>
+                    </div>
+                    <p class="footer-description">
+                        Driving Business Performance Through Global Practices. 
+                        Your trusted partner for operational excellence and compliance solutions.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="assessment.html">Assessment</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services.html">Business Performance Management</a></li>
+                        <li><a href="services.html">Strategic Planning & Execution</a></li>
+                        <li><a href="services.html">ISO Excellence</a></li>
+                        <li><a href="services.html">Risk Management</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-building"></i> Professional Business Solutions</p>
+                        <p><i class="fas fa-calendar"></i> Available Monday - Friday</p>
+                        <p><i class="fas fa-clock"></i> 9:00 AM - 6:00 PM</p>
                     </div>
                 </div>
-                <div class="footer-tagline">
-                    <p>...helping Organisations achieve and maintain global status for sustained success.</p>
-                </div>
-                <p class="footer-description">
-                    Driving Business Performance Through Global Practices. 
-                    Your trusted partner for operational excellence and compliance solutions.
-                </p>
-
-                
             </div>
             
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="assessment.html">Assessment</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Services</h4>
-                <ul>
-                    <li><a href="services.html">Business Performance Management</a></li>
-                    <li><a href="services.html">Strategic Planning & Execution</a></li>
-                    <li><a href="services.html">ISO Excellence</a></li>
-                    <li><a href="services.html">Risk Management</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h4>Contact Info</h4>
-                <div class="contact-info">
-                    <p><i class="fas fa-building"></i> Professional Business Solutions</p>
-                    <p><i class="fas fa-calendar"></i> Available Monday - Friday</p>
-                    <p><i class="fas fa-clock"></i> 9:00 AM - 6:00 PM</p>
-                </div>
-                <br/><br/>
-                <!-- Social Media Icons -->
-                <div class="social-links">
-                    <a href="https://www.instagram.com/oak_global?igsh=MWVlN3IxNHR6cGc2bg%3D%3D&utm_source=qr" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.facebook.com/share/1JxodipmbR/?mibextid=wwXIfr" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.linkedin.com/company/oak-global-international-business-solutions-ltd/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 OAK Global International Business Solutions. All rights reserved.</p>
             </div>
         </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2025 OAK Global International Business Solutions. All rights reserved.</p>
-        </div>
-    </div>
     </footer>
 
     <script src="assets/js/script.js" type="module"></script>

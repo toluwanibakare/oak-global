@@ -3,323 +3,131 @@ console.log('🔍 Assessment System Loading...');
 
 // Assessment Questions Database
 const assessmentQuestions = {
-    finances: [
+    risks: [
         {
-            id: 'fin_1',
-            question: 'Do you have a detailed budget and financial plan for the next 12 months?',
-            weight: 3
-        },
-        {
-            id: 'fin_2',
-            question: 'Do you regularly monitor your cash flow and have at least 3 months of operating expenses in reserve?',
+            id: 'risk_1',
+            question: 'Do you continually assess risks in the business that may affect the ability of the QMS to achieve its intended purpose?',
             weight: 4
         },
         {
-            id: 'fin_3',
-            question: 'Are your financial records up-to-date and reviewed monthly?',
-            weight: 2
-        },
-        {
-            id: 'fin_4',
-            question: 'Do you have clear visibility into your profit margins for each product/service?',
+            id: 'risk_2',
+            question: 'Have you considered both international and external issues that may impact the ability of the business to to achieve the intended purpose of your QMS?',
             weight: 3
         },
         {
-            id: 'fin_5',
-            question: 'Have you implemented cost control measures and regularly review expenses?',
+            id: 'risk_3',
+            question: 'Have you addressed the risks and opportunities in order to provide assurance that your QMS can achieve its intended purpose?',
             weight: 2
         },
         {
-            id: 'fin_6',
-            question: 'Do you have diversified revenue streams to reduce financial risk?',
+            id: 'risk_4',
+            question: 'Have you planned the actions to address these risks and opportunities?',
             weight: 3
         },
         {
-            id: 'fin_7',
-            question: 'Are you meeting your financial targets and KPIs consistently?',
-            weight: 4
-        },
-        {
-            id: 'fin_8',
-            question: 'Do you have access to additional funding sources if needed for growth?',
-            weight: 2
-        },
-        {
-            id: 'fin_9',
-            question: 'Are your pricing strategies competitive and profitable?',
-            weight: 3
-        },
-        {
-            id: 'fin_10',
-            question: 'Do you conduct regular financial audits and reviews?',
+            id: 'risk_5',
+            question: 'Are the actions integrated into the QMS, fully implented and evaluated for effectiveness?',
             weight: 2
         }
     ],
-    customers: [
+    business: [
         {
-            id: 'cust_1',
-            question: 'Do you regularly collect and analyze customer feedback?',
-            weight: 3
-        },
-        {
-            id: 'cust_2',
-            question: 'Do you have a customer retention rate above 80%?',
+            id: 'bus_1',
+            question: 'Have you systematically defined and do you manage each process and its interactions so as to achieve the inteded results in accordance with both the policy and strategic direction of the busines?',
             weight: 4
         },
         {
-            id: 'cust_3',
-            question: 'Are you actively acquiring new customers through multiple channels?',
+            id: 'bus_2',
+            question: 'Do you understand the context of your business and what the needs and expectations are of your interested parties?',
             weight: 3
-        },
+        }
+    ],
+    leadership: [
         {
-            id: 'cust_4',
-            question: 'Do you have a customer relationship management (CRM) system in place?',
-            weight: 2
-        },
-        {
-            id: 'cust_5',
-            question: 'Are you measuring customer satisfaction scores regularly?',
-            weight: 3
-        },
-        {
-            id: 'cust_6',
-            question: 'Do you have a clear understanding of your target market and customer personas?',
+            id: 'lead_1',
+            question: 'Have you identified your leadership commitment, including your quality policy to guide your QMS?',
             weight: 4
         },
         {
-            id: 'cust_7',
-            question: 'Are you providing excellent customer service with quick response times?',
+            id: 'lead_2',
+            question: 'Have you identified the roles, responsibilites and authorities required for your QMS?',
+            weight: 4
+        },
+        {
+            id: 'lead_3',
+            question: 'Have you defined the objectives for improving your products or services, processes, structure and management system?',
             weight: 3
+        }
+    ],
+    resources: [
+        {
+            id: 'res_1',
+            question: 'Are there processes for identifying and assigning resources and identifying competencies needed for the tasks and activities?',
+            weight: 4
         },
         {
-            id: 'cust_8',
-            question: 'Do you have a loyalty program or customer retention strategy?',
-            weight: 2
+            id: 'res_2',
+            question: 'Is communication of policies and strategy, with relevant objectives, carried out effectively?',
+            weight: 4
         },
         {
-            id: 'cust_9',
-            question: 'Are you actively engaging with customers on social media and digital platforms?',
-            weight: 2
-        },
-        {
-            id: 'cust_10',
-            question: 'Do you regularly conduct market research to understand customer needs?',
-            weight: 3
+            id: 'res_3',
+            question: 'Is the documented information you created sufficient to ensure that the quality management system is suitable, adequate and effective for its purpose?',
+            weight: 4
         }
     ],
     operations: [
         {
             id: 'ops_1',
-            question: 'Are your business processes documented and standardized?',
-            weight: 3
+            question: 'Have you established the necessary controls to ensure that the business processes can function in such a way that does not adversely affect products or services?',
+            weight: 4
         },
         {
             id: 'ops_2',
-            question: 'Do you have efficient systems and technology supporting your operations?',
+            question: 'Iss the necessary corrective action taken when operation controls (processes, procedures, etc.) are not followed?',
             weight: 4
         },
         {
             id: 'ops_3',
-            question: 'Are you measuring and monitoring key operational metrics?',
-            weight: 3
-        },
-        {
-            id: 'ops_4',
-            question: 'Do you have quality control measures in place?',
-            weight: 3
-        },
-        {
-            id: 'ops_5',
-            question: 'Are your supply chain and vendor relationships well-managed?',
-            weight: 2
-        },
-        {
-            id: 'ops_6',
-            question: 'Do you have backup plans for critical business operations?',
-            weight: 3
-        },
-        {
-            id: 'ops_7',
-            question: 'Are you continuously improving your processes and efficiency?',
-            weight: 4
-        },
-        {
-            id: 'ops_8',
-            question: 'Do you have adequate inventory management systems?',
-            weight: 2
-        },
-        {
-            id: 'ops_9',
-            question: 'Are your facilities and equipment properly maintained?',
-            weight: 2
-        },
-        {
-            id: 'ops_10',
-            question: 'Do you have scalable operations that can handle business growth?',
-            weight: 4
-        }
-    ],
-    compliance: [
-        {
-            id: 'comp_1',
-            question: 'Are you compliant with all relevant industry regulations and standards?',
-            weight: 4
-        },
-        {
-            id: 'comp_2',
-            question: 'Do you have proper business licenses and permits?',
-            weight: 4
-        },
-        {
-            id: 'comp_3',
-            question: 'Are your tax obligations up-to-date and properly managed?',
-            weight: 4
-        },
-        {
-            id: 'comp_4',
-            question: 'Do you have adequate insurance coverage for your business?',
-            weight: 3
-        },
-        {
-            id: 'comp_5',
-            question: 'Are your employment practices compliant with labor laws?',
-            weight: 3
-        },
-        {
-            id: 'comp_6',
-            question: 'Do you have proper data protection and privacy policies?',
-            weight: 3
-        },
-        {
-            id: 'comp_7',
-            question: 'Are your contracts and legal agreements properly structured?',
-            weight: 2
-        },
-        {
-            id: 'comp_8',
-            question: 'Do you conduct regular compliance audits and reviews?',
-            weight: 3
-        },
-        {
-            id: 'comp_9',
-            question: 'Are you staying updated with regulatory changes in your industry?',
-            weight: 2
-        },
-        {
-            id: 'comp_10',
-            question: 'Do you have proper corporate governance structures in place?',
+            question: "Have you determined what would constitute an operational control being 'out of control'?",
             weight: 3
         }
+
     ],
-    risk: [
-        {
-            id: 'risk_1',
-            question: 'Have you identified and documented all major business risks?',
-            weight: 4
-        },
-        {
-            id: 'risk_2',
-            question: 'Do you have risk mitigation strategies for each identified risk?',
-            weight: 4
-        },
-        {
-            id: 'risk_3',
-            question: 'Are you regularly monitoring and reviewing your risk exposure?',
-            weight: 3
-        },
-        {
-            id: 'risk_4',
-            question: 'Do you have a business continuity plan for emergencies?',
-            weight: 4
-        },
-        {
-            id: 'risk_5',
-            question: 'Are your cybersecurity measures adequate and up-to-date?',
-            weight: 3
-        },
-        {
-            id: 'risk_6',
-            question: 'Do you have proper backup and disaster recovery procedures?',
-            weight: 3
-        },
-        {
-            id: 'risk_7',
-            question: 'Are you diversified enough to handle market fluctuations?',
-            weight: 2
-        },
-        {
-            id: 'risk_8',
-            question: 'Do you have adequate financial reserves for unexpected events?',
-            weight: 3
-        },
-        {
-            id: 'risk_9',
-            question: 'Are your key personnel and knowledge properly protected?',
-            weight: 2
-        },
-        {
-            id: 'risk_10',
-            question: 'Do you regularly test and update your risk management procedures?',
-            weight: 3
-        }
-    ],
+
     strategy: [
         {
             id: 'strat_1',
-            question: 'Do you have a clear business vision and mission statement?',
+            question: 'Do you have a programme of internal audits, which will systematically review the processes of the QMS to validate that they are meeting the planned arrangements that are set out for them?',
             weight: 3
         },
         {
             id: 'strat_2',
-            question: 'Have you defined specific, measurable business goals for the next 1-3 years?',
+            question: 'Do you review the information collected related to the performance and effectiveness of the QMS? (This is called management review)',
             weight: 4
         },
         {
             id: 'strat_3',
-            question: 'Do you regularly review and update your business strategy?',
+            question: 'Do you effectively manage any nonconformity and corrective action in order to fix problems found during performance evaluation?',
             weight: 3
         },
         {
             id: 'strat_4',
-            question: 'Are you tracking key performance indicators (KPIs) aligned with your strategy?',
+            question: 'Do you ensure that the information gathered is used to make necessary positive adjustments to QMS? (e.g. if a target has been met, then a new target can be chosen. If there are problems reaching a target, then the resources for the program can be reviewed and adjustments made)',
             weight: 4
-        },
-        {
-            id: 'strat_5',
-            question: 'Do you conduct regular competitive analysis and market research?',
-            weight: 3
-        },
-        {
-            id: 'strat_6',
-            question: 'Are your team members aligned with and understand the business strategy?',
-            weight: 3
-        },
-        {
-            id: 'strat_7',
-            question: 'Do you have a clear value proposition that differentiates you from competitors?',
-            weight: 4
-        },
-        {
-            id: 'strat_8',
-            question: 'Are you investing in innovation and future growth opportunities?',
-            weight: 2
-        },
-        {
-            id: 'strat_9',
-            question: 'Do you have succession planning and leadership development programs?',
-            weight: 2
-        },
-        {
-            id: 'strat_10',
-            question: 'Are you measuring the effectiveness of your strategic initiatives?',
-            weight: 3
         }
     ]
 };
 
+// Category order for sequential flow
+const categoryOrder = ['risks', 'business', 'leadership', 'resources', 'operations', 'strategy'];
+
 // Assessment State
 let currentAssessment = {
     category: null,
+    categoryIndex: 0,
+    unlockedIndex: 0, // highest unlocked category index (0 = first)
+    completedCategories: {},
     questions: [],
     currentQuestionIndex: 0,
     answers: {},
@@ -355,14 +163,17 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initializeAssessmentSystem() {
-    // Add event listeners for assessment buttons
-    const assessmentButtons = document.querySelectorAll('.assessment-btn');
-    assessmentButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const category = this.getAttribute('data-category');
-            startAssessment(category);
+    // Single universal start button under categories
+    const startAllBtn = document.getElementById('start-all-assessment');
+    if (startAllBtn) {
+        startAllBtn.addEventListener('click', function() {
+            // disable the start button once started
+            startAllBtn.disabled = true;
+            startAllBtn.classList.add('started');
+            // Start with the first category in order
+            startAssessment(categoryOrder[0]);
         });
-    });
+    }
 
     // Back to categories button
     const backBtn = document.getElementById('back-to-categories');
@@ -411,33 +222,30 @@ function initializeAssessmentSystem() {
 
 function startAssessment(category) {
     console.log(`🎯 Starting ${category} assessment`);
-    
-    // Reset assessment state
-    currentAssessment = {
-        category: category,
-        questions: [...assessmentQuestions[category]],
-        currentQuestionIndex: 0,
-        answers: {},
-        userInfo: {}
-    };
+
+    const idx = categoryOrder.indexOf(category);
+    if (idx === -1) return;
+
+    // Prevent starting categories that are locked
+    if (idx > currentAssessment.unlockedIndex) {
+        alert('Please complete previous categories first.');
+        return;
+    }
+
+    // Set current category index and questions (keep cumulative answers)
+    currentAssessment.category = category;
+    currentAssessment.categoryIndex = idx;
+    currentAssessment.questions = [...assessmentQuestions[category]];
+    currentAssessment.currentQuestionIndex = 0;
 
     // Update UI
-    const categoryTitles = {
-        finances: 'Financial Health Assessment',
-        customers: 'Customer Relations Assessment',
-        operations: 'Operations Assessment',
-        compliance: 'Compliance & Governance Assessment',
-        risk: 'Risk Management Assessment',
-        strategy: 'Strategic Planning Assessment'
-    };
-
-    document.getElementById('assessment-category-title').textContent = categoryTitles[category];
+    document.getElementById('assessment-category-title').textContent = getCategoryDisplayName(category);
     document.getElementById('total-questions').textContent = currentAssessment.questions.length;
-    
+
     // Load first question
     loadQuestion(0);
     updateProgress();
-    
+
     // Show assessment form
     showSection('assessment-form-section');
 }
@@ -522,9 +330,14 @@ function updateNavigationButtons() {
     const hasAnswer = currentAssessment.answers[currentQuestion.id];
     nextBtn.disabled = !hasAnswer;
     
-    // Change button text for last question
+    // Change button text for last question: use 'Next Category' until the last category, then 'Complete Assessment'
     if (currentAssessment.currentQuestionIndex === currentAssessment.questions.length - 1) {
-        nextBtn.innerHTML = '<span>Complete Assessment</span><i class="fas fa-check"></i>';
+        const isLastCategory = currentAssessment.categoryIndex >= categoryOrder.length - 1;
+        if (isLastCategory) {
+            nextBtn.innerHTML = '<span>Complete Assessment</span><i class="fas fa-check"></i>';
+        } else {
+            nextBtn.innerHTML = '<span>Next Category</span><i class="fas fa-arrow-right"></i>';
+        }
     } else {
         nextBtn.innerHTML = '<span>Next</span><i class="fas fa-chevron-right"></i>';
     }
@@ -541,18 +354,45 @@ function previousQuestion() {
 function nextQuestion() {
     const currentQuestion = currentAssessment.questions[currentAssessment.currentQuestionIndex];
     const hasAnswer = currentAssessment.answers[currentQuestion.id];
-    
+
     if (!hasAnswer) {
         alert('Please select an answer before proceeding.');
         return;
     }
-    
+
+    // If there are more questions in this category, go to next question
     if (currentAssessment.currentQuestionIndex < currentAssessment.questions.length - 1) {
         currentAssessment.currentQuestionIndex++;
         loadQuestion(currentAssessment.currentQuestionIndex);
         updateProgress();
+        return;
+    }
+
+    // Last question in current category — mark category complete
+    const finishedCategory = currentAssessment.category;
+    currentAssessment.completedCategories[finishedCategory] = true;
+    const finishedBtnEl = document.querySelector(`.assessment-btn[data-category="${finishedCategory}"]`);
+    if (finishedBtnEl) finishedBtnEl.classList.add('completed');
+
+    // If there is a next category, unlock it and load it
+    if (currentAssessment.categoryIndex < categoryOrder.length - 1) {
+        const nextIdx = currentAssessment.categoryIndex + 1;
+        currentAssessment.unlockedIndex = Math.max(currentAssessment.unlockedIndex, nextIdx);
+        const nextCategory = categoryOrder[nextIdx];
+
+        currentAssessment.categoryIndex = nextIdx;
+        currentAssessment.category = nextCategory;
+        currentAssessment.questions = [...assessmentQuestions[nextCategory]];
+        currentAssessment.currentQuestionIndex = 0;
+
+        // Update UI title and counts
+        document.getElementById('assessment-category-title').textContent = getCategoryDisplayName(nextCategory);
+        document.getElementById('total-questions').textContent = currentAssessment.questions.length;
+
+        loadQuestion(0);
+        updateProgress();
     } else {
-        // Assessment complete, show email collection
+        // Last category finished — proceed to email collection
         showSection('email-collection-section');
     }
 }
@@ -596,7 +436,8 @@ async function handleEmailSubmission(e) {
 
 function calculateResults() {
     const answers = currentAssessment.answers;
-    const questions = currentAssessment.questions;
+    // Calculate results across all categories (final aggregated assessment)
+    const questions = categoryOrder.flatMap(cat => assessmentQuestions[cat]);
     
     let totalScore = 0;
     let maxScore = 0;
@@ -673,7 +514,7 @@ function calculateResults() {
     }
     
     return {
-        category: currentAssessment.category,
+        category: 'overall',
         percentage,
         status,
         statusClass,
@@ -690,46 +531,168 @@ function calculateResults() {
 
 async function storeAssessmentResults(results) {
     try {
-        const assessmentData = {
-            email: results.userInfo.email,
+        // Build master assessment payload
+        const assessmentPayload = {
+            email: results.userInfo.email || null,
             name: results.userInfo.name || null,
             company: results.userInfo.company || null,
-            category: results.category,
-            score: results.percentage,
+            overall_score: results.percentage,
             status: results.status,
             total_questions: results.totalQuestions,
             yes_count: results.yesCount,
             no_count: results.noCount,
             unsure_count: results.unsureCount,
-            answers: JSON.stringify(results.answers),
+            answers: results.answers || {},
+            metadata: {
+                source: 'web',
+                version: '1.0.0'
+            },
             created_at: new Date().toISOString()
         };
 
         if (supabase) {
-            console.log('📤 Saving assessment to Supabase...');
-            
-            const { data, error } = await supabase
-                .from('assessment_responses')
-                .insert([assessmentData]);
-            
-            if (error) {
-                console.error('❌ Supabase error:', error);
-                throw error;
-            } else {
-                console.log('✅ Assessment saved to Supabase successfully');
+            console.log('📤 Saving assessment to Supabase (assessments, categories, answers)...');
+
+            // Insert master assessment and return id
+            const { data: insertedAssessment, error: assessmentError } = await supabase
+                .from('assessments')
+                .insert([assessmentPayload])
+                .select()
+                .single();
+
+            if (assessmentError) {
+                console.error('❌ Supabase error inserting assessment:', assessmentError);
+                throw assessmentError;
             }
+
+            const assessmentId = insertedAssessment.id;
+
+            // Prepare per-category payloads
+            const categoryRows = [];
+            const answerRows = [];
+
+            categoryOrder.forEach((catKey, idx) => {
+                const questions = assessmentQuestions[catKey] || [];
+                let yesCount = 0, noCount = 0, unsureCount = 0;
+                let totalScore = 0, maxScore = 0;
+                const catAnswers = {};
+
+                questions.forEach(q => {
+                    const ans = currentAssessment.answers[q.id];
+                    if (ans === 'yes') yesCount++;
+                    else if (ans === 'no') noCount++;
+                    else if (ans === 'unsure') unsureCount++;
+
+                    const weight = q.weight || 1;
+                    maxScore += weight * 3;
+                    if (ans === 'yes') totalScore += weight * 3;
+                    else if (ans === 'unsure') totalScore += weight * 1;
+
+                    if (ans) catAnswers[q.id] = ans;
+
+                    // prepare answer row if answered
+                    if (ans) {
+                        const scoreForAnswer = ans === 'yes' ? weight * 3 : (ans === 'unsure' ? weight * 1 : 0);
+                        answerRows.push({
+                            assessment_id: assessmentId,
+                            category_key: catKey,
+                            question_id: q.id,
+                            question_text: q.question,
+                            answer: ans,
+                            weight: weight,
+                            score: scoreForAnswer,
+                            created_at: new Date().toISOString()
+                        });
+                    }
+                });
+
+                const categoryScore = maxScore > 0 ? Math.round((totalScore / maxScore) * 100) : null;
+                const categoryStatus = categoryScore === null ? null : (categoryScore >= 80 ? 'Excellent' : (categoryScore >= 65 ? 'Good' : (categoryScore >= 45 ? 'Needs Improvement' : 'Critical')));
+
+                categoryRows.push({
+                    assessment_id: assessmentId,
+                    category_key: catKey,
+                    category_title: getCategoryDisplayName(catKey),
+                    position: idx,
+                    score: categoryScore,
+                    status: categoryStatus,
+                    total_questions: questions.length,
+                    yes_count: yesCount,
+                    no_count: noCount,
+                    unsure_count: unsureCount,
+                    answers: catAnswers,
+                    created_at: new Date().toISOString()
+                });
+            });
+
+            // Insert categories in bulk
+            if (categoryRows.length > 0) {
+                const { error: catError } = await supabase
+                    .from('assessment_categories')
+                    .insert(categoryRows);
+
+                if (catError) {
+                    console.error('❌ Supabase error inserting categories:', catError);
+                    throw catError;
+                }
+            }
+
+            // Insert answer rows in bulk (if any)
+            if (answerRows.length > 0) {
+                // Insert in batches to avoid payload limits
+                const batchSize = 500;
+                for (let i = 0; i < answerRows.length; i += batchSize) {
+                    const batch = answerRows.slice(i, i + batchSize);
+                    const { error: ansError } = await supabase
+                        .from('assessment_answers')
+                        .insert(batch);
+                    if (ansError) {
+                        console.error('❌ Supabase error inserting answers:', ansError);
+                        throw ansError;
+                    }
+                }
+            }
+
+            console.log('✅ Assessment, categories and answers saved to Supabase successfully');
         } else {
-            // Fallback to localStorage
-            console.log('📤 Saving assessment to localStorage...');
-            
-            const assessments = JSON.parse(localStorage.getItem('oakglobal_assessments') || '[]');
-            assessmentData.id = Date.now();
-            assessments.push(assessmentData);
-            localStorage.setItem('oakglobal_assessments', JSON.stringify(assessments));
-            
+            // Fallback to structured localStorage
+            console.log('📤 Saving assessment to localStorage (structured)...');
+            const store = JSON.parse(localStorage.getItem('oakglobal_assessments_v2') || '[]');
+            const record = {
+                id: Date.now(),
+                assessment: assessmentPayload,
+                categories: categoryOrder.map((catKey, idx) => {
+                    const questions = assessmentQuestions[catKey] || [];
+                    const catAnswers = {};
+                    let yesCount = 0, noCount = 0, unsureCount = 0, totalScore = 0, maxScore = 0;
+                    questions.forEach(q => {
+                        const ans = currentAssessment.answers[q.id];
+                        if (ans) catAnswers[q.id] = ans;
+                        const weight = q.weight || 1;
+                        maxScore += weight * 3;
+                        if (ans === 'yes') { yesCount++; totalScore += weight * 3; }
+                        else if (ans === 'unsure') { unsureCount++; totalScore += weight * 1; }
+                        else if (ans === 'no') { noCount++; }
+                    });
+                    const categoryScore = maxScore > 0 ? Math.round((totalScore / maxScore) * 100) : null;
+                    return {
+                        category_key: catKey,
+                        category_title: getCategoryDisplayName(catKey),
+                        position: idx,
+                        score: categoryScore,
+                        total_questions: questions.length,
+                        yes_count: yesCount,
+                        no_count: noCount,
+                        unsure_count: unsureCount,
+                        answers: catAnswers
+                    };
+                })
+            };
+            store.push(record);
+            localStorage.setItem('oakglobal_assessments_v2', JSON.stringify(store));
             console.log('✅ Assessment saved to localStorage successfully');
         }
-        
+
     } catch (error) {
         console.error('❌ Error storing assessment:', error);
         // Don't throw error - allow results to be shown even if storage fails
@@ -781,12 +744,13 @@ function displayResults(results) {
 
 function getCategoryDisplayName(category) {
     const categoryNames = {
-        finances: 'Financial Health',
-        customers: 'Customer Relations',
+        risks: 'Risks and Opportunities',
+        business: 'The Business Context',
+        leadership: 'Leadership',
+        resources: 'Supporting Resources',
         operations: 'Operations',
-        compliance: 'Compliance & Governance',
-        risk: 'Risk Management',
-        strategy: 'Strategic Planning'
+        strategy: 'Evaluation & Improvement',
+        overall: 'Overall Assessment'
     };
     return categoryNames[category] || category;
 }
@@ -861,16 +825,41 @@ function showSection(sectionId) {
 function resetAssessment() {
     currentAssessment = {
         category: null,
+        categoryIndex: 0,
+        unlockedIndex: 0,
+        completedCategories: {},
         questions: [],
         currentQuestionIndex: 0,
         answers: {},
         userInfo: {}
     };
-    
+
     // Reset form
     const emailForm = document.getElementById('email-collection-form');
     if (emailForm) {
         emailForm.reset();
+    }
+
+    // Reset category buttons state: only first category unlocked
+    const assessmentButtons = document.querySelectorAll('.assessment-btn');
+    assessmentButtons.forEach(button => {
+        const category = button.getAttribute('data-category');
+        const idx = categoryOrder.indexOf(category);
+        if (idx > 0) {
+            button.disabled = true;
+            button.classList.add('locked');
+            button.classList.remove('completed');
+        } else {
+            button.disabled = false;
+            button.classList.remove('locked');
+            button.classList.remove('completed');
+        }
+    });
+    // Ensure the universal start button is enabled and cleaned up
+    const startAllBtn = document.getElementById('start-all-assessment');
+    if (startAllBtn) {
+        startAllBtn.disabled = false;
+        startAllBtn.classList.remove('started');
     }
 }
 
@@ -899,6 +888,7 @@ window.assessmentSystem = {
     currentAssessment,
     assessmentQuestions,
     startAssessment,
+    categoryOrder,
     calculateResults,
     supabase: supabase ? 'Connected' : 'Not Available'
 };

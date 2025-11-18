@@ -314,13 +314,14 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 1rem 2rem;
+    padding: 0.75rem 1rem;
     border: none;
     border-radius: 12px;
     font-weight: 600;
     cursor: pointer;
     transition: all var(--transition-normal);
-    font-size: 1rem;
+    font-size: 0.95rem;
+    white-space: nowrap;
 }
 
 .prev-btn {
@@ -339,6 +340,31 @@
     background: var(--gradient-primary);
     color: white;
     margin-left: auto;
+    min-width: 160px;
+}
+
+/* Keep theme color when focused or active so text remains visible */
+.nav-btn:focus,
+.nav-btn:active {
+    outline: none;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg);
+}
+
+.next-btn:focus,
+.next-btn:active {
+    background: var(--gradient-primary) !important;
+    color: black !important;
+    outline: none;
+    box-shadow: var(--shadow-lg);
+}
+
+.assessment-btn:focus,
+.assessment-btn:active {
+    background: var(--gradient-primary) !important;
+    color: black !important;
+    outline: none;
+    box-shadow: var(--shadow-lg);
 }
 
 .next-btn:hover {
