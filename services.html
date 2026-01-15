@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <link rel="favicon" type="image/x-icon" href="public/favicon.ico">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
@@ -72,6 +72,86 @@
         height: 45px;
     }
 }
+
+/* Category Tabs */
+.category-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 1rem;
+}
+
+.category-tab {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #6b7280;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.category-tab:hover {
+    color: #059669;
+}
+
+.category-tab.active {
+    color: #059669;
+    border-bottom: 3px solid #059669;
+}
+
+/* Category Content */
+.category-content {
+    display: none;
+}
+
+.category-content.active {
+    display: block;
+}
+
+/* Full width services grid */
+.full-width-services {
+    width: 100%;
+    max-width: 100%;
+}
+
+.full-width-services .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    width: 100%;
+}
+
+/* Empty State for GRC */
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: #f9fafb;
+    border-radius: 8px;
+    border: 2px dashed #d1d5db;
+}
+
+.empty-state i {
+    font-size: 3rem;
+    color: #9ca3af;
+    margin-bottom: 1rem;
+}
+
+.empty-state h3 {
+    color: #6b7280;
+    margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+    color: #9ca3af;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
     </style>
 </head>
 <body>
@@ -168,201 +248,345 @@
         </div>
     </section>
 
-    <!-- Services Overview -->
-    <section class="services-overview">
+    <!-- Services Categories -->
+    <section class="services-categories">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Professional Business Solutions</h2>
-                <p class="section-subtitle">
-                    Our expert team delivers tailored solutions designed to optimize your business performance, 
-                    ensure compliance, and drive sustainable growth. Each service is crafted to meet the unique 
-                    challenges of modern organizations seeking global recognition and operational excellence.
-                </p>
+            <div class="category-tabs">
+                <button class="category-tab active" data-category="management">
+                    <i class="fas fa-chart-line"></i>
+                    Management Services
+                </button>
+                <button class="category-tab" data-category="grc">
+                    <i class="fas fa-shield-alt"></i>
+                    Governance, Risk & Compliance (GRC) Advisory Services
+                </button>
             </div>
-            
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Business Performance Management">
-                        <div class="service-overlay">
-                            <i class="fas fa-chart-line"></i>
+
+            <!-- Management Services Content -->
+            <div class="category-content active full-width-services" id="management-content">
+                <div class="services-grid">
+                    <!-- Business Performance Management -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Business Performance Management">
+                            <div class="service-overlay">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Business Performance Management</h3>
+                            <p>Optimize your business operations through strategic planning, performance monitoring, and continuous improvement initiatives that drive sustainable growth.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Strategic planning and goal setting</li>
+                                <li><i class="fas fa-check"></i> KPI development and monitoring</li>
+                                <li><i class="fas fa-check"></i> Performance optimization strategies</li>
+                                <li><i class="fas fa-check"></i> <a href="https://assessment.ibmssp.org.ng/" target="_blank" rel="noopener noreferrer" style="color: #059669; text-decoration: none;">MSAT Assessment Tool</a></li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="service-content">
-                        <h3>Business Performance Management</h3>
-                        <p>Optimize your business operations through strategic planning, performance monitoring, and continuous improvement initiatives that drive sustainable growth.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Strategic planning and goal setting</li>
-                            <li><i class="fas fa-check"></i> KPI development and monitoring</li>
-                            <li><i class="fas fa-check"></i> Performance optimization strategies</li>
-                            <li><i class="fas fa-check"></i> <a href="https://assessment.ibmssp.org.ng/" target="_blank" rel="noopener noreferrer" style="color: #059669; text-decoration: none;">MSAT Assessment Tool</a></li>
-                        </ul>
+
+                    <!-- Strategic Planning & Execution -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.pexels.com/photos/3184454/pexels-photo-3184454.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Strategic Planning">
+                            <div class="service-overlay">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Strategic Planning & Execution</h3>
+                            <p>Define and implement winning strategies that connect business strategy with purpose, driving meaningful results and competitive advantage.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Strategic vision development</li>
+                                <li><i class="fas fa-check"></i> Purpose-driven strategy alignment</li>
+                                <li><i class="fas fa-check"></i> Execution planning and monitoring</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Operational Improvement -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.pexels.com/photos/3183153/pexels-photo-3183153.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Operational Improvement">
+                            <div class="service-overlay">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Operational Improvement</h3>
+                            <p>Transform operations through process mapping, bottleneck identification, and workflow optimization for sustainable performance gains.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Process mapping and analysis</li>
+                                <li><i class="fas fa-check"></i> Bottleneck identification</li>
+                                <li><i class="fas fa-check"></i> Workflow optimization</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Performance Monitoring & Measurement -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.pexels.com/photos/3183164/pexels-photo-3183164.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Performance Monitoring">
+                            <div class="service-overlay">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Performance Monitoring & Measurement</h3>
+                            <p>Implement robust monitoring systems that provide real-time insights and support data-driven decision making for continuous improvement.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Performance dashboard development</li>
+                                <li><i class="fas fa-check"></i> KPI tracking and reporting</li>
+                                <li><i class="fas fa-check"></i> Data analytics and insights</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Strategy Maturity Assessment -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.pexels.com/photos/3183165/pexels-photo-3183165.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Strategy Assessment">
+                            <div class="service-overlay">
+                                <i class="fas fa-search"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Strategy Maturity Assessment</h3>
+                            <p>Evaluate the connection between your strategies, vision, and purpose through comprehensive assessment and maturity roadmap development.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Strategic capability evaluation</li>
+                                <li><i class="fas fa-check"></i> Vision-strategy alignment</li>
+                                <li><i class="fas fa-check"></i> Maturity roadmap development</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Management Systems Assessment -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.pexels.com/photos/3183173/pexels-photo-3183173.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Management Systems">
+                            <div class="service-overlay">
+                                <i class="fas fa-clipboard-check"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Management Systems Assessment</h3>
+                            <p>Measure and assess your management system performance maturity level with comprehensive evaluation and improvement recommendations.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> System maturity evaluation</li>
+                                <li><i class="fas fa-check"></i> Performance measurement analysis</li>
+                                <li><i class="fas fa-check"></i> Best practice benchmarking</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Regulatory Compliance Assessment -->
+                    <!-- <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Regulatory Compliance">
+                            <div class="service-overlay">
+                                <i class="fas fa-gavel"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Regulatory Compliance Assessment</h3>
+                            <p>Conduct comprehensive regulatory and statutory audits while developing effective mitigation plans for ongoing compliance.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Regulatory audit and assessment</li>
+                                <li><i class="fas fa-check"></i> Compliance program design</li>
+                            </ul>
+                        </div>
+                    </div> -->
+
+                    <!-- ISO Excellence -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="ISO Excellence">
+                            <div class="service-overlay">
+                                <i class="fas fa-award"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>ISO Excellence</h3>
+                            <p>Comprehensive ISO services including system design, gap assessment, internal audits, implementation support, and certification validation.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Management system design</li>
+                                <li><i class="fas fa-check"></i> Gap assessment and analysis</li>
+                                <li><i class="fas fa-check"></i> Certification validation</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Risk Management & Compliance -->
+                    <!-- <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.pexels.com/photos/3183156/pexels-photo-3183156.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Risk Management">
+                            <div class="service-overlay">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Risk Management & Compliance</h3>
+                            <p>Comprehensive risk assessment and compliance management that protects and enhances business value through strategic risk mitigation.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Risk identification, assessment and planning</li>
+                                <li><i class="fas fa-check"></i> Compliance framework development</li>
+                                <li><i class="fas fa-check"></i> Crisis management planning</li>
+                            </ul>
+                        </div>
+                    </div> -->
+
+                    <!-- Environmental Impact Audit -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://vincivilworld.com/wp-content/uploads/2021/06/untitled-design-27.jpg" alt="Environmental Impact Audit">
+                            <div class="service-overlay">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Environmental Impact Audit</h3>
+                            <p>Your business reputation, ability to sell products and services and attract staff may all be affected by the environmental policies and procedures that you have in place.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Builds trust and attracts eco-conscious customers.</li>
+                                <li><i class="fas fa-check"></i> Improves brand image and partnerships.</li>
+                                <li><i class="fas fa-check"></i> Encourages innovation and cost-efficient practices.</li>
+                                <li><i class="fas fa-check"></i> Saves money and boosts eligibility for green grants and tenders.</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="https://images.pexels.com/photos/3184454/pexels-photo-3184454.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Strategic Planning">
-                        <div class="service-overlay">
-                            <i class="fas fa-bullseye"></i>
+            <!-- GRC Advisory Services Content -->
+            <div class="category-content full-width-services" id="grc-content">
+                <div class="services-grid">
+                    <!-- Risk & Compliance Health Check -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Risk & Compliance Health Check">
+                            <div class="service-overlay">
+                                <i class="fas fa-heartbeat"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Risk & Compliance Health Check</h3>
+                            <p>A rapid assessment of your organisation's risk management maturity, compliance obligations, and governance effectiveness.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Risk & compliance gap analysis</li>
+                                <li><i class="fas fa-check"></i> Priority risk register</li>
+                                <li><i class="fas fa-check"></i> Practical recommendations</li>
+                                <li><i class="fas fa-check"></i> Board-ready report</li>
+                            </ul>
+                            <p class="service-note"><strong>Ideal for:</strong> Organisations seeking clarity before major decisions.</p>
                         </div>
                     </div>
-                    <div class="service-content">
-                        <h3>Strategic Planning & Execution</h3>
-                        <p>Define and implement winning strategies that connect business strategy with purpose, driving meaningful results and competitive advantage.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Strategic vision development</li>
-                            <li><i class="fas fa-check"></i> Purpose-driven strategy alignment</li>
-                            <li><i class="fas fa-check"></i> Execution planning and monitoring</li>
-                        </ul>
-                    </div>
-                </div>
 
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="https://images.pexels.com/photos/3183153/pexels-photo-3183153.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Operational Improvement">
-                        <div class="service-overlay">
-                            <i class="fas fa-cogs"></i>
+                    <!-- Enterprise Risk Management Framework Setup -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.pexels.com/photos/3183158/pexels-photo-3183158.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Enterprise Risk Management Framework">
+                            <div class="service-overlay">
+                                <i class="fas fa-sitemap"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Enterprise Risk Management (ERM) Framework Setup</h3>
+                            <p>Design and implementation of a structured ERM framework aligned with ISO 31000 and COSO ERM principles.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Risk management policy & framework</li>
+                                <li><i class="fas fa-check"></i> Risk appetite & tolerance definition</li>
+                                <li><i class="fas fa-check"></i> Strategic and operational risk registers</li>
+                                <li><i class="fas fa-check"></i> Reporting templates for management and boards</li>
+                            </ul>
+                            <p class="service-note"><strong>Suitable for:</strong> Medium to large organisations, NGOs, and regulated entities.</p>
                         </div>
                     </div>
-                    <div class="service-content">
-                        <h3>Operational Improvement</h3>
-                        <p>Transform operations through process mapping, bottleneck identification, and workflow optimization for sustainable performance gains.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Process mapping and analysis</li>
-                            <li><i class="fas fa-check"></i> Bottleneck identification</li>
-                            <li><i class="fas fa-check"></i> Workflow optimization</li>
-                        </ul>
-                    </div>
-                </div>
 
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="https://images.pexels.com/photos/3183164/pexels-photo-3183164.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Performance Monitoring">
-                        <div class="service-overlay">
-                            <i class="fas fa-chart-bar"></i>
+                    <!-- Compliance Management System -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Compliance Management System">
+                            <div class="service-overlay">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Compliance Management System (ISO 37301-Aligned)</h3>
+                            <p>Support organisations to establish a structured approach to compliance with proactive monitoring and reporting.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Identification of compliance obligations</li>
+                                <li><i class="fas fa-check"></i> Compliance register and controls</li>
+                                <li><i class="fas fa-check"></i> Monitoring and reporting structure</li>
+                                <li><i class="fas fa-check"></i> Internal compliance readiness review</li>
+                            </ul>
+                            <p class="service-note"><strong>Helps organisations:</strong> Move from reactive to proactive compliance.</p>
                         </div>
                     </div>
-                    <div class="service-content">
-                        <h3>Performance Monitoring & Measurement</h3>
-                        <p>Implement robust monitoring systems that provide real-time insights and support data-driven decision making for continuous improvement.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Performance dashboard development</li>
-                            <li><i class="fas fa-check"></i> KPI tracking and reporting</li>
-                            <li><i class="fas fa-check"></i> Data analytics and insights</li>
-                        </ul>
-                    </div>
-                </div>
 
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="https://images.pexels.com/photos/3183165/pexels-photo-3183165.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Strategy Assessment">
-                        <div class="service-overlay">
-                            <i class="fas fa-search"></i>
+                    <!-- Outsourcing Governance and Management -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.pexels.com/photos/3184328/pexels-photo-3184328.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Outsourcing Governance">
+                            <div class="service-overlay">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Outsourcing Governance and Management (ISO 37500)</h3>
+                            <p>Establish a structured approach to design, manage, and improve outsourcing arrangements effectively.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Compliance checks on outsourced service providers</li>
+                                <li><i class="fas fa-check"></i> Guidance on outsourcing governance</li>
+                                <li><i class="fas fa-check"></i> Policy Statement & Outsourcing Principles</li>
+                                <li><i class="fas fa-check"></i> Governance Structure & Risk Management</li>
+                                <li><i class="fas fa-check"></i> Exit and Continuity planning</li>
+                            </ul>
+                            <p class="service-note"><strong>Helps organizations:</strong> Outsource wisely, responsibly, and sustainably.</p>
                         </div>
                     </div>
-                    <div class="service-content">
-                        <h3>Strategy Maturity Assessment</h3>
-                        <p>Evaluate the connection between your strategies, vision, and purpose through comprehensive assessment and maturity roadmap development.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Strategic capability evaluation</li>
-                            <li><i class="fas fa-check"></i> Vision-strategy alignment</li>
-                            <li><i class="fas fa-check"></i> Maturity roadmap development</li>
-                        </ul>
-                    </div>
-                </div>
 
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="https://images.pexels.com/photos/3183173/pexels-photo-3183173.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Management Systems">
-                        <div class="service-overlay">
-                            <i class="fas fa-clipboard-check"></i>
+                    <!-- Board & Executive Risk Advisory Sessions -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.pexels.com/photos/3184351/pexels-photo-3184351.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Board Advisory Sessions">
+                            <div class="service-overlay">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Board & Executive Risk Advisory Sessions</h3>
+                            <p>Executive-level engagement designed for boards, senior management, trustees and governing councils.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Risk oversight responsibilities</li>
+                                <li><i class="fas fa-check"></i> Governance accountability</li>
+                                <li><i class="fas fa-check"></i> Decision-making under uncertainty</li>
+                                <li><i class="fas fa-check"></i> Strategic risk assessment</li>
+                            </ul>
+                            <p class="service-note"><strong>Focus:</strong> Short, high-impact sessions with long-term value for leadership teams.</p>
                         </div>
                     </div>
-                    <div class="service-content">
-                        <h3>Management Systems Assessment</h3>
-                        <p>Measure and assess your management system performance maturity level with comprehensive evaluation and improvement recommendations.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> System maturity evaluation</li>
-                            <li><i class="fas fa-check"></i> Performance measurement analysis</li>
-                            <li><i class="fas fa-check"></i> Best practice benchmarking</li>
-                        </ul>
-                    </div>
-                </div>
 
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Regulatory Compliance">
-                        <div class="service-overlay">
-                            <i class="fas fa-gavel"></i>
+                    <!-- Retained / Virtual GRC Advisory -->
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.pexels.com/photos/3183159/pexels-photo-3183159.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Virtual GRC Advisory">
+                            <div class="service-overlay">
+                                <i class="fas fa-headset"></i>
+                            </div>
                         </div>
-                    </div>
-                    <div class="service-content">
-                        <h3>Regulatory Compliance Assessment</h3>
-                        <p>Conduct comprehensive regulatory and statutory audits while developing effective mitigation plans for ongoing compliance.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Regulatory audit and assessment</li>
-                            <!-- <li><i class="fas fa-check"></i> Risk mitigation planning</li> -->
-                            <li><i class="fas fa-check"></i> Compliance program design</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="ISO Excellence">
-                        <div class="service-overlay">
-                            <i class="fas fa-award"></i>
+                        <div class="service-content">
+                            <h3>Retained / Virtual GRC Advisory</h3>
+                            <p>Ongoing advisory support as an outsourced GRC advisor with flexible engagement models.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Periodic risk reviews</li>
+                                <li><i class="fas fa-check"></i> Compliance monitoring</li>
+                                <li><i class="fas fa-check"></i> Advisory support to management</li>
+                                <li><i class="fas fa-check"></i> Input into board reporting</li>
+                                <li><i class="fas fa-check"></i> Regulatory updates and guidance</li>
+                            </ul>
+                            <p class="service-note"><strong>Benefit:</strong> Cost-effective alternative to full-time senior hires with expert guidance.</p>
                         </div>
-                    </div>
-                    <div class="service-content">
-                        <h3>ISO Excellence</h3>
-                        <p>Comprehensive ISO services including system design, gap assessment, internal audits, implementation support, and certification validation.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Management system design</li>
-                            <li><i class="fas fa-check"></i> Gap assessment and analysis</li>
-                            <li><i class="fas fa-check"></i> Certification validation</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="https://images.pexels.com/photos/3183156/pexels-photo-3183156.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Risk Management">
-                        <div class="service-overlay">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                    </div>
-                    <div class="service-content">
-                        <h3>Risk Management & Compliance</h3>
-                        <p>Comprehensive risk assessment and compliance management that protects and enhances business value through strategic risk mitigation.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Risk identification, assessment and planning</li>
-                            <li><i class="fas fa-check"></i> Compliance framework development</li>
-                            <li><i class="fas fa-check"></i> Crisis management planning</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="https://vincivilworld.com/wp-content/uploads/2021/06/untitled-design-27.jpg" alt="Environmental Impact Audit">
-                        <div class="service-overlay">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                    </div>
-                    <div class="service-content">
-                        <h3>Environmental Impact Audit</h3>
-                        <p>Your business reputation, ability to sell products and services and attract staff may all be affected by the environmental policies and procedures that you have in place.
-
-                            We to help you become
-                            an environmentally friendly business, and to meet your environmental obligations. (Green Business)</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Builds trust and attracts eco-conscious customers.</li>
-                            <li><i class="fas fa-check"></i> Improves brand image and partnerships.</li>
-                            <li><i class="fas fa-check"></i> Encourages innovation and cost-efficient practices.</li>
-                            <li><i class="fas fa-check"></i> Saves money and boosts eligibility for green grants and tenders.</li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -529,6 +753,31 @@
     </div>
     </footer>
 
-     <script src="assets/js/script.js" type="module"></script>
+    <script src="assets/js/script.js" type="module"></script>
+    <script>
+        // Category Tab Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.category-tab');
+            const contents = document.querySelectorAll('.category-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const category = tab.dataset.category;
+                    
+                    // Update active tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    // Show corresponding content
+                    contents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === `${category}-content`) {
+                            content.classList.add('active');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 </body>
-</html> 
+</html>
