@@ -1,25 +1,12 @@
 // OAK Global International Business Solutions - JavaScript
-console.log('🌳 OAK Global - Professional Website Loading...');
+// Professional website initialization
 
-// Supabase configuration
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
-let supabase = null;
-
-// Initialize Supabase if credentials are available
-if (SUPABASE_URL && SUPABASE_ANON_KEY) {
-    try {
-        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        console.log('✅ Supabase initialized successfully');
-    } catch (error) {
-        console.warn('⚠️ Supabase initialization failed:', error);
-    }
-}
+// Backend API configuration
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ DOM loaded, initializing website...');
+    // DOM loaded, initializing website
     
     // Initialize all functionality
     initializeNavigation();
@@ -30,19 +17,18 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeLoadingStates();
     initializeVisionMissionCards();
     
-    console.log('🚀 OAK Global website fully initialized');
+    // OAK Global website fully initialized
 });
 
 // Enhanced Mobile Navigation
 function initializeNavigation() {
-    console.log('📱 Initializing navigation...');
+    // Initializing navigation
     
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
     
     if (!navToggle || !navMenu) {
-        console.error('❌ Navigation elements not found');
         return;
     }
     
@@ -97,12 +83,12 @@ function initializeNavigation() {
         }
     });
     
-    console.log('✅ Navigation initialized');
+    // Navigation initialized
 }
 
 // Scroll Effects
 function initializeScrollEffects() {
-    console.log('🎯 Initializing scroll effects...');
+    // Initializing scroll effects
     
     const header = document.querySelector('.main-header');
     let lastScrollY = window.scrollY;
@@ -138,7 +124,7 @@ function initializeScrollEffects() {
     
     window.addEventListener('scroll', requestTick, { passive: true });
     
-    console.log('✅ Scroll effects initialized');
+    // Scroll effects initialized
 }
 
 // Scroll Animations
@@ -193,12 +179,12 @@ function initializeAnimations() {
         observer.observe(element);
     });
     
-    console.log(`✅ Observing ${animatedElements.length} elements for animation`);
+    // Elements observed for animation
 }
 
 // Counter Animations
 function initializeCounters() {
-    console.log('🔢 Initializing counter animations...');
+    // Initializing counter animations
     
     const counters = document.querySelectorAll('[data-count]');
     
@@ -233,18 +219,18 @@ function initializeCounters() {
         counterObserver.observe(counter);
     });
     
-    console.log(`✅ ${counters.length} counters initialized`);
+    // Counters initialized
 }
 
-// Contact Form Handling with Supabase
+// Contact Form Handling with Node/Express Backend
 function initializeContactForm() {
-    console.log('📧 Initializing contact form...');
+    // Initializing contact form
     
     const contactForm = document.getElementById('contact-form');
     const messageDiv = document.getElementById('form-messages');
     
     if (!contactForm) {
-        console.log('ℹ️ No contact form found on this page');
+        // No contact form found on this page
         return;
     }
     
@@ -287,68 +273,38 @@ function initializeContactForm() {
         submitButton.classList.add('loading');
         
         try {
-            let success = false;
+            // Sending contact form to backend
             
-            // Try Supabase first
-            if (supabase) {
-                console.log('📤 Attempting to save to Supabase...');
-                
-                const { data, error } = await supabase
-                    .from('contacts')
-                    .insert([
-                        {
-                            name: name,
-                            email: email,
-                            company: company || null,
-                            service: service || null,
-                            message: message
-                        }
-                    ]);
-                
-                if (error) {
-                    console.error('❌ Supabase error:', error);
-                    throw error;
-                } else {
-                    console.log('✅ Contact saved to Supabase successfully');
-                    success = true;
-                }
-            }
-            
-            // Fallback to localStorage if Supabase fails or isn't available
-            if (!success) {
-                console.log('📤 Saving to localStorage as fallback...');
-                
-                const contacts = JSON.parse(localStorage.getItem('oakglobal_contacts') || '[]');
-                const newContact = {
-                    id: Date.now(),
+            const response = await fetch(`${API_BASE_URL}/contacts`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
                     name: name,
                     email: email,
-                    company: company,
-                    service: service,
-                    message: message,
-                    timestamp: new Date().toISOString(),
-                    read: false
-                };
-                contacts.push(newContact);
-                localStorage.setItem('oakglobal_contacts', JSON.stringify(contacts));
-                
-                console.log('✅ Contact saved to localStorage successfully');
-                success = true;
+                    company: company || null,
+                    service: service || null,
+                    message: message
+                })
+            });
+            
+            const result = await response.json();
+            
+            if (!response.ok) {
+                throw new Error(result.error || 'Failed to submit contact form');
             }
             
-            if (success) {
-                // Show success message
-                showMessage('Thank you for your message! We will get back to you within 24 hours.', 'success');
-                
-                // Reset form
-                contactForm.reset();
-                
-                // Track form submission
-                trackFormSubmission(name, email, service);
-            }
+            // Contact submitted successfully
+            showMessage('Thank you for your message! We will get back to you within 24 hours.', 'success');
+            
+            // Reset form
+            contactForm.reset();
+            
+            // Track form submission
+            trackFormSubmission(name, email, service);
             
         } catch (error) {
-            console.error('❌ Form submission error:', error);
             showMessage('Sorry, there was an error sending your message. Please try again or contact us directly.', 'error');
         } finally {
             // Reset button
@@ -390,19 +346,12 @@ function initializeContactForm() {
             const visits = parseInt(localStorage.getItem('oakglobal_visits') || '0') + 1;
             localStorage.setItem('oakglobal_visits', visits.toString());
             
-            // Log submission details (for debugging)
-            console.log('📊 Form submission tracked:', {
-                name: name,
-                email: email,
-                service: service,
-                timestamp: new Date().toISOString()
-            });
+            // Form submission tracked
         } catch (error) {
-            console.warn('⚠️ Analytics tracking failed:', error);
         }
     }
     
-    console.log('✅ Contact form initialized');
+    // Contact form initialized
 }
 
 // Loading States
@@ -429,12 +378,12 @@ function initializeLoadingStates() {
         });
     });
     
-    console.log('✅ Loading states initialized');
+    // Loading states initialized
 }
 
 // Vision Mission Cards
 function initializeVisionMissionCards() {
-    console.log('🎴 Initializing vision mission cards...');
+    // Initializing vision mission cards
     
     const cards = document.querySelectorAll('.swipeable-cards .card');
     const indicators = document.querySelectorAll('.indicator');
@@ -442,21 +391,14 @@ function initializeVisionMissionCards() {
     const nextBtn = document.getElementById('nextCard');
     
     if (cards.length === 0) {
-        console.log('ℹ️ No vision mission cards found on this page');
+        // No vision mission cards found on this page
         return;
     }
     
     let currentCard = 0;
     let autoPlayInterval = null;
     
-    console.log('Found cards:', cards.length);
-    console.log('Found indicators:', indicators.length);
-    console.log('Found prev button:', prevBtn ? 'Yes' : 'No');
-    console.log('Found next button:', nextBtn ? 'Yes' : 'No');
-    
     function showCard(index) {
-        console.log('Showing card:', index);
-        
         // Hide all cards first
         cards.forEach(card => {
             card.classList.remove('active', 'prev');
@@ -484,13 +426,11 @@ function initializeVisionMissionCards() {
     
     function nextCard() {
         const next = (currentCard + 1) % cards.length;
-        console.log('Moving to next card:', next);
         showCard(next);
     }
     
     function prevCard() {
         const prev = (currentCard - 1 + cards.length) % cards.length;
-        console.log('Moving to previous card:', prev);
         showCard(prev);
     }
     
@@ -504,20 +444,18 @@ function initializeVisionMissionCards() {
     }
     
     function stopAutoPlay() {
-        if (autoPlayInterval) {
-            console.log('Stopping auto-play...');
-            clearInterval(autoPlayInterval);
-            autoPlayInterval = null;
-        }
+    if (autoPlayInterval) {
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = null;
     }
+}
+
     
     // Event listeners
     if (nextBtn) {
-        console.log('Adding next button event listener');
         nextBtn.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            console.log('Next button clicked');
             stopAutoPlay();
             nextCard();
             startAutoPlay();
@@ -525,7 +463,6 @@ function initializeVisionMissionCards() {
     }
     
     if (prevBtn) {
-        console.log('Adding prev button event listener');
         prevBtn.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -540,7 +477,6 @@ function initializeVisionMissionCards() {
         indicator.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            console.log('Indicator clicked:', index);
             stopAutoPlay();
             showCard(index);
             startAutoPlay();
@@ -548,24 +484,19 @@ function initializeVisionMissionCards() {
     });
     
     // Initialize first card
-    console.log('Initializing first card...');
     showCard(0);
     
     // Start auto-play
-    console.log('Starting initial auto-play...');
     startAutoPlay();
     
     // Pause auto-play on hover
     const cardsContainer = document.querySelector('.cards-container');
     if (cardsContainer) {
-        console.log('Adding hover event listeners to cards container');
         cardsContainer.addEventListener('mouseenter', () => {
-            console.log('Mouse entered - pausing autoplay');
             stopAutoPlay();
         });
         
         cardsContainer.addEventListener('mouseleave', () => {
-            console.log('Mouse left - resuming autoplay');
             startAutoPlay();
         });
     }
@@ -598,24 +529,24 @@ function initializeVisionMissionCards() {
         }, { passive: true });
     }
     
-    console.log('✅ Vision mission cards initialized');
+    // Vision mission cards initialized
 }
 
 // Performance monitoring
 function logPerformance() {
     if (typeof window !== 'undefined' && window.performance) {
         const loadTime = window.performance.timing.loadEventEnd - window.performance.timing.navigationStart;
-        console.log(`⚡ Page loaded in ${loadTime}ms`);
+        // Page load time tracked
         
         // Track page views
         try {
             const visits = parseInt(localStorage.getItem('oakglobal_visits') || '0') + 1;
             localStorage.setItem('oakglobal_visits', visits.toString());
         } catch (error) {
-            console.warn('⚠️ Visit tracking failed:', error);
+            // Visit tracking failed
         }
     } else {
-        console.log('❌ Performance API not available');
+        // Performance API not available
     }
 }
 
@@ -624,7 +555,7 @@ window.addEventListener('load', logPerformance);
 
 // Global error handling
 window.addEventListener('error', function(e) {
-    console.error('❌ JavaScript Error:', e.error);
+    // Error caught
 });
 
 // Utility functions
@@ -682,7 +613,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Export for debugging
 window.oakGlobal = {
     version: '5.0.0',
-    type: 'Professional HTML Website with Supabase Integration',
+    type: 'Professional HTML Website',
     theme: 'Green & Blue Professional',
     features: [
         'Enhanced Mobile Navigation',
@@ -696,9 +627,31 @@ window.oakGlobal = {
         'Loading States',
         'Error Handling'
     ],
-    supabase: supabase ? 'Connected' : 'Not Available'
+    // typeof supabase !== 'undefined' ? 'Connected' : 'Not Available'
+
 };
 
-console.log('🌳 OAK Global Professional Website v5.0.0 Ready!');
-console.log('🎨 Theme: Professional Green & Blue');
-console.log('🗄️ Database:', supabase ? 'Supabase Connected' : 'LocalStorage Fallback');
+  document.addEventListener("DOMContentLoaded", function () {
+    const params = new URLSearchParams(window.location.search);
+    const category = params.get("category");
+
+    if (!category) return;
+
+    const tabs = document.querySelectorAll(".category-tab");
+    const contents = document.querySelectorAll(".category-content full-width services");
+
+    tabs.forEach(tab => {
+      tab.classList.remove("active");
+      if (tab.dataset.category === category) {
+        tab.classList.add("active");
+      }
+    });
+
+    contents.forEach(content => {
+      content.classList.remove("active");
+      if (content.dataset.category === category) {
+        content.classList.add("active");
+      }
+    });
+  });
+

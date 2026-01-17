@@ -1,4 +1,6 @@
 // Admin Panel JavaScript
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 document.addEventListener('DOMContentLoaded', function() {
     initializeAdmin();
 });
@@ -124,95 +126,103 @@ function initializeAdminSections() {
     initializeSettingsForms();
 }
 
-function loadDashboardData() {
-    const contacts = JSON.parse(localStorage.getItem('oakglobal_contacts') || '[]');
-    const visits = parseInt(localStorage.getItem('oakglobal_visits') || '0');
-    
-    // Update dashboard stats
-    document.getElementById('totalMessages').textContent = contacts.length;
-    document.getElementById('websiteVisits').textContent = visits.toLocaleString();
-    
-    // Calculate today's messages
-    const today = new Date().toDateString();
-    const todayMessages = contacts.filter(contact => {
-        const contactDate = new Date(contact.timestamp).toDateString();
-        return contactDate === today;
-    }).length;
-    
-    document.getElementById('todayMessages').textContent = todayMessages;
-    
-    // Load recent activity
-    loadRecentActivity(contacts);
+async function loadDashboardData() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/stats/dashboard`);
+        const stats = await response.json();
+        
+        // Update dashboard stats
+        document.getElementById('totalMessages').textContent = stats.totalContacts;
+        document.getElementById('websiteVisits').textContent = stats.totalAssessments;
+        document.getElementById('todayMessages').textContent = stats.unreadContacts;
+        
+        // Load recent contacts
+        loadRecentContacts();
+    } catch (error) {
+        showNotification('Failed to load dashboard data', 'error');
+    }
 }
 
-function loadRecentActivity(contacts) {
-    const recentActivity = document.getElementById('recentActivity');
-    const sortedContacts = [...contacts].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-    const recentContacts = sortedContacts.slice(0, 5); // Last 5 contacts
-    
-    if (recentContacts.length === 0) {
-        recentActivity.innerHTML = '<div class="empty-state"><h3>No recent activity</h3><p>Contact messages will appear here when received.</p></div>';
-        return;
-    }
-    
-    const activityHTML = recentContacts.map(contact => {
-        const date = new Date(contact.timestamp);
-        const timeAgo = getTimeAgo(date);
-        const serviceText = contact.service ? getServiceDisplayName(contact.service) : 'General inquiry';
+async function loadRecentContacts() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/contacts`);
+        const contacts = await response.json();
         
-        return `
-            <div class="activity-item">
-                <div>
-                    <strong>New contact message from ${contact.name}</strong>
-                    <br>
-                    <small>${contact.email} - ${serviceText}</small>
+        const recentActivity = document.getElementById('recentActivity');
+        const sortedContacts = contacts.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        const recentContacts = sortedContacts.slice(0, 5);
+        
+        if (recentContacts.length === 0) {
+            recentActivity.innerHTML = '<div class="empty-state"><h3>No recent activity</h3><p>Contact messages will appear here when received.</p></div>';
+            return;
+        }
+        
+        const activityHTML = recentContacts.map(contact => {
+            const date = new Date(contact.created_at);
+            const timeAgo = getTimeAgo(date);
+            const serviceText = contact.service ? getServiceDisplayName(contact.service) : 'General inquiry';
+            
+            return `
+                <div class="activity-item">
+                    <div>
+                        <strong>New contact message from ${contact.name}</strong>
+                        <br>
+                        <small>${contact.email} - ${serviceText}</small>
+                    </div>
+                    <div class="activity-time">${timeAgo}</div>
                 </div>
-                <div class="activity-time">${timeAgo}</div>
-            </div>
-        `;
-    }).join('');
-    
-    recentActivity.innerHTML = activityHTML;
+            `;
+        }).join('');
+        
+        recentActivity.innerHTML = activityHTML;
+    } catch (error) {
+        // Activity loading failed
+    }
 }
 
-function loadContactsData() {
-    const contacts = JSON.parse(localStorage.getItem('oakglobal_contacts') || '[]');
-    const contactsList = document.getElementById('contactsList');
-    
-    if (contacts.length === 0) {
-        contactsList.innerHTML = '<div class="empty-state"><h3>No contact messages</h3><p>Contact form submissions will appear here.</p></div>';
-        return;
-    }
-    
-    const sortedContacts = [...contacts].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-    
-    const contactsHTML = sortedContacts.map((contact, index) => {
-        const date = new Date(contact.timestamp);
-        const formattedDate = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
-        const serviceText = contact.service ? getServiceDisplayName(contact.service) : 'Not specified';
+async function loadContactsData() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/contacts`);
+        const contacts = await response.json();
+        const contactsList = document.getElementById('contactsList');
         
-        return `
-            <div class="contact-item-admin ${contact.read ? 'read' : 'unread'}">
-                <div class="contact-header">
-                    <div class="contact-name">${contact.name}</div>
-                    <div class="contact-date">${formattedDate}</div>
+        if (contacts.length === 0) {
+            contactsList.innerHTML = '<div class="empty-state"><h3>No contact messages</h3><p>Contact form submissions will appear here.</p></div>';
+            return;
+        }
+        
+        const sortedContacts = [...contacts].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        
+        const contactsHTML = sortedContacts.map((contact) => {
+            const date = new Date(contact.created_at);
+            const formattedDate = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+            const serviceText = contact.service ? getServiceDisplayName(contact.service) : 'Not specified';
+            
+            return `
+                <div class="contact-item-admin ${contact.read ? 'read' : 'unread'}">
+                    <div class="contact-header">
+                        <div class="contact-name">${contact.name}</div>
+                        <div class="contact-date">${formattedDate}</div>
+                    </div>
+                    <div class="contact-email">📧 ${contact.email}</div>
+                    ${contact.company ? `<div class="contact-company">🏢 ${contact.company}</div>` : ''}
+                    <div class="contact-service">🔧 Service: ${serviceText}</div>
+                    <div class="contact-message">
+                        <strong>Message:</strong><br>
+                        ${contact.message}
+                    </div>
+                    <div class="contact-actions">
+                        <button class="success-button" onclick="markAsRead('${contact.id}')">${contact.read ? 'Mark as Unread' : 'Mark as Read'}</button>
+                        <button class="danger-button" onclick="deleteContact('${contact.id}')">Delete</button>
+                    </div>
                 </div>
-                <div class="contact-email">📧 ${contact.email}</div>
-                ${contact.company ? `<div class="contact-company">🏢 ${contact.company}</div>` : ''}
-                <div class="contact-service">🔧 Service: ${serviceText}</div>
-                <div class="contact-message">
-                    <strong>Message:</strong><br>
-                    ${contact.message}
-                </div>
-                <div class="contact-actions">
-                    <button class="success-button" onclick="markAsRead(${contact.id})">${contact.read ? 'Mark as Unread' : 'Mark as Read'}</button>
-                    <button class="danger-button" onclick="deleteContact(${contact.id})">Delete</button>
-                </div>
-            </div>
-        `;
-    }).join('');
-    
-    contactsList.innerHTML = contactsHTML;
+            `;
+        }).join('');
+        
+        contactsList.innerHTML = contactsHTML;
+    } catch (error) {
+        showNotification('Failed to load contacts', 'error');
+    }
 }
 
 function getServiceDisplayName(serviceValue) {
@@ -327,29 +337,45 @@ function initializeSettingsForms() {
 }
 
 // Utility functions
-function markAsRead(contactId) {
-    let contacts = JSON.parse(localStorage.getItem('oakglobal_contacts') || '[]');
-    const contactIndex = contacts.findIndex(contact => contact.id === contactId);
-    
-    if (contactIndex !== -1) {
-        contacts[contactIndex].read = !contacts[contactIndex].read;
-        localStorage.setItem('oakglobal_contacts', JSON.stringify(contacts));
-        loadContactsData();
-        loadDashboardData(); // Refresh dashboard stats
-        
-        const status = contacts[contactIndex].read ? 'read' : 'unread';
-        showNotification(`Contact marked as ${status}.`, 'success');
+async function markAsRead(contactId) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/contacts/${contactId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ read: true })
+        });
+
+        if (response.ok) {
+            loadContactsData();
+            loadDashboardData();
+            showNotification('Contact marked as read.', 'success');
+        } else {
+            showNotification('Failed to update contact.', 'error');
+        }
+    } catch (error) {
+        showNotification('Error updating contact.', 'error');
     }
 }
 
-function deleteContact(contactId) {
+async function deleteContact(contactId) {
     if (confirm('Are you sure you want to delete this contact message?')) {
-        let contacts = JSON.parse(localStorage.getItem('oakglobal_contacts') || '[]');
-        contacts = contacts.filter(contact => contact.id !== contactId);
-        localStorage.setItem('oakglobal_contacts', JSON.stringify(contacts));
-        loadContactsData();
-        loadDashboardData(); // Refresh dashboard stats
-        showNotification('Contact message deleted.', 'success');
+        try {
+            const response = await fetch(`${API_BASE_URL}/contacts/${contactId}`, {
+                method: 'DELETE'
+            });
+
+            if (response.ok) {
+                loadContactsData();
+                loadDashboardData();
+                showNotification('Contact message deleted.', 'success');
+            } else {
+                showNotification('Failed to delete contact.', 'error');
+            }
+        } catch (error) {
+            showNotification('Error deleting contact.', 'error');
+        }
     }
 }
 
@@ -434,6 +460,3 @@ const notificationCSS = `
 const notificationStyle = document.createElement('style');
 notificationStyle.textContent = notificationCSS;
 document.head.appendChild(notificationStyle);
-
-console.log('OAK Global Admin Panel initialized');
-console.log('Login credentials: administrator / admin@123');

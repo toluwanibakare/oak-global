@@ -1,0 +1,48 @@
+# robots.txt for OAK Global International Business Solutions
+# Generated: January 17, 2026
+
+# Allow all search engines to crawl the site
+User-agent: *
+Allow: /
+Allow: /assets/
+Allow: /public/
+
+# Disallow sensitive files and directories
+Disallow: /backend/
+Disallow: /node_modules/
+Disallow: /supabase/
+Disallow: /*.env
+Disallow: /private/
+Disallow: /admin/
+Disallow: /.git/
+
+# Allow specific search engine crawlers to prioritize certain paths
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+# Set crawl delay for all other bots
+User-agent: *
+Crawl-delay: 2
+Request-rate: 1/10s
+
+# Sitemap location
+Sitemap: https://www.oakglobal.com/sitemap.xml
+
+# Block bad bots (optional - add as needed)
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /

@@ -1,5 +1,4 @@
 // Business Assessment System
-console.log('🔍 Assessment System Loading...');
 
 // Assessment Questions Database
 const assessmentQuestions = {
@@ -134,21 +133,8 @@ let currentAssessment = {
     userInfo: {}
 };
 
-// Supabase configuration
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
-let supabase = null;
-
-// Initialize Supabase if credentials are available
-if (SUPABASE_URL && SUPABASE_ANON_KEY) {
-    try {
-        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        console.log('✅ Supabase initialized for assessments');
-    } catch (error) {
-        console.warn('⚠️ Supabase initialization failed:', error);
-    }
-}
+// Backend API configuration
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 // DOM Elements
 const assessmentCategories = document.getElementById('assessment-categories');
@@ -158,7 +144,7 @@ const resultsSection = document.getElementById('results-section');
 
 // Initialize Assessment System
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 Assessment System Initialized');
+    // Assessment system initialized
     initializeAssessmentSystem();
 });
 
@@ -217,11 +203,11 @@ function initializeAssessmentSystem() {
         });
     }
 
-    console.log('✅ Assessment system event listeners initialized');
+    // Event listeners initialized
 }
 
 function startAssessment(category) {
-    console.log(`🎯 Starting ${category} assessment`);
+    // Starting assessment
 
     const idx = categoryOrder.indexOf(category);
     if (idx === -1) return;
@@ -428,7 +414,6 @@ async function handleEmailSubmission(e) {
         showSection('results-section');
         
     } catch (error) {
-        console.error('Error processing assessment:', error);
         hideLoading();
         alert('There was an error processing your assessment. Please try again.');
     }
@@ -531,170 +516,40 @@ function calculateResults() {
 
 async function storeAssessmentResults(results) {
     try {
-        // Build master assessment payload
+        // Build assessment payload
         const assessmentPayload = {
             email: results.userInfo.email || null,
             name: results.userInfo.name || null,
             company: results.userInfo.company || null,
-            overall_score: results.percentage,
+            category: 'overall',
+            score: results.percentage,
             status: results.status,
             total_questions: results.totalQuestions,
             yes_count: results.yesCount,
             no_count: results.noCount,
             unsure_count: results.unsureCount,
-            answers: results.answers || {},
-            metadata: {
-                source: 'web',
-                version: '1.0.0'
-            },
-            created_at: new Date().toISOString()
+            answers: results.answers || {}
         };
 
-        if (supabase) {
-            console.log('📤 Saving assessment to Supabase (assessments, categories, answers)...');
+        // Saving assessment to backend
+        const response = await fetch(`${API_BASE_URL}/assessments`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(assessmentPayload)
+        });
 
-            // Insert master assessment and return id
-            const { data: insertedAssessment, error: assessmentError } = await supabase
-                .from('assessments')
-                .insert([assessmentPayload])
-                .select()
-                .single();
+        const result = await response.json();
 
-            if (assessmentError) {
-                console.error('❌ Supabase error inserting assessment:', assessmentError);
-                throw assessmentError;
-            }
-
-            const assessmentId = insertedAssessment.id;
-
-            // Prepare per-category payloads
-            const categoryRows = [];
-            const answerRows = [];
-
-            categoryOrder.forEach((catKey, idx) => {
-                const questions = assessmentQuestions[catKey] || [];
-                let yesCount = 0, noCount = 0, unsureCount = 0;
-                let totalScore = 0, maxScore = 0;
-                const catAnswers = {};
-
-                questions.forEach(q => {
-                    const ans = currentAssessment.answers[q.id];
-                    if (ans === 'yes') yesCount++;
-                    else if (ans === 'no') noCount++;
-                    else if (ans === 'unsure') unsureCount++;
-
-                    const weight = q.weight || 1;
-                    maxScore += weight * 3;
-                    if (ans === 'yes') totalScore += weight * 3;
-                    else if (ans === 'unsure') totalScore += weight * 1;
-
-                    if (ans) catAnswers[q.id] = ans;
-
-                    // prepare answer row if answered
-                    if (ans) {
-                        const scoreForAnswer = ans === 'yes' ? weight * 3 : (ans === 'unsure' ? weight * 1 : 0);
-                        answerRows.push({
-                            assessment_id: assessmentId,
-                            category_key: catKey,
-                            question_id: q.id,
-                            question_text: q.question,
-                            answer: ans,
-                            weight: weight,
-                            score: scoreForAnswer,
-                            created_at: new Date().toISOString()
-                        });
-                    }
-                });
-
-                const categoryScore = maxScore > 0 ? Math.round((totalScore / maxScore) * 100) : null;
-                const categoryStatus = categoryScore === null ? null : (categoryScore >= 80 ? 'Excellent' : (categoryScore >= 65 ? 'Good' : (categoryScore >= 45 ? 'Needs Improvement' : 'Critical')));
-
-                categoryRows.push({
-                    assessment_id: assessmentId,
-                    category_key: catKey,
-                    category_title: getCategoryDisplayName(catKey),
-                    position: idx,
-                    score: categoryScore,
-                    status: categoryStatus,
-                    total_questions: questions.length,
-                    yes_count: yesCount,
-                    no_count: noCount,
-                    unsure_count: unsureCount,
-                    answers: catAnswers,
-                    created_at: new Date().toISOString()
-                });
-            });
-
-            // Insert categories in bulk
-            if (categoryRows.length > 0) {
-                const { error: catError } = await supabase
-                    .from('assessment_categories')
-                    .insert(categoryRows);
-
-                if (catError) {
-                    console.error('❌ Supabase error inserting categories:', catError);
-                    throw catError;
-                }
-            }
-
-            // Insert answer rows in bulk (if any)
-            if (answerRows.length > 0) {
-                // Insert in batches to avoid payload limits
-                const batchSize = 500;
-                for (let i = 0; i < answerRows.length; i += batchSize) {
-                    const batch = answerRows.slice(i, i + batchSize);
-                    const { error: ansError } = await supabase
-                        .from('assessment_answers')
-                        .insert(batch);
-                    if (ansError) {
-                        console.error('❌ Supabase error inserting answers:', ansError);
-                        throw ansError;
-                    }
-                }
-            }
-
-            console.log('✅ Assessment, categories and answers saved to Supabase successfully');
-        } else {
-            // Fallback to structured localStorage
-            console.log('📤 Saving assessment to localStorage (structured)...');
-            const store = JSON.parse(localStorage.getItem('oakglobal_assessments_v2') || '[]');
-            const record = {
-                id: Date.now(),
-                assessment: assessmentPayload,
-                categories: categoryOrder.map((catKey, idx) => {
-                    const questions = assessmentQuestions[catKey] || [];
-                    const catAnswers = {};
-                    let yesCount = 0, noCount = 0, unsureCount = 0, totalScore = 0, maxScore = 0;
-                    questions.forEach(q => {
-                        const ans = currentAssessment.answers[q.id];
-                        if (ans) catAnswers[q.id] = ans;
-                        const weight = q.weight || 1;
-                        maxScore += weight * 3;
-                        if (ans === 'yes') { yesCount++; totalScore += weight * 3; }
-                        else if (ans === 'unsure') { unsureCount++; totalScore += weight * 1; }
-                        else if (ans === 'no') { noCount++; }
-                    });
-                    const categoryScore = maxScore > 0 ? Math.round((totalScore / maxScore) * 100) : null;
-                    return {
-                        category_key: catKey,
-                        category_title: getCategoryDisplayName(catKey),
-                        position: idx,
-                        score: categoryScore,
-                        total_questions: questions.length,
-                        yes_count: yesCount,
-                        no_count: noCount,
-                        unsure_count: unsureCount,
-                        answers: catAnswers
-                    };
-                })
-            };
-            store.push(record);
-            localStorage.setItem('oakglobal_assessments_v2', JSON.stringify(store));
-            console.log('✅ Assessment saved to localStorage successfully');
+        if (!response.ok) {
+            throw new Error(result.error || 'Failed to save assessment');
         }
 
+        // Assessment saved successfully
+        return result;
+
     } catch (error) {
-        console.error('❌ Error storing assessment:', error);
         // Don't throw error - allow results to be shown even if storage fails
     }
 }
@@ -786,7 +641,7 @@ NEXT STEPS:
 
 Contact OAK Global for professional assistance:
 Email: info@oakglobal.com
-Phone: +2348133061881
+Phone: +2348099904338
 
 This report was generated by OAK Global's Business Assessment Tool.
 Visit our website for more business solutions: https://oakglobal.com

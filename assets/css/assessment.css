@@ -370,6 +370,7 @@
 .next-btn:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
+    background: linear-gradient(135deg, rgba(4, 120, 87, 0.9) 0%, rgba(2, 90, 65, 0.9) 100%);
 }
 
 .next-btn:disabled {
@@ -473,16 +474,17 @@
     align-items: center;
     justify-content: center;
     gap: 0.75rem;
-    padding: 1.25rem 2rem;
+    padding: 1.5rem 2.5rem;
     background: var(--gradient-primary);
     color: white;
     border: none;
     border-radius: 12px;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     cursor: pointer;
     transition: all var(--transition-normal);
-    margin-top: 1rem;
+    margin-top: 1.5rem;
+    min-width: 400px;
 }
 
 .submit-assessment-btn:hover {
@@ -710,8 +712,11 @@
 }
 
 .action-btn.secondary:hover {
-    background: var(--accent-color);
-    color: white;
+    background: rgba(4, 120, 87, 0.1);
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
 }
 
 .action-btn.tertiary {

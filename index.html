@@ -3,7 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OAK Global International Business Solutions</title>
+    <title>Business Solutions & GRC Advisory Services - OAK Global</title>
+    <meta name="description" content="OAK Global provides professional business management, GRC advisory, compliance consulting, and risk management solutions for organizations seeking operational excellence and global recognition.">
+    <meta name="keywords" content="GRC advisory, business solutions, compliance consulting, risk management, management systems, ISO certification, business performance management, enterprise risk management, operational excellence">
+    <meta name="author" content="OAK Global International Business Solutions">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta property="og:title" content="Business Solutions & GRC Advisory Services - OAK Global">
+    <meta property="og:description" content="Professional GRC advisory, compliance, and business performance solutions for operational excellence.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.oakglobal.com">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Business Solutions & GRC Advisory Services - OAK Global">
+    <meta name="twitter:description" content="Professional GRC advisory, compliance, and business performance solutions.">
+    <link rel="canonical" href="https://www.oakglobal.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -11,7 +23,57 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="favicon" type="image/x-icon" href="public/favicon.ico">
-
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@name": "OAK Global International Business Solutions",
+      "alternateName": "OAK Global",
+      "url": "https://www.oakglobal.com",
+      "logo": "https://www.oakglobal.com/assets/img/logo.png",
+      "description": "Professional GRC advisory, compliance, and business performance solutions",
+      "sameAs": [
+        "https://www.facebook.com/share/1JxodipmbR/",
+        "https://www.instagram.com/oak_global",
+        "https://www.linkedin.com/company/oak-global-international-business-solutions-ltd/"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+2348099904338",
+        "contactType": "Customer Service",
+        "email": "info@oakglobal.com"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "NG"
+      }
+    }
+    </script>
+    
+    <!-- Service Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "OAK Global International Business Solutions",
+      "image": "https://www.oakglobal.com/assets/img/logo.png",
+      "description": "Professional business consulting, GRC advisory, and compliance management services",
+      "url": "https://www.oakglobal.com",
+      "telephone": "+2348099904338",
+      "email": "info@oakglobal.com",
+      "priceRange": "$",
+      "areaServed": "NG",
+      "serviceType": [
+        "GRC Advisory",
+        "Compliance Consulting",
+        "Risk Management",
+        "Business Performance Management",
+        "ISO Certification Support"
+      ]
+    }
+    </script>
 
     <style>
         /* Fix header covering hero section */
@@ -43,6 +105,69 @@
     min-height: calc(100vh - 90px);
 }
 
+/* GRC Highlight Styles */
+.grc-highlight {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    border-left: 4px solid #059669;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 2rem 0;
+}
+
+.grc-highlight-content {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.grc-icon {
+    background: #059669;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.grc-text h3 {
+    color: #059669;
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+}
+
+.grc-text p {
+    color: #374151;
+    margin-bottom: 1rem;
+}
+
+.grc-services-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.grc-service-tag {
+    background: white;
+    border: 1px solid #d1d5db;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #374151;
+    transition: all 0.3s ease;
+}
+
+.grc-service-tag:hover {
+    background: #059669;
+    color: white;
+    border-color: #059669;
+    transform: translateY(-2px);
+}
+
 /* Mobile adjustments */
 @media (max-width: 768px) {
     .contact-header {
@@ -66,6 +191,15 @@
         margin-top: 60px;
         min-height: 40vh;
     }
+    
+    .grc-highlight-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .grc-services-list {
+        justify-content: center;
+    }
 }
 
 @media (max-width: 480px) {
@@ -82,11 +216,14 @@
             <div class="contact-info-top">
                 <div class="contact-item-top">
                     <i class="fas fa-envelope"></i>
-                    <span>info@oakglobal.com</span>
+                    
+                    <span>o.kolawole@oak-global.com.ng</span>
+                    <br>
+                    <span>e.abraham@oak-global.com.ng</span>
                 </div>
                 <div class="contact-item-top">
                     <i class="fas fa-phone"></i>
-                    <span>+2348133061881 | +234 802 364 4148</span>
+                    <span>+2348099904338 | +234 802 364 4148</span>
                 </div>
             </div>
         </div>
@@ -209,6 +346,10 @@
                             <i class="fas fa-check-circle"></i>
                             <span>Strategic Growth Planning</span>
                         </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>GRC Advisory Services</span>
+                        </div>
                     </div>
                     <a href="about.html" class="learn-more-btn">
                         <span>Learn More About Us</span>
@@ -297,10 +438,10 @@
                         </div>
                     </div>
                     <div class="service-content">
-                        <h3>Business Performance Management</h3>
-                        <p>Optimize your business operations and drive sustainable growth through strategic performance management and operational excellence.</p>
-                        <a href="services.html" class="service-link">
-                            <span>Learn More</span>
+                        <h3>Management Services</h3>
+                        <p>Comprehensive business performance optimization, strategic planning, operational improvement, and ISO excellence services.</p>
+                        <a href="services.html?category=management" class="service-link">
+                            <span>Explore Management Services</span>
                             <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
@@ -308,16 +449,16 @@
 
                 <div class="service-card">
                     <div class="service-icon">
-                        <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Strategic Planning">
+                        <img src="https://images.pexels.com/photos/3183158/pexels-photo-3183158.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="GRC Services">
                         <div class="icon-overlay">
-                            <i class="fas fa-bullseye"></i>
+                            <i class="fas fa-shield-alt"></i>
                         </div>
                     </div>
                     <div class="service-content">
-                        <h3>Strategic Planning & Execution</h3>
-                        <p>Define and implement winning strategies that connect business strategy with purpose and drive organizational success.</p>
-                        <a href="services.html" class="service-link">
-                            <span>Learn More</span>
+                        <h3>GRC Advisory Services</h3>
+                        <p>Expert Governance, Risk & Compliance solutions including risk management frameworks, compliance systems, and board advisory.</p>
+                        <a href="services.html?category=grc" class="service-link">
+                            <span>Explore GRC Services</span>
                             <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
@@ -325,16 +466,40 @@
 
                 <div class="service-card">
                     <div class="service-icon">
-                        <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="ISO Excellence">
+                        <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Assessment Tools">
                         <div class="icon-overlay">
                             <i class="fas fa-award"></i>
                         </div>
                     </div>
                     <div class="service-content">
-                        <h3>ISO Excellence</h3>
-                        <p>Management system design, gap assessment, internal audits, implementation support, and certification validation services.</p>
-                        <a href="services.html" class="service-link">
-                            <span>Learn More</span>
+                        <h3>Assessment & Tools</h3>
+                        <p>MSAT assessment platform and comprehensive evaluation tools to measure maturity, performance, and compliance across your organization.</p>
+                        <a href="assessment.html" class="service-link">
+                            <span>Explore Assessment Tools</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GRC Services Highlight -->
+            <div class="grc-highlight">
+                <div class="grc-highlight-content">
+                    <div class="grc-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="grc-text">
+                        <h3>Governance, Risk & Compliance (GRC) Advisory Services</h3>
+                        <p>We now offer comprehensive GRC solutions to help your organization manage risk, ensure compliance, and strengthen governance frameworks. Our expert team provides:</p>
+                        <div class="grc-services-list">
+                            <span class="grc-service-tag">Risk & Compliance Health Check</span>
+                            <span class="grc-service-tag">Enterprise Risk Management</span>
+                            <span class="grc-service-tag">Compliance Management Systems</span>
+                            <span class="grc-service-tag">Board Advisory Sessions</span>
+                            <span class="grc-service-tag">Virtual GRC Support</span>
+                        </div>
+                        <a href="services.html?category=grc" class="service-link" style="margin-top: 1rem;">
+                            <span>Discover Our GRC Solutions</span>
                             <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
@@ -499,10 +664,10 @@
             <div class="footer-section">
                 <h4>Services</h4>
                 <ul>
-                    <li><a href="services.html">Business Performance Management</a></li>
-                    <li><a href="services.html">Strategic Planning & Execution</a></li>
+                    <li><a href="services.html">Management Services</a></li>
+                    <li><a href="services.html">GRC Advisory Services</a></li>
                     <li><a href="services.html">ISO Excellence</a></li>
-                    <li><a href="services.html">Risk Management</a></li>
+                    <li><a href="services.html">Assessment Tools</a></li>
                 </ul>
             </div>
             
@@ -524,7 +689,8 @@
         </div>
         
         <div class="footer-bottom">
-            <p>&copy; 2025 OAK Global International Business Solutions. All rights reserved.</p>
+            <p>&copy; 2026 OAK Global International Business Solutions. All rights reserved.</p>
+            <p style="text-align: right; margin-top: 1rem; font-size: 0.9rem;">Built by <a href="https://tmb.it.com" target="_blank" rel="noopener noreferrer" style="color: #047857; text-decoration: none; font-weight: 600; hover: text-decoration underline;">TMB</a></p>
         </div>
     </div>
     </footer>
