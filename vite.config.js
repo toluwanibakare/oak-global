@@ -1,16 +1,9 @@
 import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  build: {
-    rollupOptions: {
-      input: {
-        main: 'index.html',
-        about: 'about.html',
-        services: 'services.html',
-        contact: 'contact.html'
-      }
-    }
-  },
+  plugins: [react(), tailwindcss()],
   server: {
     port: 3000,
     open: true
