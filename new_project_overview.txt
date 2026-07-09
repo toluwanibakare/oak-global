@@ -1,0 +1,135 @@
+# Oak Global Enterprise Platform (OakEIP) Planning Document
+
+## Project Overview
+
+Oak Global currently exists as a corporate website hosted on **oak-global.com.ng**. It contains standard marketing pages such as Home, About, Services, Assessment, and Contact.
+
+Over time, separate enterprise applications have been developed in Laravel for different business functions. These applications currently operate independently, each with its own interface and workflow.
+
+The objective of this project is **not** to build another application. The objective is to transform Oak Global into a unified Enterprise Digital Platform that serves as the central access point for all Oak business solutions.
+
+The website will evolve from being a corporate website into an Enterprise Platform Portal.
+
+## Existing Systems
+
+The following Lovable applications already exist as independent products:
+
+* OakAudix (Audit Management)
+* OakComply (Compliance Management)
+* OakHSE360 (Health, Safety and Environment)
+* OakExec (Executive Intelligence)
+
+Each application currently operates separately.
+
+## Long Term Vision
+
+Oak Global becomes the parent platform known as the **Oak Global Enterprise Intelligence Platform (OakEIP).**
+
+Rather than users visiting different systems independently, they access everything through Oak Global.
+
+Oak Global becomes responsible for:
+
+* User authentication
+* Organization management
+* Shared navigation
+* Platform dashboard
+* Notifications
+* AI services
+* Shared reporting
+* Future shared document management
+* Common platform experience
+
+Individual modules continue to provide their specialized business functions while relying on the platform for common services.
+
+## Project Goal
+
+Transform the current Oak Global website into a modern Enterprise Platform Portal while preserving its public marketing functionality.
+
+The platform should provide two distinct experiences.
+
+### Public Experience
+
+Visitors who are not logged in should access:
+
+* Home
+* About
+* Industries
+* Solutions
+* Platform
+* Modules
+* Resources
+* Contact
+* Login
+
+This side of the website focuses on marketing, education, lead generation, and customer acquisition.
+
+### Enterprise Experience
+
+Authenticated users enter the Enterprise Workspace.
+
+This becomes the primary working environment where users can access all subscribed modules from one location.
+
+Instead of multiple disconnected applications, users should experience one unified platform.
+
+## Current Development Scope
+
+This phase is **not** focused on rebuilding every Laravel module.
+
+Instead, the focus is to prepare Oak Global to become the enterprise foundation that will eventually connect all existing modules.
+
+The primary objectives are:
+
+1. Redesign the current Oak Global website.
+
+2. Introduce a modern enterprise architecture.
+
+3. Build the Enterprise Portal.
+
+4. Create a unified navigation system.
+
+5. Prepare the platform for future Single Sign On.
+
+6. Design reusable layouts and components.
+
+7. Create a scalable foundation that future modules can integrate into.
+
+## Integration Strategy
+
+The existing Laravel applications remain operational.
+
+They will not initially be merged into one codebase.
+
+Instead, Oak Global will function as the central platform that provides a unified user experience while connecting the independent applications.
+
+Future phases may gradually consolidate shared services such as authentication, notifications, reporting, document management, and AI into the central platform.
+
+## Future Platform Services
+
+Although they may not all be implemented immediately, the architecture should anticipate support for:
+
+* Identity and Access Management
+* Organization hierarchy
+* Multi tenant architecture
+* Role Based Access Control
+* Shared dashboard framework
+* Workflow engine
+* Notification service
+* Reporting engine
+* Document repository
+* Evidence repository
+* CAPA engine
+* API gateway
+* Audit trail
+* Enterprise search
+* AI orchestration layer
+* OakAI enterprise assistant
+* Analytics
+* Platform integrations
+
+## Design Philosophy
+
+Oak Global should no longer feel like a traditional corporate website.
+
+It should communicate that users are entering an enterprise software ecosystem similar to major enterprise platforms, while remaining approachable for organizations across Africa.
+
+The architecture must prioritize scalability, modularity, maintainability, and future expansion so that additional enterprise modules can be added without redesigning the platform.
