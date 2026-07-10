@@ -272,20 +272,20 @@ export default function AboutPage() {
       </section>
 
       {/* ─────── Stats ─────── */}
-      <section className="py-20 bg-neutral-900 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-emerald-900/20 to-sky-900/20" />
-        <div className="max-w-6xl mx-auto px-4 relative z-10">
+      <section className="py-20 bg-neutral-950 relative overflow-hidden border-b border-white/5">
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.012)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.012)_1px,transparent_1px)] bg-[size:48px_48px]" />
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
           <motion.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-80px' }}
-            className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center"
+            className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/5"
           >
             {stats.map((s) => (
-              <motion.div key={s.label} variants={itemFadeUp}>
+              <motion.div key={s.label} variants={itemFadeUp} className="bg-neutral-950 py-10 px-6 text-center">
                 <AnimatedCounter value={s.value} />
-                <span className="text-white/60 text-sm uppercase tracking-widest">{s.label}</span>
+                <span className="text-white/50 text-xs font-semibold uppercase tracking-[0.15em]">{s.label}</span>
               </motion.div>
             ))}
           </motion.div>
@@ -328,10 +328,10 @@ export default function AboutPage() {
       </section>
 
       {/* ─────── Our Approach ─────── */}
-      <section className="py-24 bg-white overflow-hidden">
+      <section className="py-24 bg-neutral-950 overflow-hidden border-b border-white/5">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center max-w-xl mx-auto mb-12">
-            <SectionHeading label="How We Work" title="Our" highlight="Approach" light description="A proven methodology that delivers results." />
+            <SectionHeading label="How We Work" title="Our" highlight="Approach" description="A proven methodology that delivers results." />
           </div>
 
           <motion.div
@@ -343,7 +343,7 @@ export default function AboutPage() {
           >
             {approach.map((a, i) => (
               <motion.div key={a.title} variants={itemFadeUp}>
-                <div className="text-center p-8 bg-neutral-50 border border-neutral-200 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 h-full group">
+                <div className="text-center p-8 bg-neutral-900 border border-white/5 hover:-translate-y-2 hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300 h-full group">
                   <div className="relative w-20 h-20 mx-auto mb-6">
                     <div className="absolute inset-0 bg-gradient-to-br from-emerald-600 to-sky-700 rotate-45 group-hover:rotate-[135deg] transition-transform duration-500" />
                     <div className="relative z-10 w-full h-full flex items-center justify-center text-white text-2xl">
@@ -353,8 +353,8 @@ export default function AboutPage() {
                       {i + 1}
                     </div>
                   </div>
-                  <h4 className="text-lg font-bold text-neutral-900 mb-3">{a.title}</h4>
-                  <p className="text-neutral-600 text-sm leading-relaxed">{a.desc}</p>
+                  <h4 className="text-lg font-bold text-white mb-3">{a.title}</h4>
+                  <p className="text-white/50 text-sm leading-relaxed">{a.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -374,10 +374,10 @@ export default function AboutPage() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-80px' }}
-            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="flex flex-wrap justify-center gap-6"
           >
             {values.map((v) => (
-              <motion.div key={v.title} variants={itemFadeUp}>
+              <motion.div key={v.title} variants={itemFadeUp} className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
                 <div className="bg-white p-8 text-center shadow-md border border-neutral-200 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 h-full">
                   <div className="w-20 h-20 bg-gradient-to-br from-emerald-600 to-sky-700 flex items-center justify-center mx-auto mb-6 text-white text-2xl">
                     <i className={`fas ${v.icon}`} />
