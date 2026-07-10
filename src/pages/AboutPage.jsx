@@ -86,7 +86,7 @@ function SectionHeading({ label, title, highlight, description, light }) {
         {title} <span className="text-emerald-400">{highlight}</span>
       </h2>
       {description && (
-        <p className={`mt-4 text-base max-w-xl leading-relaxed ${light ? 'text-neutral-500' : 'text-white/40'}`}>
+        <p className={`mt-4 text-base max-w-xl mx-auto leading-relaxed ${light ? 'text-neutral-500' : 'text-white/40'}`}>
           {description}
         </p>
       )}
@@ -155,7 +155,7 @@ export default function AboutPage() {
   return (
     <PageTransition>
       {/* ─────── Hero ─────── */}
-      <section className="relative min-h-[60vh] flex items-center overflow-hidden pt-24 lg:pt-[116px]">
+      <section className="relative min-h-[65vh] flex items-center overflow-hidden pt-24 lg:pt-[116px]">
         <div className="absolute inset-0 -z-10">
           <motion.img
             initial={{ scale: 1.2 }}
@@ -163,22 +163,50 @@ export default function AboutPage() {
             transition={{ duration: 8, ease: 'easeOut' }}
             src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop"
             alt=""
-            className="w-full h-full object-cover brightness-[0.35]"
+            className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-neutral-900/80 via-emerald-700/50 to-sky-700/50" />
+          <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/90 via-neutral-950/70 to-neutral-950/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/40 via-transparent to-transparent" />
+          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-emerald-500/[0.04] blur-3xl pointer-events-none" />
         </div>
         <div className="max-w-6xl mx-auto px-4 w-full">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ type: 'spring', stiffness: 120, damping: 14 }}
-            className="text-center max-w-2xl mx-auto"
-          >
-            <span className="inline-block px-3 py-1.5 bg-white/15 text-white rounded-full text-xs font-semibold uppercase tracking-wide mb-4 border border-white/20">
+          <motion.div className="text-center max-w-3xl mx-auto">
+            <motion.span
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15, duration: 0.5 }}
+              className="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 text-emerald-400 text-[11px] font-semibold tracking-widest uppercase border border-emerald-500/20"
+            >
               About OAK Global
-            </span>
-            <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-3">Excellence in Global Business Solutions</h1>
-            <p className="text-white/80 text-lg">Empowering organizations to achieve operational excellence and international recognition through strategic business performance management.</p>
+            </motion.span>
+
+            <h1 className="mt-6 font-extrabold leading-[1.04]">
+              <motion.span
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.6, ease: [0.45, 0.05, 0.55, 0.95] }}
+                className="block text-4xl sm:text-5xl lg:text-6xl xl:text-7xl tracking-tight text-white"
+              >
+                Excellence in Global
+              </motion.span>
+              <motion.span
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.6, ease: [0.45, 0.05, 0.55, 0.95] }}
+                className="block text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-emerald-400 mt-1 tracking-tight"
+              >
+                Business Solutions
+              </motion.span>
+            </h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.6, ease: [0.45, 0.05, 0.55, 0.95] }}
+              className="mt-6 text-white/60 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed"
+            >
+              Empowering organizations to achieve operational excellence and international recognition through strategic business performance management.
+            </motion.p>
           </motion.div>
         </div>
       </section>
