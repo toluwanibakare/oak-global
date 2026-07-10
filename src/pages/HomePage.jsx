@@ -1,8 +1,51 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import ScrollReveal from '../components/ScrollReveal'
 import PageTransition from '../components/PageTransition'
+
+const slides = [
+  {
+    product: 'OakAudix',
+    tagline: 'Audit Management',
+    headline: 'Enterprise Audit',
+    highlight: 'Intelligence.',
+    description: 'Plan, execute, and track audits in one place. Real-time reports, automated findings, and risk-based scheduling.',
+    image: 'https://images.pexels.com/photos/3861077/pexels-photo-3861077.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
+    icon: 'fa-clipboard-check',
+    details: ['Automated audit scheduling', 'Real-time reporting', 'Risk-based assessment', 'Finding tracking & closure'],
+  },
+  {
+    product: 'OakComply',
+    tagline: 'Compliance Management',
+    headline: 'Stay Compliant.',
+    highlight: 'Stay Ahead.',
+    description: 'Know your obligations. Track every requirement. Close gaps before they become findings.',
+    image: 'https://images.pexels.com/photos/7433857/pexels-photo-7433857.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
+    icon: 'fa-shield-halved',
+    details: ['Obligation register', 'Gap analysis', 'Compliance calendar', 'Regulatory updates'],
+  },
+  {
+    product: 'OakHSE360',
+    tagline: 'Health, Safety & Environment',
+    headline: 'Zero Harm.',
+    highlight: 'Maximum Performance.',
+    description: 'Report incidents. Assess risks. Track environmental data. All in one place.',
+    image: 'https://images.pexels.com/photos/37510660/pexels-photo-37510660.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
+    icon: 'fa-leaf',
+    details: ['Incident reporting', 'Risk assessment', 'Environmental monitoring', 'Safety compliance'],
+  },
+  {
+    product: 'OakExec',
+    tagline: 'Executive Intelligence',
+    headline: 'Data-Driven.',
+    highlight: 'Decisions.',
+    description: 'Dashboards that matter. Metrics that move the needle. Visibility from boardroom to frontline.',
+    image: 'https://images.pexels.com/photos/8636589/pexels-photo-8636589.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
+    icon: 'fa-chart-pie',
+    details: ['Executive dashboards', 'Predictive analytics', 'Enterprise KPIs', 'Real-time reporting'],
+  },
+]
 
 const stats = [
   { value: 500, label: 'Projects Completed' },
@@ -29,9 +72,29 @@ const services = [
 ]
 
 export default function HomePage() {
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const [showLeftArrow, setShowLeftArrow] = useState(false)
+  const [showRightArrow, setShowRightArrow] = useState(false)
   const [counts, setCounts] = useState(stats.map(() => 0))
   const statsRef = useRef(null)
   const counted = useRef(false)
+  const slideTimer = useRef(null)
+  const slideRef = useRef(null)
+
+  const goToSlide = useCallback((i) => {
+    setCurrentSlide(i)
+    if (slideTimer.current) clearInterval(slideTimer.current)
+    slideTimer.current = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length)
+    }, 5000)
+  }, [])
+
+  useEffect(() => {
+    slideTimer.current = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length)
+    }, 5000)
+    return () => clearInterval(slideTimer.current)
+  }, [])
 
   useEffect(() => {
     const el = statsRef.current
@@ -76,60 +139,151 @@ export default function HomePage() {
   return (
     <PageTransition>
       {/* Hero */}
-      <section className="relative min-h-screen flex items-center overflow-hidden pt-16 lg:pt-[116px]">
-        <div className="absolute inset-0 -z-10">
-          <img
-            src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop"
-            alt=""
-            className="w-full h-full object-cover brightness-[0.4]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-neutral-900/80 via-emerald-700/50 to-sky-700/50" />
+      <section ref={slideRef} className="relative h-screen overflow-hidden"
+        onMouseEnter={() => { if (slideTimer.current) clearInterval(slideTimer.current) }}
+        onMouseLeave={() => {
+          if (slideTimer.current) clearInterval(slideTimer.current)
+          slideTimer.current = setInterval(() => setCurrentSlide((prev) => (prev + 1) % slides.length), 5000)
+          setShowLeftArrow(false)
+          setShowRightArrow(false)
+        }}
+        onMouseMove={(e) => {
+          const rect = e.currentTarget.getBoundingClientRect()
+          const x = e.clientX - rect.left
+          setShowLeftArrow(x < 100)
+          setShowRightArrow(x > rect.width - 100)
+        }}
+      >
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentSlide}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8 }}
+            className="absolute inset-0"
+          >
+            <img
+              src={slides[currentSlide].image}
+              alt=""
+              className="w-full h-full object-cover object-[center_80%]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/95 via-neutral-950/85 to-neutral-950/60" />
+            <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/40 via-transparent to-transparent" />
+          </motion.div>
+        </AnimatePresence>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 w-full h-full pt-24 lg:pt-[140px] pb-36">
+          <div className="grid lg:grid-cols-2 gap-16 items-center h-full">
+            {/* Left */}
+            <div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentSlide}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <span className="inline-flex items-center gap-2.5 px-3 py-1.5 bg-emerald-500/10 text-emerald-400 text-[11px] font-semibold tracking-widest uppercase border border-emerald-500/20">
+                    <i className={`fas ${slides[currentSlide].icon} text-[10px]`} />
+                    {slides[currentSlide].product} — {slides[currentSlide].tagline}
+                  </span>
+
+                  <h1 className="mt-6 text-white font-extrabold leading-[1.04]">
+                    <span className="block text-5xl sm:text-6xl lg:text-7xl xl:text-8xl tracking-tight">{slides[currentSlide].headline}</span>
+                    <span className="block text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-emerald-400 mt-1 tracking-tight">{slides[currentSlide].highlight}</span>
+                  </h1>
+
+                  <p className="mt-4 text-base sm:text-lg text-neutral-400 max-w-lg leading-relaxed">
+                    {slides[currentSlide].description}
+                  </p>
+
+                  <div className="mt-8 flex flex-wrap gap-4">
+                    <Link
+                      to="/services"
+                      className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-emerald-600 text-white text-sm font-bold hover:bg-emerald-500 transition-all duration-300"
+                    >
+                      <span>Explore {slides[currentSlide].product}</span>
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </Link>
+                    <Link
+                      to="/about"
+                      className="inline-flex items-center gap-2.5 px-7 py-3.5 border border-white/20 text-white text-sm font-bold hover:bg-white/5 transition-all duration-300"
+                    >
+                      View All Products
+                    </Link>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Right */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentSlide}
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -30 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="hidden lg:block"
+              >
+                <div className="bg-white/[0.04] border border-white/[0.08] p-6">
+                  <div className="flex items-center gap-3 pb-4 border-b border-white/[0.06]">
+                    <div className="w-10 h-10 bg-emerald-500/10 flex items-center justify-center">
+                      <i className={`fas ${slides[currentSlide].icon} text-emerald-400 text-base`} />
+                    </div>
+                    <div>
+                      <div className="text-white font-bold text-sm">{slides[currentSlide].product}</div>
+                      <div className="text-neutral-500 text-xs mt-0.5">{slides[currentSlide].tagline}</div>
+                    </div>
+                  </div>
+                  <ul className="mt-4 space-y-2.5">
+                    {slides[currentSlide].details.map((d) => (
+                      <li key={d} className="flex items-center gap-3 text-sm text-neutral-400">
+                        <span className="w-1 h-1 bg-emerald-400" />
+                        {d}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
 
-        <div className="max-w-6xl mx-auto px-4 w-full">
-          <div className="max-w-2xl mx-auto text-center">
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-white font-extrabold leading-tight mb-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
-            >
-              <span className="block">Driving Business Performance</span>
-              <span className="block bg-gradient-to-r from-emerald-400 to-sky-400 bg-clip-text text-transparent">
-                Through Global Practices
-              </span>
-            </motion.h1>
+        {/* Side arrows */}
+        <button
+          onClick={() => goToSlide((currentSlide - 1 + slides.length) % slides.length)}
+          className={`absolute left-1 lg:left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full border border-white/20 text-white/40 hover:text-emerald-400 hover:border-emerald-400/50 transition-all duration-300 ${
+            showLeftArrow ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
+        >
+          ←
+        </button>
 
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-white/80 text-lg max-w-xl mx-auto mb-10"
-            >
-              We guide you through every step, ensuring global performance, compliance and operational excellence for sustainable growth.
-            </motion.p>
+        <button
+          onClick={() => goToSlide((currentSlide + 1) % slides.length)}
+          className={`absolute right-1 lg:right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full border border-white/20 text-white/40 hover:text-emerald-400 hover:border-emerald-400/50 transition-all duration-300 ${
+            showRightArrow ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
+        >
+          →
+        </button>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="flex flex-wrap gap-4 justify-center"
-            >
-              <Link
-                to="/services"
-                className="inline-flex items-center gap-2.5 px-8 py-4 bg-gradient-to-r from-emerald-600 to-sky-700 text-white text-base font-bold rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300"
-              >
-                <span>Explore Services</span>
-                <i className="fas fa-arrow-right text-sm" />
-              </Link>
-              <Link
-                to="/about"
-                className="inline-flex items-center gap-2.5 px-8 py-4 bg-white/10 text-white text-base font-bold rounded-2xl border border-white/30 backdrop-blur-md hover:bg-white/20 hover:-translate-y-0.5 transition-all duration-300"
-              >
-                <span>Learn More</span>
-              </Link>
-            </motion.div>
-          </div>
+        {/* Progress */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3">
+          {slides.map((s, i) => (
+            <button
+              key={s.product}
+              onClick={() => goToSlide(i)}
+              className={`h-1 transition-all duration-500 ${
+                i === currentSlide ? 'w-10 bg-emerald-400' : 'w-6 bg-white/30 hover:bg-white/50'
+              }`}
+            />
+          ))}
         </div>
       </section>
 

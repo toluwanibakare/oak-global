@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -19,9 +19,17 @@ const links = [
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [navHidden, setNavHidden] = useState(false)
   const [mobile, setMobile] = useState(false)
   const [productsOpen, setProductsOpen] = useState(false)
+  const lastScrollY = useRef(0)
+  const navHiddenRef = useRef(false)
+  const hideTimer = useRef(null)
   const { pathname } = useLocation()
+
+  useEffect(() => {
+    navHiddenRef.current = navHidden
+  }, [navHidden])
 
   useEffect(() => {
     const check = () => setMobile(window.innerWidth < 1024)
@@ -31,9 +39,48 @@ export default function Navbar() {
   }, [])
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
+    const onScroll = () => {
+      const currentY = window.scrollY
+      const direction = currentY > lastScrollY.current ? 'down' : 'up'
+      lastScrollY.current = currentY
+
+      if (direction === 'down' && currentY > 80) {
+        setNavHidden(true)
+      } else if (direction === 'up') {
+        setNavHidden(false)
+      }
+
+      setScrolled(currentY > 40)
+    }
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    const onMouseMove = (e) => {
+      if (e.clientY < 130) {
+        setNavHidden(false)
+        if (hideTimer.current) {
+          clearTimeout(hideTimer.current)
+          hideTimer.current = null
+        }
+      } else if (!navHiddenRef.current && window.scrollY > 100) {
+        if (!hideTimer.current) {
+          hideTimer.current = setTimeout(() => {
+            setNavHidden(true)
+            hideTimer.current = null
+          }, 2000)
+        }
+      } else if (e.clientY >= 130 && hideTimer.current) {
+        clearTimeout(hideTimer.current)
+        hideTimer.current = null
+      }
+    }
+    window.addEventListener('mousemove', onMouseMove)
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove)
+      if (hideTimer.current) clearTimeout(hideTimer.current)
+    }
   }, [])
 
   useEffect(() => {
@@ -76,9 +123,9 @@ export default function Navbar() {
 
       {/* Main header */}
       <header
-        className="fixed left-0 right-0 z-40 transition-all duration-500"
+        className="fixed left-0 right-0 z-40 transition-[top] duration-300 ease-out"
         style={{
-          top: mobile ? '0' : scrolled ? '0' : '36px',
+          top: mobile ? '0' : navHidden ? '-120px' : '36px',
           backgroundColor: scrolled ? 'rgba(255,255,255,0.97)' : 'rgba(255,255,255,0.95)',
           boxShadow: scrolled ? '0 1px 3px rgba(0,0,0,0.06)' : 'none',
           backdropFilter: scrolled ? 'blur(12px)' : 'none',
@@ -111,10 +158,10 @@ export default function Navbar() {
                       <i className="fas fa-chevron-down text-[8px] ml-0.5 group-hover:-rotate-180 transition-transform duration-300" />
                     </button>
                     <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-1 group-hover:translate-y-0">
-                      <div className="bg-white rounded-xl shadow-xl border border-neutral-200 p-2 w-72">
+                      <div className="bg-white rounded-none shadow-xl border border-neutral-200 p-2 w-72">
                         {item.dropdown.map((product) => (
-                          <a key={product.label} href="#" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-emerald-50 transition-colors">
-                            <div className="w-9 h-9 bg-emerald-100 rounded-lg flex items-center justify-center shrink-0">
+                          <a key={product.label} href="#" className="flex items-center gap-3 px-4 py-3 rounded-none hover:bg-emerald-50 transition-colors">
+                            <div className="w-9 h-9 bg-emerald-100 rounded-none flex items-center justify-center shrink-0">
                               <i className={`fas ${product.icon} text-emerald-600 text-sm`} />
                             </div>
                             <div>
@@ -155,7 +202,7 @@ export default function Navbar() {
                   {active && (
                     <motion.span
                       layoutId="underline"
-                      className="absolute -bottom-px left-0 right-0 h-0.5 bg-emerald-600 rounded-full"
+                      className="absolute -bottom-px left-5 right-5 h-0.5 bg-emerald-600"
                     />
                   )}
                 </Link>
@@ -167,7 +214,7 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center">
             <Link
               to="/contact"
-              className="group inline-flex items-center gap-3 px-6 py-2.5 text-sm font-bold text-white bg-gradient-to-r from-emerald-600 to-sky-700 rounded-xl shadow-lg hover:shadow-xl hover:shadow-emerald-500/20 hover:-translate-y-0.5 active:scale-[0.97] whitespace-nowrap transition-all duration-300"
+              className="group inline-flex items-center gap-3 px-6 py-2.5 text-sm font-bold text-white bg-gradient-to-r from-emerald-600 to-sky-700 rounded-none shadow-lg hover:shadow-xl hover:shadow-emerald-500/20 hover:-translate-y-0.5 active:scale-[0.97] whitespace-nowrap transition-all duration-300"
             >
               <span>Get Started</span>
               <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -179,7 +226,7 @@ export default function Navbar() {
           {/* Mobile toggle */}
           <button
             onClick={() => setOpen(!open)}
-            className="lg:hidden flex flex-col items-end gap-1 p-3 rounded-xl hover:bg-neutral-100 transition-colors cursor-pointer"
+            className="lg:hidden flex flex-col items-end gap-1 p-3 rounded-none hover:bg-neutral-100 transition-colors cursor-pointer"
             aria-label="Toggle menu"
           >
             <motion.span
@@ -242,7 +289,7 @@ export default function Navbar() {
                         <div>
                           <button
                             onClick={() => setProductsOpen(!productsOpen)}
-                            className="flex items-center justify-between w-full px-5 py-3 text-base font-semibold text-neutral-600 rounded-2xl hover:bg-emerald-50/60 transition-all"
+                            className="flex items-center justify-between w-full px-5 py-3 text-base font-semibold text-neutral-600 rounded-none hover:bg-emerald-50/60 transition-all"
                           >
                             <span className="flex items-center gap-3">
                               <i className="fas fa-cubes w-5 text-center text-neutral-400" />
@@ -263,8 +310,8 @@ export default function Navbar() {
                               >
                                 <div className="ml-3 mt-1 space-y-1 pl-4 border-l-2 border-emerald-100">
                                   {item.dropdown.map((product) => (
-                                    <a key={product.label} href="#" className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-emerald-50 transition-colors">
-                                      <div className="w-8 h-8 bg-emerald-100 rounded-lg flex items-center justify-center shrink-0">
+                                    <a key={product.label} href="#" className="flex items-center gap-3 px-4 py-3 rounded-none hover:bg-emerald-50 transition-colors">
+                                      <div className="w-8 h-8 bg-emerald-100 rounded-none flex items-center justify-center shrink-0">
                                         <i className={`fas ${product.icon} text-emerald-600 text-xs`} />
                                       </div>
                                       <div>
@@ -286,7 +333,7 @@ export default function Navbar() {
                       ) : (
                         <Link
                           to={item.to}
-                          className={`flex items-center justify-between px-5 py-3 text-base font-semibold rounded-2xl transition-all ${
+                          className={`flex items-center justify-between px-5 py-3 text-base font-semibold rounded-none transition-all ${
                             pathname === item.to
                               ? 'text-emerald-700 bg-emerald-50'
                               : 'text-neutral-600 hover:text-emerald-700 hover:bg-emerald-50/60'
@@ -321,7 +368,7 @@ export default function Navbar() {
                   <Link
                     to="/contact"
                     onClick={() => setOpen(false)}
-                    className="group flex items-center justify-center gap-3 w-full px-6 py-3.5 text-base font-bold text-white bg-gradient-to-r from-emerald-600 to-sky-700 rounded-2xl shadow-lg hover:shadow-xl hover:shadow-emerald-500/20 transition-all"
+                    className="group flex items-center justify-center gap-3 w-full px-6 py-3.5 text-base font-bold text-white bg-gradient-to-r from-emerald-600 to-sky-700 rounded-none shadow-lg hover:shadow-xl hover:shadow-emerald-500/20 transition-all"
                   >
                     <span>Get Started</span>
                     <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
