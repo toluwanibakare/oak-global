@@ -1,27 +1,65 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import ScrollReveal from '../components/ScrollReveal'
 import PageTransition from '../components/PageTransition'
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, ease: [0.45, 0.05, 0.55, 0.95] },
+  },
+}
+
+const itemFadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1, y: 0,
+    transition: { type: 'spring', stiffness: 120, damping: 14 },
+  },
+}
+
+function SectionHeading({ label, title, highlight, description, light }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ type: 'spring', stiffness: 120, damping: 14 }}
+    >
+      <span className={`inline-flex items-center gap-2 px-3 py-1.5 text-[11px] font-semibold tracking-widest uppercase border ${light ? 'bg-emerald-500/10 text-emerald-700 border-emerald-500/20' : 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'}`}>
+        {label}
+      </span>
+      <h2 className={`mt-6 text-3xl md:text-5xl font-extrabold leading-tight tracking-tight ${light ? 'text-neutral-900' : 'text-white'}`}>
+        {title} <span className="text-emerald-400">{highlight}</span>
+      </h2>
+      {description && (
+        <p className={`mt-4 text-base max-w-xl leading-relaxed ${light ? 'text-neutral-500' : 'text-white/40'}`}>
+          {description}
+        </p>
+      )}
+    </motion.div>
+  )
+}
+
 const grcServices = [
-  { title: 'Risk & Compliance Health Check', desc: 'A rapid assessment of your organisation\'s risk management maturity, compliance obligations, and governance effectiveness.', features: ['Risk maturity evaluation', 'Compliance gap analysis', 'Governance framework review', 'Regulatory obligation mapping', 'Actionable improvement roadmap'] },
-  { title: 'Enterprise Risk Management Framework', desc: 'Design and implement a comprehensive ERM framework aligned with ISO 31000 to identify, assess, and mitigate business risks.', features: ['Risk appetite definition', 'Risk assessment and planning', 'Control framework design', 'Risk reporting dashboards', 'Culture and capability building'] },
-  { title: 'Compliance Management System (ISO 37301)', desc: 'Implement a robust compliance management system based on ISO 37301 to ensure regulatory adherence and ethical operations.', features: ['Compliance framework setup', 'Regulatory obligation register', 'Policy and procedure development', 'Compliance training programs', 'Continuous monitoring systems'] },
-  { title: 'Outsourcing Governance (ISO 37500)', desc: 'Establish effective governance frameworks for outsourced operations ensuring quality, risk control, and regulatory compliance.', features: ['Vendor risk assessment', 'Outsourcing governance framework', 'Service level monitoring', 'Contract compliance review', 'Performance evaluation'] },
-  { title: 'Board Advisory Sessions', desc: 'Strategic advisory services for boards and senior leadership on governance best practices, risk oversight, and compliance strategy.', features: ['Board governance assessment', 'Strategic risk workshops', 'Compliance oversight guidance', 'Governance policy development', 'Board effectiveness review'] },
-  { title: 'Virtual GRC Advisory', desc: 'Flexible remote advisory services providing ongoing GRC support, guidance, and expertise to organizations across all locations.', features: ['Remote GRC consulting', 'Virtual risk workshops', 'Online compliance reviews', 'Digital documentation', 'Progress tracking tools'] },
+  { icon: 'fa-shield', title: 'Risk & Compliance Health Check', desc: 'A rapid assessment of your organisation\'s risk management maturity, compliance obligations, and governance effectiveness.', features: ['Risk maturity evaluation', 'Compliance gap analysis', 'Governance framework review', 'Regulatory obligation mapping', 'Actionable improvement roadmap'] },
+  { icon: 'fa-sitemap', title: 'Enterprise Risk Management Framework', desc: 'Design and implement a comprehensive ERM framework aligned with ISO 31000 to identify, assess, and mitigate business risks.', features: ['Risk appetite definition', 'Risk assessment and planning', 'Control framework design', 'Risk reporting dashboards', 'Culture and capability building'] },
+  { icon: 'fa-file-shield', title: 'Compliance Management System (ISO 37301)', desc: 'Implement a robust compliance management system based on ISO 37301 to ensure regulatory adherence and ethical operations.', features: ['Compliance framework setup', 'Regulatory obligation register', 'Policy and procedure development', 'Compliance training programs', 'Continuous monitoring systems'] },
+  { icon: 'fa-handshake', title: 'Outsourcing Governance (ISO 37500)', desc: 'Establish effective governance frameworks for outsourced operations ensuring quality, risk control, and regulatory compliance.', features: ['Vendor risk assessment', 'Outsourcing governance framework', 'Service level monitoring', 'Contract compliance review', 'Performance evaluation'] },
+  { icon: 'fa-users-gear', title: 'Board Advisory Sessions', desc: 'Strategic advisory services for boards and senior leadership on governance best practices, risk oversight, and compliance strategy.', features: ['Board governance assessment', 'Strategic risk workshops', 'Compliance oversight guidance', 'Governance policy development', 'Board effectiveness review'] },
+  { icon: 'fa-laptop-code', title: 'Virtual GRC Advisory', desc: 'Flexible remote advisory services providing ongoing GRC support, guidance, and expertise to organizations across all locations.', features: ['Remote GRC consulting', 'Virtual risk workshops', 'Online compliance reviews', 'Digital documentation', 'Progress tracking tools'] },
 ]
 
 const managementServices = [
-  { title: 'Business Performance Management', desc: 'Comprehensive performance management to optimize your business operations and achieve strategic objectives through data-driven insights.', features: ['Performance metrics design', 'Balanced scorecard implementation', 'KPI development', 'Performance dashboards', 'Continuous improvement cycles'] },
-  { title: 'Strategic Planning & Execution', desc: "Develop and execute winning strategies that align your organization's vision with actionable plans, ensuring measurable results.", features: ['Strategic plan development', 'Vision and mission alignment', 'Action plan creation', 'Progress monitoring', 'Strategy review cycles'] },
-  { title: 'Operational Improvement', desc: 'Streamline operations, reduce costs, and improve efficiency through proven methodologies and best practices in operational excellence.', features: ['Process optimization', 'Cost reduction strategies', 'Efficiency improvement', 'Quality management', 'Lean methodology'] },
-  { title: 'Performance Monitoring', desc: 'Continuous monitoring and reporting systems that track performance, identify trends, and enable proactive decision-making.', features: ['Monitoring system design', 'Real-time reporting', 'Trend analysis', 'Alert mechanisms', 'Management dashboards'] },
-  { title: 'Strategy Maturity Assessment', desc: 'Evaluate the connection between your strategies, vision, and purpose through comprehensive assessment and maturity roadmap development.', features: ['Strategic maturity evaluation', 'Capability assessment', 'Gap analysis', 'Improvement roadmap', 'Benchmark comparison'] },
-  { title: 'Management Systems Assessment', desc: 'Comprehensive evaluation of your management systems with actionable recommendations for enhancement and certification readiness.', features: ['System effectiveness review', 'Compliance validation', 'Best practice assessment', 'Improvement recommendations', 'Certification support'] },
-  { title: 'ISO Excellence', desc: 'Comprehensive ISO services including system design, gap assessment, internal audits, implementation support, and certification validation.', features: ['ISO system design', 'Gap assessment and analysis', 'Internal audits', 'Implementation support', 'Certification validation'] },
-  { title: 'Environmental Impact Audit', desc: 'Thorough environmental impact assessment and audit services to ensure regulatory compliance and sustainable business practices.', features: ['Environmental impact review', 'Regulatory audit and assessment', 'Sustainability planning', 'Compliance framework', 'Improvement roadmap'] },
+  { icon: 'fa-chart-line', title: 'Business Performance Management', desc: 'Comprehensive performance management to optimize your business operations and achieve strategic objectives through data-driven insights.', features: ['Performance metrics design', 'Balanced scorecard implementation', 'KPI development', 'Performance dashboards', 'Continuous improvement cycles'] },
+  { icon: 'fa-compass', title: 'Strategic Planning & Execution', desc: "Develop and execute winning strategies that align your organization's vision with actionable plans, ensuring measurable results.", features: ['Strategic plan development', 'Vision and mission alignment', 'Action plan creation', 'Progress monitoring', 'Strategy review cycles'] },
+  { icon: 'fa-gauge-high', title: 'Operational Improvement', desc: 'Streamline operations, reduce costs, and improve efficiency through proven methodologies and best practices in operational excellence.', features: ['Process optimization', 'Cost reduction strategies', 'Efficiency improvement', 'Quality management', 'Lean methodology'] },
+  { icon: 'fa-clock', title: 'Performance Monitoring', desc: 'Continuous monitoring and reporting systems that track performance, identify trends, and enable proactive decision-making.', features: ['Monitoring system design', 'Real-time reporting', 'Trend analysis', 'Alert mechanisms', 'Management dashboards'] },
+  { icon: 'fa-stairs', title: 'Strategy Maturity Assessment', desc: 'Evaluate the connection between your strategies, vision, and purpose through comprehensive assessment and maturity roadmap development.', features: ['Strategic maturity evaluation', 'Capability assessment', 'Gap analysis', 'Improvement roadmap', 'Benchmark comparison'] },
+  { icon: 'fa-clipboard-check', title: 'Management Systems Assessment', desc: 'Comprehensive evaluation of your management systems with actionable recommendations for enhancement and certification readiness.', features: ['System effectiveness review', 'Compliance validation', 'Best practice assessment', 'Improvement recommendations', 'Certification support'] },
+  { icon: 'fa-award', title: 'ISO Excellence', desc: 'Comprehensive ISO services including system design, gap assessment, internal audits, implementation support, and certification validation.', features: ['ISO system design', 'Gap assessment and analysis', 'Internal audits', 'Implementation support', 'Certification validation'] },
+  { icon: 'fa-leaf', title: 'Environmental Impact Audit', desc: 'Thorough environmental impact assessment and audit services to ensure regulatory compliance and sustainable business practices.', features: ['Environmental impact review', 'Regulatory audit and assessment', 'Sustainability planning', 'Compliance framework', 'Improvement roadmap'] },
 ]
 
 const process = [
@@ -44,27 +82,67 @@ export default function ServicesPage() {
 
   return (
     <PageTransition>
-      {/* Hero */}
-      <section className="relative min-h-[50vh] flex items-center overflow-hidden pt-24 lg:pt-[116px]">
+      {/* ─────── Hero ─────── */}
+      <section className="relative min-h-[65vh] flex items-center overflow-hidden pt-24 lg:pt-[116px]">
         <div className="absolute inset-0 -z-10">
-          <img src="https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop" alt="" className="w-full h-full object-cover brightness-[0.4]" />
-          <div className="absolute inset-0 bg-gradient-to-br from-neutral-900/80 via-emerald-700/50 to-sky-700/50" />
+          <motion.img
+            initial={{ scale: 1.2 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 8, ease: 'easeOut' }}
+            src="https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop"
+            alt=""
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/90 via-neutral-950/70 to-neutral-950/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/40 via-transparent to-transparent" />
+          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-emerald-500/[0.04] blur-3xl pointer-events-none" />
         </div>
         <div className="max-w-6xl mx-auto px-4 w-full">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-center max-w-2xl mx-auto">
-            <span className="inline-block px-3 py-1.5 bg-white/15 text-white rounded-full text-xs font-semibold uppercase tracking-wide mb-4 border border-white/20">
+          <motion.div className="text-center max-w-3xl mx-auto">
+            <motion.span
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15, duration: 0.5 }}
+              className="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 text-emerald-400 text-[11px] font-semibold tracking-widest uppercase border border-emerald-500/20"
+            >
               Our Expertise
-            </span>
-            <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-3">Comprehensive Business Solutions</h1>
-            <p className="text-white/80 text-lg">Tailored solutions designed to optimize your business performance, ensure compliance, and drive sustainable growth.</p>
+            </motion.span>
+
+            <h1 className="mt-6 font-extrabold leading-[1.04]">
+              <motion.span
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.6, ease: [0.45, 0.05, 0.55, 0.95] }}
+                className="block text-4xl sm:text-5xl lg:text-6xl xl:text-7xl tracking-tight text-white"
+              >
+                Comprehensive Business
+              </motion.span>
+              <motion.span
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.6, ease: [0.45, 0.05, 0.55, 0.95] }}
+                className="block text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-emerald-400 mt-1 tracking-tight"
+              >
+                Solutions
+              </motion.span>
+            </h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.6, ease: [0.45, 0.05, 0.55, 0.95] }}
+              className="mt-6 text-white/60 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed"
+            >
+              Tailored solutions designed to optimize your business performance, ensure compliance, and drive sustainable growth.
+            </motion.p>
           </motion.div>
         </div>
       </section>
 
-      {/* Tabs */}
-      <section className="py-12 bg-neutral-50">
+      {/* ─────── Tabs ─────── */}
+      <section className="py-12 bg-neutral-50 border-b border-neutral-100">
         <div className="max-w-6xl mx-auto px-4">
-          <div className="flex justify-center gap-2 bg-white p-1.5 rounded-2xl shadow-sm border border-neutral-200 max-w-md mx-auto">
+          <div className="flex justify-center gap-1 bg-white p-1 shadow-sm border border-neutral-200 max-w-md mx-auto">
             {[
               { key: 'management', label: 'Management Systems' },
               { key: 'grc', label: 'GRC Advisory' },
@@ -72,12 +150,12 @@ export default function ServicesPage() {
               <button
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key)}
-                className={`relative px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 cursor-pointer ${
+                className={`relative px-5 py-2.5 text-sm font-semibold transition-all duration-300 cursor-pointer ${
                   activeTab === tab.key ? 'text-white' : 'text-neutral-600 hover:text-neutral-900'
                 }`}
               >
                 {activeTab === tab.key && (
-                  <motion.div layoutId="tab-bg" className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-sky-700 rounded-xl" />
+                  <motion.div layoutId="tab-bg" className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-sky-700" />
                 )}
                 <span className="relative z-10">{tab.label}</span>
               </button>
@@ -86,7 +164,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Services Grid */}
+      {/* ─────── Services Grid ─────── */}
       <section className="py-12 bg-neutral-50">
         <div className="max-w-6xl mx-auto px-4">
           <AnimatePresence mode="wait">
@@ -96,15 +174,25 @@ export default function ServicesPage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
+              variants={containerVariants}
               className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
             >
               {services.map((s, i) => (
-                <ScrollReveal key={s.title} delay={i * 0.08}>
-                  <div className="bg-white rounded-2xl overflow-hidden shadow-md border border-neutral-200 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group">
-                    <div className="p-6">
+                <motion.div
+                  key={s.title}
+                  variants={itemFadeUp}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: '-80px' }}
+                >
+                  <div className="bg-white border border-neutral-200 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group h-full flex flex-col">
+                    <div className="p-6 flex flex-col flex-1">
+                      <div className="w-12 h-12 bg-gradient-to-br from-emerald-600 to-sky-700 flex items-center justify-center text-white text-lg mb-4">
+                        <i className={`fas ${s.icon}`} />
+                      </div>
                       <h3 className="text-lg font-bold text-neutral-900 mb-3">{s.title}</h3>
-                      <p className="text-neutral-600 text-sm leading-relaxed mb-4">{s.desc}</p>
-                      <ul className="space-y-2">
+                      <p className="text-neutral-600 text-sm leading-relaxed mb-4 flex-1">{s.desc}</p>
+                      <ul className="space-y-2 border-t border-neutral-100 pt-4">
                         {s.features.map((f) => (
                           <li key={f} className="flex items-start gap-2 text-sm text-neutral-600">
                             <i className="fas fa-check text-emerald-600 mt-0.5 text-xs" />
@@ -114,55 +202,68 @@ export default function ServicesPage() {
                       </ul>
                     </div>
                   </div>
-                </ScrollReveal>
+                </motion.div>
               ))}
             </motion.div>
           </AnimatePresence>
         </div>
       </section>
 
-      {/* Process */}
-      <section className="py-24 bg-white">
+      {/* ─────── Process ─────── */}
+      <section className="py-24 bg-white overflow-hidden">
         <div className="max-w-6xl mx-auto px-4">
-          <ScrollReveal>
-            <div className="text-center max-w-xl mx-auto mb-12">
-              <span className="inline-block px-3 py-1.5 bg-emerald-100 text-emerald-800 rounded-full text-xs font-semibold uppercase tracking-wide mb-4 border border-emerald-200">
-                Our Process
-              </span>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-neutral-900 mb-2">How We Work</h2>
-              <p className="text-neutral-600">A proven methodology that ensures successful outcomes for every engagement.</p>
-            </div>
-          </ScrollReveal>
+          <div className="text-center max-w-xl mx-auto mb-12">
+            <SectionHeading label="Our Process" title="How We" highlight="Work" light description="A proven methodology that ensures successful outcomes for every engagement." />
+          </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          >
             {process.map((step, i) => (
-              <ScrollReveal key={step.num} delay={i * 0.1}>
-                <div className="bg-neutral-50 p-6 rounded-2xl text-center shadow-md border border-neutral-200 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
-                  <div className="w-14 h-14 bg-gradient-to-br from-emerald-600 to-sky-700 rounded-full flex items-center justify-center mx-auto mb-4 text-white text-lg font-bold">
-                    {step.num}
+              <motion.div key={step.num} variants={itemFadeUp}>
+                <div className="bg-neutral-50 p-6 text-center shadow-sm border border-neutral-200 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 h-full group">
+                  <div className="relative w-16 h-16 mx-auto mb-4">
+                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-600 to-sky-700 rotate-45 group-hover:rotate-[135deg] transition-transform duration-500" />
+                    <div className="relative z-10 w-full h-full flex items-center justify-center text-white text-lg font-bold">
+                      {step.num}
+                    </div>
                   </div>
                   <h3 className="font-bold text-neutral-900 mb-2">{step.title}</h3>
                   <p className="text-neutral-600 text-sm leading-relaxed">{step.desc}</p>
                 </div>
-              </ScrollReveal>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-24 bg-gradient-to-br from-neutral-900 to-neutral-800 text-center">
-        <div className="max-w-6xl mx-auto px-4">
-          <ScrollReveal>
-            <div className="max-w-xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-3">Ready to Transform Your Business?</h2>
-              <p className="text-white/70 mb-6">Contact us today to discuss how our comprehensive services can help your organization achieve operational excellence and global recognition.</p>
-              <Link to="/contact" className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-sky-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
-                <span>Get Started Today</span>
-                <i className="fas fa-arrow-right" />
-              </Link>
-            </div>
-          </ScrollReveal>
+      {/* ─────── CTA ─────── */}
+      <section className="py-24 bg-neutral-950 relative overflow-hidden border-b border-white/5">
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.012)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.012)_1px,transparent_1px)] bg-[size:48px_48px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/[0.03] blur-3xl pointer-events-none" />
+        <div className="max-w-6xl mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ type: 'spring', stiffness: 120, damping: 14 }}
+            className="text-center max-w-xl mx-auto"
+          >
+            <h2 className="text-3xl md:text-5xl font-extrabold text-white leading-tight tracking-tight mb-4">
+              Ready to Transform <span className="text-emerald-400">Your Business?</span>
+            </h2>
+            <p className="text-white/40 text-base leading-relaxed mb-8">
+              Contact us today to discuss how our comprehensive services can help your organization achieve operational excellence and global recognition.
+            </p>
+            <Link to="/contact" className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-sky-700 text-white font-semibold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
+              <span>Get Started Today</span>
+              <i className="fas fa-arrow-right" />
+            </Link>
+          </motion.div>
         </div>
       </section>
     </PageTransition>
