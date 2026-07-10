@@ -76,7 +76,7 @@ export default function HomePage() {
   return (
     <PageTransition>
       {/* Hero */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center overflow-hidden pt-16 lg:pt-[116px]">
         <div className="absolute inset-0 -z-10">
           <img
             src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop"
@@ -113,18 +113,18 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="flex flex-wrap gap-3 justify-center"
+              className="flex flex-wrap gap-4 justify-center"
             >
               <Link
                 to="/services"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-sky-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300"
+                className="inline-flex items-center gap-2.5 px-8 py-4 bg-gradient-to-r from-emerald-600 to-sky-700 text-white text-base font-bold rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300"
               >
                 <span>Explore Services</span>
-                <i className="fas fa-arrow-right" />
+                <i className="fas fa-arrow-right text-sm" />
               </Link>
               <Link
                 to="/about"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 text-white font-semibold rounded-xl border border-white/30 backdrop-blur-md hover:bg-white/20 hover:-translate-y-0.5 transition-all duration-300"
+                className="inline-flex items-center gap-2.5 px-8 py-4 bg-white/10 text-white text-base font-bold rounded-2xl border border-white/30 backdrop-blur-md hover:bg-white/20 hover:-translate-y-0.5 transition-all duration-300"
               >
                 <span>Learn More</span>
               </Link>
@@ -239,9 +239,9 @@ export default function HomePage() {
 
           <ScrollReveal>
             <div className="text-center">
-              <Link to="/services" className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-sky-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
+              <Link to="/services" className="inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-emerald-600 to-sky-700 text-white text-base font-bold rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
                 <span>View All Services</span>
-                <i className="fas fa-arrow-right" />
+                <i className="fas fa-arrow-right text-sm" />
               </Link>
             </div>
           </ScrollReveal>

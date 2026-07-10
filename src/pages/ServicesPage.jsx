@@ -45,7 +45,7 @@ export default function ServicesPage() {
   return (
     <PageTransition>
       {/* Hero */}
-      <section className="relative min-h-[50vh] flex items-center overflow-hidden pt-24 md:pt-0">
+      <section className="relative min-h-[50vh] flex items-center overflow-hidden pt-24 lg:pt-[116px]">
         <div className="absolute inset-0 -z-10">
           <img src="https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop" alt="" className="w-full h-full object-cover brightness-[0.4]" />
           <div className="absolute inset-0 bg-gradient-to-br from-neutral-900/80 via-emerald-700/50 to-sky-700/50" />
