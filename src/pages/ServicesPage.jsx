@@ -175,12 +175,13 @@ export default function ServicesPage() {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
               variants={containerVariants}
-              className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+              className="flex flex-wrap justify-center gap-6"
             >
               {services.map((s, i) => (
                 <motion.div
                   key={s.title}
                   variants={itemFadeUp}
+                  className="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true, margin: '-80px' }}
