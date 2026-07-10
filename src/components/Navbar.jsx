@@ -12,6 +12,7 @@ const products = [
 const links = [
   { label: 'Home', to: '/', icon: 'fa-house' },
   { label: 'About', to: '/about', icon: 'fa-building' },
+  { label: 'Services', to: '/services', icon: 'fa-briefcase' },
   { label: 'Products', icon: 'fa-cubes', dropdown: products },
   { label: 'Resources', icon: 'fa-folder-open' },
 ]
