@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import PageTransition from '../components/PageTransition'
@@ -17,42 +17,6 @@ const itemFadeUp = {
     opacity: 1, y: 0,
     transition: { type: 'spring', stiffness: 120, damping: 14 },
   },
-}
-
-function AnimatedCounter({ value, suffix = '+' }) {
-  const [count, setCount] = useState(0)
-  const counted = useRef(false)
-  const ref = useRef(null)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el || counted.current) return
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !counted.current) {
-          counted.current = true
-          let start = 0
-          const duration = 2000
-          const step = value / (duration / 16)
-          const timer = setInterval(() => {
-            start += step
-            if (start >= value) {
-              setCount(value)
-              clearInterval(timer)
-            } else {
-              setCount(Math.floor(start))
-            }
-          }, 16)
-          observer.unobserve(el)
-        }
-      },
-      { threshold: 0.5 }
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [value])
-
-  return <span ref={ref} className="block text-4xl md:text-5xl font-extrabold text-emerald-400 mb-2 tabular-nums">{count}{suffix}</span>
 }
 
 function SectionHeading({ label, title, highlight, description, light }) {
@@ -103,13 +67,6 @@ const process = [
   { num: '02', title: 'Assessment', desc: 'Based on our assessment, we develop customized strategies and solutions tailored to your specific needs.' },
   { num: '03', title: 'Implementation', desc: 'Our team works alongside yours to implement solutions effectively and efficiently.' },
   { num: '04', title: 'Optimization', desc: 'We continuously monitor, measure, and optimize to ensure sustained success.' },
-]
-
-const stats = [
-  { value: 200, label: 'Projects Completed' },
-  { value: 50, label: 'Certified Experts' },
-  { value: 15, label: 'Industry Verticals' },
-  { value: 6, label: 'Global Offices' },
 ]
 
 const faqs = [
@@ -260,27 +217,6 @@ export default function ServicesPage() {
               ))}
             </motion.div>
           </AnimatePresence>
-        </div>
-      </section>
-
-      {/* ─────── Stats ─────── */}
-      <section className="py-20 bg-neutral-950 relative overflow-hidden border-y border-white/5">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.012)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.012)_1px,transparent_1px)] bg-[size:48px_48px]" />
-        <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/5"
-          >
-            {stats.map((s) => (
-              <motion.div key={s.label} variants={itemFadeUp} className="bg-neutral-950 py-10 px-6 text-center">
-                <AnimatedCounter value={s.value} />
-                <span className="text-white/50 text-xs font-semibold uppercase tracking-[0.15em]">{s.label}</span>
-              </motion.div>
-            ))}
-          </motion.div>
         </div>
       </section>
 
