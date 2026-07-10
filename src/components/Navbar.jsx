@@ -134,15 +134,15 @@ export default function Navbar() {
                     onMouseEnter={() => { dropdownHoveredRef.current = true }}
                     onMouseLeave={() => { dropdownHoveredRef.current = false }}
                   >
-                    <button className="flex items-center gap-1.5 px-5 py-2 text-sm font-semibold text-neutral-600 hover:text-emerald-600 transition-all duration-200">
+                    <Link to="/products" className="flex items-center gap-1.5 px-5 py-2 text-sm font-semibold text-neutral-600 hover:text-emerald-600 transition-all duration-200">
                       <i className={`fas ${item.icon} text-[11px]`} />
                       {item.label}
                       <i className="fas fa-chevron-down text-[8px] ml-0.5 group-hover:-rotate-180 transition-transform duration-300" />
-                    </button>
+                    </Link>
                     <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-1 group-hover:translate-y-0">
                       <div className="bg-white rounded-none shadow-xl border border-neutral-200 p-2 w-72">
                         {item.dropdown.map((product) => (
-                          <a key={product.label} href="#" className="flex items-center gap-3 px-4 py-3 rounded-none hover:bg-emerald-50 transition-colors">
+                          <Link key={product.label} to="/products" className="flex items-center gap-3 px-4 py-3 rounded-none hover:bg-emerald-50 transition-colors">
                             <div className="w-9 h-9 bg-emerald-100 rounded-none flex items-center justify-center shrink-0">
                               <i className={`fas ${product.icon} text-emerald-600 text-sm`} />
                             </div>
@@ -150,7 +150,7 @@ export default function Navbar() {
                               <div className="text-sm font-semibold text-neutral-800">{product.label}</div>
                               <div className="text-xs text-neutral-500">{product.desc}</div>
                             </div>
-                          </a>
+                          </Link>
                         ))}
                       </div>
                     </div>
@@ -269,7 +269,8 @@ export default function Navbar() {
                     >
                       {item.dropdown ? (
                         <div>
-                          <button
+                          <Link
+                            to="/products"
                             onClick={() => setProductsOpen(!productsOpen)}
                             className="flex items-center justify-between w-full px-5 py-3 text-base font-semibold text-neutral-600 rounded-none hover:bg-emerald-50/60 transition-all"
                           >
@@ -281,7 +282,7 @@ export default function Navbar() {
                               animate={{ rotate: productsOpen ? 180 : 0 }}
                               className="fas fa-chevron-down text-neutral-300 text-sm"
                             />
-                          </button>
+                          </Link>
                           <AnimatePresence>
                             {productsOpen && (
                               <motion.div
@@ -292,7 +293,7 @@ export default function Navbar() {
                               >
                                 <div className="ml-3 mt-1 space-y-1 pl-4 border-l-2 border-emerald-100">
                                   {item.dropdown.map((product) => (
-                                    <a key={product.label} href="#" className="flex items-center gap-3 px-4 py-3 rounded-none hover:bg-emerald-50 transition-colors">
+                                    <Link key={product.label} to="/products" className="flex items-center gap-3 px-4 py-3 rounded-none hover:bg-emerald-50 transition-colors">
                                       <div className="w-8 h-8 bg-emerald-100 rounded-none flex items-center justify-center shrink-0">
                                         <i className={`fas ${product.icon} text-emerald-600 text-xs`} />
                                       </div>
@@ -300,7 +301,7 @@ export default function Navbar() {
                                         <div className="text-sm font-semibold text-neutral-800">{product.label}</div>
                                         <div className="text-[11px] text-neutral-500">{product.desc}</div>
                                       </div>
-                                    </a>
+                                    </Link>
                                   ))}
                                 </div>
                               </motion.div>

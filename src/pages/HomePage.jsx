@@ -371,7 +371,7 @@ export default function HomePage() {
                       </svg>
                     </Link>
                     <Link
-                      to="/about"
+                      to="/products"
                       className="inline-flex items-center gap-2.5 px-7 py-3.5 border border-white/20 text-white text-sm font-bold hover:bg-white/5 transition-all duration-300"
                     >
                       View All Products
