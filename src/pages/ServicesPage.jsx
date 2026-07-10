@@ -19,6 +19,42 @@ const itemFadeUp = {
   },
 }
 
+function AnimatedCounter({ value, suffix = '+' }) {
+  const [count, setCount] = useState(0)
+  const counted = useRef(false)
+  const ref = useRef(null)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el || counted.current) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !counted.current) {
+          counted.current = true
+          let start = 0
+          const duration = 2000
+          const step = value / (duration / 16)
+          const timer = setInterval(() => {
+            start += step
+            if (start >= value) {
+              setCount(value)
+              clearInterval(timer)
+            } else {
+              setCount(Math.floor(start))
+            }
+          }, 16)
+          observer.unobserve(el)
+        }
+      },
+      { threshold: 0.5 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [value])
+
+  return <span ref={ref} className="block text-4xl md:text-5xl font-extrabold text-emerald-400 mb-2 tabular-nums">{count}{suffix}</span>
+}
+
 function SectionHeading({ label, title, highlight, description, light }) {
   return (
     <motion.div
@@ -34,7 +70,7 @@ function SectionHeading({ label, title, highlight, description, light }) {
         {title} <span className="text-emerald-400">{highlight}</span>
       </h2>
       {description && (
-        <p className={`mt-4 text-base max-w-xl leading-relaxed ${light ? 'text-neutral-500' : 'text-white/40'}`}>
+        <p className={`mt-4 text-base max-w-xl mx-auto leading-relaxed ${light ? 'text-neutral-500' : 'text-white/40'}`}>
           {description}
         </p>
       )}
@@ -69,9 +105,26 @@ const process = [
   { num: '04', title: 'Optimization', desc: 'We continuously monitor, measure, and optimize to ensure sustained success.' },
 ]
 
+const stats = [
+  { value: 200, label: 'Projects Completed' },
+  { value: 50, label: 'Certified Experts' },
+  { value: 15, label: 'Industry Verticals' },
+  { value: 6, label: 'Global Offices' },
+]
+
+const faqs = [
+  { q: 'Which service is right for my organization?', a: 'We offer a complimentary initial consultation to assess your needs and recommend the most suitable service package. Our team works with you to understand your challenges, goals, and industry requirements before proposing a tailored solution.' },
+  { q: 'What is the typical timeline for implementation?', a: 'Timelines vary based on the scope and complexity of the engagement. A typical project ranges from 4 to 12 weeks, depending on your organization\'s size, readiness, and specific requirements. We provide a detailed timeline during our initial assessment phase.' },
+  { q: 'Do you offer ongoing support after implementation?', a: 'Yes, we provide continuous support through our Virtual GRC Advisory services, performance monitoring, and periodic review engagements. We believe in building lasting partnerships and are always available for ongoing consultation.' },
+  { q: 'How do you ensure compliance with industry regulations?', a: 'Our consultants stay up-to-date with the latest regulatory requirements across industries. We leverage ISO standards, regulatory databases, and our network of compliance experts to ensure your organization meets all applicable regulations.' },
+  { q: 'Can your services be tailored for small businesses?', a: 'Absolutely. We design scalable solutions that fit organizations of all sizes. Our engagement models are flexible, and we offer modular service packages that can be customized to your budget and needs.' },
+  { q: 'What certifications do your consultants hold?', a: 'Our team holds international certifications including ISO Lead Auditor, PMP, CRISC, CISM, and other industry-recognized credentials. Each consultant brings 10+ years of experience in their domain of expertise.' },
+]
+
 export default function ServicesPage() {
   const [searchParams] = useSearchParams()
   const [activeTab, setActiveTab] = useState(searchParams.get('category') === 'grc' ? 'grc' : 'management')
+  const [openFaq, setOpenFaq] = useState(null)
 
   useEffect(() => {
     const cat = searchParams.get('category')
@@ -210,6 +263,27 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      {/* ─────── Stats ─────── */}
+      <section className="py-20 bg-neutral-950 relative overflow-hidden border-y border-white/5">
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.012)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.012)_1px,transparent_1px)] bg-[size:48px_48px]" />
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/5"
+          >
+            {stats.map((s) => (
+              <motion.div key={s.label} variants={itemFadeUp} className="bg-neutral-950 py-10 px-6 text-center">
+                <AnimatedCounter value={s.value} />
+                <span className="text-white/50 text-xs font-semibold uppercase tracking-[0.15em]">{s.label}</span>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
       {/* ─────── Process ─────── */}
       <section className="py-24 bg-white overflow-hidden">
         <div className="max-w-6xl mx-auto px-4">
@@ -242,8 +316,57 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      {/* ─────── FAQ ─────── */}
+      <section className="py-24 bg-neutral-50 overflow-hidden border-b border-neutral-100">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center max-w-xl mx-auto mb-12">
+            <SectionHeading label="FAQ" title="Frequently Asked" highlight="Questions" light description="Quick answers to common questions about our services and engagement process." />
+          </div>
+
+          <div className="max-w-3xl mx-auto">
+            {faqs.map((faq, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ delay: i * 0.05, type: 'spring', stiffness: 100, damping: 16 }}
+                className="mb-3"
+              >
+                <button
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  className="w-full flex items-center justify-between gap-4 p-5 bg-white border border-neutral-200 text-left cursor-pointer hover:border-emerald-300 transition-colors duration-300"
+                >
+                  <span className="font-semibold text-neutral-900 text-sm">{faq.q}</span>
+                  <motion.i
+                    animate={{ rotate: openFaq === i ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="fas fa-chevron-down text-emerald-600 shrink-0 text-sm"
+                  />
+                </button>
+                <AnimatePresence>
+                  {openFaq === i && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: [0.45, 0.05, 0.55, 0.95] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="p-5 bg-white border-t-0 border border-neutral-200">
+                        <p className="text-neutral-600 text-sm leading-relaxed">{faq.a}</p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ─────── CTA ─────── */}
-      <section className="py-24 bg-neutral-950 relative overflow-hidden border-b border-white/5">
+      <section className="py-24 bg-neutral-950 relative overflow-hidden">
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.012)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.012)_1px,transparent_1px)] bg-[size:48px_48px]" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/[0.03] blur-3xl pointer-events-none" />
         <div className="max-w-6xl mx-auto px-4 relative z-10">
