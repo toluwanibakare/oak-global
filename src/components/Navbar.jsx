@@ -24,13 +24,8 @@ export default function Navbar() {
   const [mobile, setMobile] = useState(false)
   const [productsOpen, setProductsOpen] = useState(false)
   const lastScrollY = useRef(0)
-  const navHiddenRef = useRef(false)
-  const hideTimer = useRef(null)
+  const dropdownHoveredRef = useRef(false)
   const { pathname } = useLocation()
-
-  useEffect(() => {
-    navHiddenRef.current = navHidden
-  }, [navHidden])
 
   useEffect(() => {
     const check = () => setMobile(window.innerWidth < 1024)
@@ -45,7 +40,7 @@ export default function Navbar() {
       const direction = currentY > lastScrollY.current ? 'down' : 'up'
       lastScrollY.current = currentY
 
-      if (direction === 'down' && currentY > 80) {
+      if (direction === 'down' && currentY > 80 && !dropdownHoveredRef.current) {
         setNavHidden(true)
       } else if (direction === 'up') {
         setNavHidden(false)
@@ -61,27 +56,10 @@ export default function Navbar() {
     const onMouseMove = (e) => {
       if (e.clientY < 130) {
         setNavHidden(false)
-        if (hideTimer.current) {
-          clearTimeout(hideTimer.current)
-          hideTimer.current = null
-        }
-      } else if (!navHiddenRef.current && window.scrollY > 100) {
-        if (!hideTimer.current) {
-          hideTimer.current = setTimeout(() => {
-            setNavHidden(true)
-            hideTimer.current = null
-          }, 2000)
-        }
-      } else if (e.clientY >= 130 && hideTimer.current) {
-        clearTimeout(hideTimer.current)
-        hideTimer.current = null
       }
     }
     window.addEventListener('mousemove', onMouseMove)
-    return () => {
-      window.removeEventListener('mousemove', onMouseMove)
-      if (hideTimer.current) clearTimeout(hideTimer.current)
-    }
+    return () => window.removeEventListener('mousemove', onMouseMove)
   }, [])
 
   useEffect(() => {
@@ -152,7 +130,10 @@ export default function Navbar() {
             {links.map((item) => {
               if (item.dropdown) {
                 return (
-                  <div key={item.label} className="relative group">
+                  <div key={item.label} className="relative group"
+                    onMouseEnter={() => { dropdownHoveredRef.current = true }}
+                    onMouseLeave={() => { dropdownHoveredRef.current = false }}
+                  >
                     <button className="flex items-center gap-1.5 px-5 py-2 text-sm font-semibold text-neutral-600 hover:text-emerald-600 transition-all duration-200">
                       <i className={`fas ${item.icon} text-[11px]`} />
                       {item.label}

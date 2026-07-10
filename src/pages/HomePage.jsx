@@ -497,10 +497,10 @@ export default function HomePage() {
               <motion.div
                 key={ind.name}
                 variants={itemFadeUp}
-                className="group relative bg-white p-8 lg:p-10 overflow-hidden rounded-xl border border-neutral-200 hover:border-emerald-200 hover:shadow-lg transition-all duration-300"
+                className="group relative bg-white p-8 lg:p-10 overflow-hidden border border-neutral-200 hover:border-emerald-200 hover:shadow-lg transition-all duration-300"
               >
                 <div className="relative z-10">
-                  <div className="w-12 h-12 bg-emerald-100 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 rounded-lg">
+                  <div className="w-12 h-12 bg-emerald-100 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
                     <i className={`fas ${ind.icon} text-emerald-600 text-lg`} />
                   </div>
                   <h3 className="text-neutral-900 font-bold text-lg mb-2">{ind.name}</h3>
