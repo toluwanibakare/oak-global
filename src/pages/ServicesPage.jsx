@@ -83,7 +83,7 @@ export default function ServicesPage() {
   return (
     <PageTransition>
       {/* ─────── Hero ─────── */}
-      <section className="relative min-h-[65vh] flex items-center overflow-hidden pt-24 lg:pt-[116px]">
+      <section className="relative min-h-[65vh] flex items-center overflow-hidden pt-32 lg:pt-[140px]">
         <div className="absolute inset-0 -z-10">
           <motion.img
             initial={{ scale: 1.2 }}
