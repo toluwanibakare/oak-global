@@ -221,7 +221,7 @@ export default function ServicesPage() {
       </section>
 
       {/* ─────── Process ─────── */}
-      <section className="py-24 bg-white overflow-hidden">
+      <section className="py-16 lg:py-24 bg-white overflow-hidden">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center max-w-xl mx-auto mb-12">
             <SectionHeading label="Our Process" title="How We" highlight="Work" light description="A proven methodology that ensures successful outcomes for every engagement." />
@@ -253,7 +253,7 @@ export default function ServicesPage() {
       </section>
 
       {/* ─────── FAQ ─────── */}
-      <section className="py-24 bg-neutral-50 overflow-hidden border-b border-neutral-100">
+      <section className="py-16 lg:py-24 bg-neutral-50 overflow-hidden border-b border-neutral-100">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center max-w-xl mx-auto mb-12">
             <SectionHeading label="FAQ" title="Frequently Asked" highlight="Questions" light description="Quick answers to common questions about our services and engagement process." />
@@ -302,7 +302,7 @@ export default function ServicesPage() {
       </section>
 
       {/* ─────── CTA ─────── */}
-      <section className="py-24 bg-neutral-950 relative overflow-hidden">
+      <section className="py-16 lg:py-24 bg-neutral-950 relative overflow-hidden">
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.012)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.012)_1px,transparent_1px)] bg-[size:48px_48px]" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/[0.03] blur-3xl pointer-events-none" />
         <div className="max-w-6xl mx-auto px-4 relative z-10">

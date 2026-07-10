@@ -212,7 +212,7 @@ export default function AboutPage() {
       </section>
 
       {/* ─────── Story ─────── */}
-      <section className="py-24 bg-white overflow-hidden">
+      <section className="py-16 lg:py-24 bg-white overflow-hidden">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <SectionHeading label="Our Story" title="Who We" highlight="Are" light description="Discover the journey behind OAK Global and our commitment to excellence." />
@@ -235,7 +235,7 @@ export default function AboutPage() {
             </motion.div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <motion.div
               variants={itemFadeLeft}
               initial="hidden"
@@ -263,7 +263,7 @@ export default function AboutPage() {
               viewport={{ once: true, margin: '-80px' }}
               className="overflow-hidden shadow-xl"
             >
-              <div className="group h-[400px]">
+              <div className="group h-[250px] sm:h-[350px] md:h-[400px]">
                 <ParallaxImage src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" alt="Professional business team" />
               </div>
             </motion.div>
@@ -293,7 +293,7 @@ export default function AboutPage() {
       </section>
 
       {/* ─────── Vision & Mission ─────── */}
-      <section className="py-24 bg-neutral-50 overflow-hidden">
+      <section className="py-16 lg:py-24 bg-neutral-50 overflow-hidden">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center max-w-xl mx-auto mb-12">
             <SectionHeading label="Our Foundation" title="Vision" highlight="& Mission" light description="The driving forces behind everything we do at OAK Global." />
@@ -328,7 +328,7 @@ export default function AboutPage() {
       </section>
 
       {/* ─────── Our Approach ─────── */}
-      <section className="py-24 bg-neutral-950 overflow-hidden border-b border-white/5">
+      <section className="py-16 lg:py-24 bg-neutral-950 overflow-hidden border-b border-white/5">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center max-w-xl mx-auto mb-12">
             <SectionHeading label="How We Work" title="Our" highlight="Approach" description="A proven methodology that delivers results." />
@@ -363,7 +363,7 @@ export default function AboutPage() {
       </section>
 
       {/* ─────── Core Values ─────── */}
-      <section className="py-24 bg-neutral-50 overflow-hidden">
+      <section className="py-16 lg:py-24 bg-neutral-50 overflow-hidden">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center max-w-xl mx-auto mb-12">
             <SectionHeading label="Our Foundation" title="Core" highlight="Values" light description="These fundamental principles guide every decision we make and every solution we deliver." />
@@ -392,9 +392,9 @@ export default function AboutPage() {
       </section>
 
       {/* ─────── Why Choose Us ─────── */}
-      <section className="py-24 bg-white overflow-hidden">
+      <section className="py-16 lg:py-24 bg-white overflow-hidden">
         <div className="max-w-6xl mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <motion.div
               variants={itemFadeLeft}
               initial="hidden"
@@ -402,7 +402,7 @@ export default function AboutPage() {
               viewport={{ once: true, margin: '-80px' }}
               className="overflow-hidden shadow-xl"
             >
-              <div className="group h-[400px]">
+              <div className="group h-[250px] sm:h-[350px] md:h-[400px]">
                 <ParallaxImage src="https://images.pexels.com/photos/3184287/pexels-photo-3184287.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" alt="Professional team meeting" />
               </div>
             </motion.div>

@@ -306,8 +306,8 @@ export default function HomePage() {
           </AnimatePresence>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 w-full h-full pt-24 lg:pt-[140px] pb-36">
-          <div className="grid lg:grid-cols-2 gap-16 items-center h-full">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 w-full h-full pt-24 lg:pt-[140px] pb-20 lg:pb-36">
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-16 items-center h-full">
             <div>
               <AnimatePresence mode="wait">
                 <motion.div
@@ -332,7 +332,7 @@ export default function HomePage() {
                       initial={{ opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.2, duration: 0.6, ease: [0.45, 0.05, 0.55, 0.95] }}
-                      className="block text-5xl sm:text-6xl lg:text-7xl xl:text-8xl tracking-tight"
+                      className="block text-4xl sm:text-6xl lg:text-7xl xl:text-8xl tracking-tight"
                     >
                       {slides[currentSlide].headline}
                     </motion.span>
@@ -340,7 +340,7 @@ export default function HomePage() {
                       initial={{ opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.3, duration: 0.6, ease: [0.45, 0.05, 0.55, 0.95] }}
-                      className="block text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-emerald-400 mt-1 tracking-tight"
+                      className="block text-4xl sm:text-6xl lg:text-7xl xl:text-8xl text-emerald-400 mt-1 tracking-tight"
                     >
                       {slides[currentSlide].highlight}
                     </motion.span>
@@ -427,13 +427,13 @@ export default function HomePage() {
 
         <button
           onClick={() => goToSlide((currentSlide - 1 + slides.length) % slides.length)}
-          className={`absolute left-1 lg:left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full border border-white/20 text-white/40 hover:text-emerald-400 hover:border-emerald-400/50 transition-all duration-300 ${showLeftArrow ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+          className={`absolute left-2 lg:left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full border border-white/20 text-white/40 hover:text-emerald-400 hover:border-emerald-400/50 transition-all duration-300 ${showLeftArrow ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         >
           ←
         </button>
         <button
           onClick={() => goToSlide((currentSlide + 1) % slides.length)}
-          className={`absolute right-1 lg:right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full border border-white/20 text-white/40 hover:text-emerald-400 hover:border-emerald-400/50 transition-all duration-300 ${showRightArrow ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+          className={`absolute right-2 lg:right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full border border-white/20 text-white/40 hover:text-emerald-400 hover:border-emerald-400/50 transition-all duration-300 ${showRightArrow ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         >
           →
         </button>
@@ -476,7 +476,7 @@ export default function HomePage() {
       </section>
 
       {/* ─────── Industries We Serve ─────── */}
-      <section className="py-24 bg-neutral-50 border-b border-neutral-100 relative overflow-hidden">
+      <section className="py-16 lg:py-24 bg-neutral-50 border-b border-neutral-100 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <SectionHeading
             label="Industries"
@@ -514,7 +514,7 @@ export default function HomePage() {
       </section>
 
       {/* ─────── Platform Overview ─────── */}
-      <section className="py-24 bg-neutral-950 border-b border-white/5">
+      <section className="py-16 lg:py-24 bg-neutral-950 border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4">
           <SectionHeading
             label="The Platform"
@@ -565,7 +565,7 @@ export default function HomePage() {
 
       {/* ─────── Why Oak Global ─────── */}
       <section className="bg-neutral-50 border-b border-neutral-100">
-        <div className="max-w-7xl mx-auto px-4 py-24">
+        <div className="max-w-7xl mx-auto px-4 py-16 lg:py-24">
           <SectionHeading
             label="Why Oak Global"
             title="Built for"
@@ -618,7 +618,7 @@ export default function HomePage() {
       </section>
 
       {/* ─────── Testimonials ─────── */}
-      <section className="py-24 bg-neutral-950 border-b border-white/5 relative overflow-hidden">
+      <section className="py-16 lg:py-24 bg-neutral-950 border-b border-white/5 relative overflow-hidden">
         <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-emerald-500/[0.015] rounded-full blur-3xl pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <SectionHeading
@@ -672,9 +672,9 @@ export default function HomePage() {
       </section>
 
       {/* ─────── About ─────── */}
-      <section className="py-24 bg-neutral-50">
+      <section className="py-16 lg:py-24 bg-neutral-50">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -725,7 +725,7 @@ export default function HomePage() {
                 <img
                   src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
                   alt="Professional business team collaboration"
-                  className="w-full h-[450px] object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-[250px] sm:h-[350px] md:h-[450px] object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-emerald-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
@@ -735,7 +735,7 @@ export default function HomePage() {
       </section>
 
       {/* ─────── Services ─────── */}
-      <section className="py-24 bg-white border-t border-b border-neutral-100">
+      <section className="py-16 lg:py-24 bg-white border-t border-b border-neutral-100">
         <div className="max-w-7xl mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -808,7 +808,7 @@ export default function HomePage() {
       </section>
 
       {/* ─────── CTA ─────── */}
-      <section className="py-28 bg-neutral-950 relative overflow-hidden border-t border-white/5">
+      <section className="py-16 lg:py-28 bg-neutral-950 relative overflow-hidden border-t border-white/5">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(5,150,105,0.08)_0%,transparent_60%)]" />
         <div className="max-w-7xl mx-auto px-4 relative z-10 text-center">
           <motion.div
