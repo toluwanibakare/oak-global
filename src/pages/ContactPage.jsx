@@ -45,8 +45,9 @@ export default function ContactPage() {
       })
       setStatus({ type: 'success', text: 'Thank you! We will get back to you within 24 hours.' })
       setForm({ name: '', email: '', company: '', service: '', message: '' })
-    } catch {
-      setStatus({ type: 'error', text: 'Sorry, something went wrong. Please try again or contact us directly.' })
+    } catch (err) {
+      console.error(err)
+      setStatus({ type: 'error', text: err.message || 'Sorry, something went wrong. Please try again or contact us directly.' })
     } finally {
       setLoading(false)
     }
@@ -144,7 +145,7 @@ export default function ContactPage() {
                       name="name"
                       value={form.name}
                       onChange={handleChange}
-                      className={`w-full p-3 pl-10 border-2 rounded-xl text-sm transition-all outline-none bg-white ${
+                      className={`w-full p-3 pl-10 border-2 rounded-xl text-sm text-neutral-900 transition-all outline-none bg-white placeholder:text-neutral-400 ${
                         errors.name ? 'border-red-400' : 'border-neutral-200 focus:border-emerald-500 focus:shadow-[0_0_0_3px_rgba(4,120,87,0.15)]'
                       }`}
                       placeholder="Your name"
@@ -159,7 +160,7 @@ export default function ContactPage() {
                       name="email"
                       value={form.email}
                       onChange={handleChange}
-                      className={`w-full p-3 pl-10 border-2 rounded-xl text-sm transition-all outline-none bg-white ${
+                      className={`w-full p-3 pl-10 border-2 rounded-xl text-sm text-neutral-900 transition-all outline-none bg-white placeholder:text-neutral-400 ${
                         errors.email ? 'border-red-400' : 'border-neutral-200 focus:border-emerald-500 focus:shadow-[0_0_0_3px_rgba(4,120,87,0.15)]'
                       }`}
                       placeholder="your@email.com"
@@ -175,7 +176,7 @@ export default function ContactPage() {
                         name="company"
                         value={form.company}
                         onChange={handleChange}
-                        className="w-full p-3 pl-10 border-2 border-neutral-200 rounded-xl text-sm transition-all outline-none bg-white focus:border-emerald-500 focus:shadow-[0_0_0_3px_rgba(4,120,87,0.15)]"
+                        className="w-full p-3 pl-10 border-2 border-neutral-200 rounded-xl text-sm text-neutral-900 transition-all outline-none bg-white placeholder:text-neutral-400 focus:border-emerald-500 focus:shadow-[0_0_0_3px_rgba(4,120,87,0.15)]"
                         placeholder="Company name"
                       />
                     </div>
@@ -185,7 +186,7 @@ export default function ContactPage() {
                         name="service"
                         value={form.service}
                         onChange={handleChange}
-                        className="w-full p-3 border-2 border-neutral-200 rounded-xl text-sm transition-all outline-none bg-white focus:border-emerald-500 focus:shadow-[0_0_0_3px_rgba(4,120,87,0.15)]"
+                        className="w-full p-3 border-2 border-neutral-200 rounded-xl text-sm text-neutral-900 transition-all outline-none bg-white focus:border-emerald-500 focus:shadow-[0_0_0_3px_rgba(4,120,87,0.15)]"
                       >
                         <option value="">Select service</option>
                         <option value="business-performance">Business Performance Management</option>
@@ -205,7 +206,7 @@ export default function ContactPage() {
                       value={form.message}
                       onChange={handleChange}
                       rows={5}
-                      className={`w-full p-3 border-2 rounded-xl text-sm transition-all outline-none bg-white resize-vertical ${
+                      className={`w-full p-3 border-2 rounded-xl text-sm text-neutral-900 transition-all outline-none bg-white placeholder:text-neutral-400 resize-vertical ${
                         errors.message ? 'border-red-400' : 'border-neutral-200 focus:border-emerald-500 focus:shadow-[0_0_0_3px_rgba(4,120,87,0.15)]'
                       }`}
                       placeholder="Tell us about your project..."

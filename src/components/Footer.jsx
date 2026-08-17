@@ -24,7 +24,7 @@ export default function Footer() {
             <p className="text-white/40 text-sm mt-1">Explore our intelligence platform. One unified view across audit, compliance, HSE, and executive insights.</p>
           </div>
           <Link to="/contact" className="shrink-0 inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-semibold text-sm px-6 py-3 transition-colors">
-            Get Started
+            Get in Touch
             <i className="fas fa-arrow-right text-xs" />
           </Link>
         </div>

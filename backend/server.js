@@ -20,6 +20,8 @@ app.use(cors({
             'http://localhost:5173',
             'http://127.0.0.1:3000',
             'http://127.0.0.1:5173',
+            'https://oak-global.com.ng',
+            'https://www.oak-global.com.ng',
             process.env.FRONTEND_URL
         ];
         
@@ -46,11 +48,14 @@ app.get('/', (req, res) => {
         endpoints: {
             health: '/api/health',
             contacts: '/api/contacts',
-            submissions: '/api/submissions',
-            admin: '/api/admin'
+            stats: '/api/stats/dashboard'
         }
     });
 });
+
+// API router (mounted at both /api and root so it works whether the
+// hosting proxy keeps or strips the /api prefix)
+const apiRouter = express.Router();
 
 // Create MySQL connection pool
 const pool = mysql.createPool({
@@ -84,7 +89,7 @@ transporter.verify((error, success) => {
 });
 
 // Health check endpoint
-app.get('/api/health', (req, res) => {
+apiRouter.get('/health', (req, res) => {
     res.json({ status: 'Server is running' });
 });
 
@@ -93,7 +98,7 @@ app.get('/api/health', (req, res) => {
 // ============================================
 
 // POST - Create new contact
-app.post('/api/contacts', async (req, res) => {
+apiRouter.post('/contacts', async (req, res) => {
     try {
         const { name, email, company, service, message } = req.body;
 
@@ -186,7 +191,7 @@ app.post('/api/contacts', async (req, res) => {
 });
 
 // GET - Fetch all contacts (admin only)
-app.get('/api/contacts', async (req, res) => {
+apiRouter.get('/contacts', async (req, res) => {
     try {
         // TODO: Add proper authentication check
         const connection = await pool.getConnection();
@@ -207,7 +212,7 @@ app.get('/api/contacts', async (req, res) => {
 });
 
 // PUT - Mark contact as read
-app.put('/api/contacts/:id', async (req, res) => {
+apiRouter.put('/contacts/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const { read } = req.body;
@@ -232,7 +237,7 @@ app.put('/api/contacts/:id', async (req, res) => {
 });
 
 // DELETE - Delete contact
-app.delete('/api/contacts/:id', async (req, res) => {
+apiRouter.delete('/contacts/:id', async (req, res) => {
     try {
         const { id } = req.params;
 
@@ -260,7 +265,7 @@ app.delete('/api/contacts/:id', async (req, res) => {
 // ============================================
 
 // GET - Dashboard statistics
-app.get('/api/stats/dashboard', async (req, res) => {
+apiRouter.get('/stats/dashboard', async (req, res) => {
     try {
         const connection = await pool.getConnection();
 
@@ -280,6 +285,10 @@ app.get('/api/stats/dashboard', async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch statistics' });
     }
 });
+
+// Mount the API router under /api and also at root (for proxies that strip the prefix)
+app.use('/api', apiRouter);
+app.use(apiRouter);
 
 // Start server
 app.listen(PORT, () => {

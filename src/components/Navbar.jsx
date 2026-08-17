@@ -6,7 +6,7 @@ const products = [
   { label: 'OakAudix', desc: 'Audit Management', icon: 'fa-clipboard-check' },
   { label: 'OakComply', desc: 'Compliance Management', icon: 'fa-shield-halved' },
   { label: 'OakHSE360', desc: 'Health, Safety & Environment', icon: 'fa-leaf' },
-  { label: 'OakExec', desc: 'Executive Intelligence', icon: 'fa-chart-pie' },
+  { label: 'OakRisk360', desc: 'Enterprise Risk & Opportunity', icon: 'fa-triangle-exclamation' },
 ]
 
 const links = [
@@ -90,11 +90,6 @@ export default function Navbar() {
             <Link to="/contact" className="text-white/50 hover:text-white text-[11px] transition-colors flex items-center gap-1.5">
               <i className="fas fa-headset text-[9px]" />
               Support
-            </Link>
-            <span className="text-white/20 text-[11px]">|</span>
-            <Link to="/contact" className="text-white/50 hover:text-white text-[11px] transition-colors flex items-center gap-1.5">
-              <i className="fas fa-lock text-[9px]" />
-              Sign In
             </Link>
           </div>
         </div>
@@ -198,7 +193,7 @@ export default function Navbar() {
               to="/contact"
               className="group inline-flex items-center gap-3 px-6 py-2.5 text-sm font-bold text-white bg-gradient-to-r from-emerald-600 to-sky-700 rounded-none shadow-lg hover:shadow-xl hover:shadow-emerald-500/20 hover:-translate-y-0.5 active:scale-[0.97] whitespace-nowrap transition-all duration-300"
             >
-              <span>Get Started</span>
+              <span>Get in Touch</span>
               <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
@@ -353,7 +348,7 @@ export default function Navbar() {
                     onClick={() => setOpen(false)}
                     className="group flex items-center justify-center gap-3 w-full px-6 py-3.5 text-base font-bold text-white bg-gradient-to-r from-emerald-600 to-sky-700 rounded-none shadow-lg hover:shadow-xl hover:shadow-emerald-500/20 transition-all"
                   >
-                    <span>Get Started</span>
+                    <span>Get in Touch</span>
                     <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                     </svg>

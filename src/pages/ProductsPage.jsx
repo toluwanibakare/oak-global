@@ -18,22 +18,6 @@ const itemFadeUp = {
   },
 }
 
-const itemFadeLeft = {
-  hidden: { opacity: 0, x: -40 },
-  visible: {
-    opacity: 1, x: 0,
-    transition: { type: 'spring', stiffness: 100, damping: 16 },
-  },
-}
-
-const itemFadeRight = {
-  hidden: { opacity: 0, x: 40 },
-  visible: {
-    opacity: 1, x: 0,
-    transition: { type: 'spring', stiffness: 100, damping: 16 },
-  },
-}
-
 function SectionHeading({ label, title, highlight, description, light }) {
   return (
     <motion.div
@@ -89,14 +73,14 @@ const products = [
     color: 'from-emerald-600 to-green-700',
   },
   {
-    icon: 'fa-chart-pie',
-    title: 'OakExec',
-    tagline: 'Executive Intelligence',
-    desc: 'Transform data into strategic decisions with powerful executive dashboards, predictive analytics, and real-time enterprise visibility.',
-    features: ['Executive dashboards & KPIs', 'Predictive analytics & forecasting', 'Real-time enterprise reporting', 'Custom metric definitions', 'Automated report distribution', 'Drill-down data exploration'],
-    benefits: ['Data-driven decision making', 'Executive visibility & control', 'Strategic performance tracking'],
+    icon: 'fa-triangle-exclamation',
+    title: 'OakRisk360',
+    tagline: 'Enterprise Risk & Opportunity',
+    desc: 'Identify, assess, and simulate risks with scenario intelligence, resilience scoring, and seven risk domains to guarantee complete governance.',
+    features: ['Seven risk domains analysis', 'Scenario intelligence engine', 'Resilience scoring metrics', 'Risk simulator & forecaster', 'Appetite & threshold alerts', 'Combined assurance dashboard'],
+    benefits: ['Proactive threat mitigation', 'Accurate resilience scoring', 'Grounded decision support'],
     image: 'https://images.pexels.com/photos/8636589/pexels-photo-8636589.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
-    color: 'from-sky-600 to-blue-700',
+    color: 'from-red-800 to-rose-950', // Maroon theme accent
   },
 ]
 
@@ -160,7 +144,7 @@ export default function ProductsPage() {
               transition={{ delay: 0.4, duration: 0.6, ease: [0.45, 0.05, 0.55, 0.95] }}
               className="mt-6 text-white/60 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed"
             >
-              Powerful platforms designed to transform how you manage audits, compliance, HSE, and executive intelligence.
+              Powerful platforms designed to transform how you manage audits, compliance, HSE, and risk intelligence.
             </motion.p>
           </motion.div>
         </div>
@@ -202,7 +186,7 @@ export default function ProductsPage() {
                       </div>
                     ))}
                   </div>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 mb-6">
                     {product.benefits.map((b) => (
                       <span key={b} className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-200">
                         <i className="fas fa-arrow-trend-up text-[10px]" />
@@ -210,6 +194,13 @@ export default function ProductsPage() {
                       </span>
                     ))}
                   </div>
+                  <Link 
+                    to={`/request-demo?product=${product.title}`} 
+                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-emerald-600 to-sky-700 text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-300"
+                  >
+                    <span>Request Demo</span>
+                    <i className="fas fa-arrow-right text-xs" />
+                  </Link>
                 </div>
                 <div className={i % 2 === 1 ? 'md:col-start-1 md:row-start-1' : ''}>
                   <div className="overflow-hidden shadow-xl">
@@ -278,8 +269,8 @@ export default function ProductsPage() {
             <p className="mt-4 text-neutral-500 text-base leading-relaxed mb-8">
               Schedule a personalized demo to discover how Oak products can transform your enterprise operations.
             </p>
-            <Link to="/contact" className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-sky-700 text-white font-semibold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
-              <span>Request a Demo</span>
+            <Link to="/request-demo" className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-sky-700 text-white font-semibold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
+              <span>Request Full Demo</span>
               <i className="fas fa-arrow-right" />
             </Link>
           </motion.div>

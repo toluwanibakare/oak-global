@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Oak Strategy Orchestra project folder
+oak-strategy-orchestra/
+
+.env
+.env.production
+.env.supabase
+

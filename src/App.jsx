@@ -9,6 +9,7 @@ import AboutPage from './pages/AboutPage'
 import ServicesPage from './pages/ServicesPage'
 import ContactPage from './pages/ContactPage'
 import ProductsPage from './pages/ProductsPage'
+import RequestDemoPage from './pages/RequestDemoPage'
 
 export default function App() {
   const location = useLocation()
@@ -28,6 +29,7 @@ export default function App() {
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/products" element={<ProductsPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/request-demo" element={<RequestDemoPage />} />
           </Routes>
         </AnimatePresence>
       </main>

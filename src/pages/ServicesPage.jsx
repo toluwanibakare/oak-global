@@ -320,7 +320,7 @@ export default function ServicesPage() {
               Contact us today to discuss how our comprehensive services can help your organization achieve operational excellence and global recognition.
             </p>
             <Link to="/contact" className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-sky-700 text-white font-semibold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
-              <span>Get Started Today</span>
+              <span>Get in Touch</span>
               <i className="fas fa-arrow-right" />
             </Link>
           </motion.div>
