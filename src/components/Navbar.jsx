@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const products = [
+  { label: 'OakForge', desc: 'Strategy & MS Accelerator', icon: 'fa-hammer' },
   { label: 'OakAudix', desc: 'Audit Management', icon: 'fa-clipboard-check' },
   { label: 'OakComply', desc: 'Compliance Management', icon: 'fa-shield-halved' },
   { label: 'OakHSE360', desc: 'Health, Safety & Environment', icon: 'fa-leaf' },
@@ -137,7 +138,7 @@ export default function Navbar() {
                     <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-1 group-hover:translate-y-0">
                       <div className="bg-white rounded-none shadow-xl border border-neutral-200 p-2 w-72">
                         {item.dropdown.map((product) => (
-                          <Link key={product.label} to="/products" className="flex items-center gap-3 px-4 py-3 rounded-none hover:bg-emerald-50 transition-colors">
+                          <Link key={product.label} to={`/products#${product.label}`} className="flex items-center gap-3 px-4 py-3 rounded-none hover:bg-emerald-50 transition-colors">
                             <div className="w-9 h-9 bg-emerald-100 rounded-none flex items-center justify-center shrink-0">
                               <i className={`fas ${product.icon} text-emerald-600 text-sm`} />
                             </div>
@@ -288,7 +289,7 @@ export default function Navbar() {
                               >
                                 <div className="ml-3 mt-1 space-y-1 pl-4 border-l-2 border-emerald-100">
                                   {item.dropdown.map((product) => (
-                                    <Link key={product.label} to="/products" className="flex items-center gap-3 px-4 py-3 rounded-none hover:bg-emerald-50 transition-colors">
+                                    <Link key={product.label} to={`/products#${product.label}`} className="flex items-center gap-3 px-4 py-3 rounded-none hover:bg-emerald-50 transition-colors" onClick={() => setOpen(false)}>
                                       <div className="w-8 h-8 bg-emerald-100 rounded-none flex items-center justify-center shrink-0">
                                         <i className={`fas ${product.icon} text-emerald-600 text-xs`} />
                                       </div>

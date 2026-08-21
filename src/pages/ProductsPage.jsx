@@ -1,5 +1,6 @@
+import { useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import PageTransition from '../components/PageTransition'
 
 const containerVariants = {
@@ -43,45 +44,110 @@ function SectionHeading({ label, title, highlight, description, light }) {
 
 const products = [
   {
+    icon: 'fa-hammer',
+    title: 'OakForge',
+    tagline: 'Strategy & Management System Implementation Accelerator',
+    desc: 'Accelerate your enterprise strategy, organizational transformation, and management system lifecycle from blueprinting to complete operational reviews.',
+    features: [
+      'Strategic objective planning & blueprints',
+      'Phase F1–F6 program lifecycle checks',
+      'Executive Command Centre integrations',
+      'Management system review boards',
+      'Separation of duties approval safety',
+      'ECIE/Improvement CAPA links'
+    ],
+    benefits: ['60% faster ISO implementation', 'Pre-configured blueprints', 'Continuous program alignment', 'Executive dashboard visibility'],
+    image: 'https://images.pexels.com/photos/3182766/pexels-photo-3182766.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
+    color: 'from-emerald-700 to-emerald-900',
+    details: [
+      { subtitle: 'Lifecycle Management', text: 'Governs transformation stages from Foundation (F1) through Gap Assessment (F2), design (F3), documentation (F4), readiness verification (F5), to audit handoff (F6).' },
+      { subtitle: 'Unified operating foundation', text: 'Combines structural program blueprints and operational reviews into a single canonical model, eliminating disconnected processes.' }
+    ]
+  },
+  {
     icon: 'fa-clipboard-check',
     title: 'OakAudix',
-    tagline: 'Audit Management',
-    desc: 'A comprehensive audit management platform that streamlines the entire audit lifecycle from planning and execution to reporting and corrective action tracking.',
-    features: ['Automated audit scheduling', 'Real-time reporting dashboards', 'Risk-based assessment engine', 'Finding tracking & closure workflows', 'Audit evidence repository', 'Custom audit checklist builder'],
-    benefits: ['Reduce audit cycle time', 'Improve finding closure rates', 'Regulatory compliance assurance'],
+    tagline: 'Enterprise Audit Management',
+    desc: 'Plan, schedule, execute, and verify audits in one knowledge-driven workspace. Streamlines finding tracking and corrective action plans.',
+    features: [
+      'Knowledge-driven, process-based audits',
+      'Automated finding tracking & CAPA tasks',
+      'Curated clause-level audit questionnaires',
+      'Evidence collection & validation repositories',
+      'Comprehensive audit package seals & hashes',
+      'Assurance dashboards & review boards'
+    ],
+    benefits: ['45% less audit preparation effort', 'Consolidated evidence and CAPA spine', 'Eliminates audit process variance', 'Automated regulatory reporting'],
     image: 'https://images.pexels.com/photos/3861077/pexels-photo-3861077.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
     color: 'from-emerald-600 to-teal-700',
+    details: [
+      { subtitle: 'Audit Assurance Flow', text: 'Fully tracks programs, plans, scopes, checklists, executions, findings, and reviews. Feeds findings directly into corrective action workflows.' },
+      { subtitle: 'Knowledge Studio Curator', text: 'Reuses curated checklist standards, previous evidence structures, and criteria benchmarks directly during live audits.' }
+    ]
   },
   {
     icon: 'fa-shield-halved',
     title: 'OakComply',
-    tagline: 'Compliance Management',
-    desc: 'Stay ahead of regulatory requirements with a centralized compliance management system that tracks obligations, manages gaps, and ensures continuous adherence.',
-    features: ['Regulatory obligation register', 'Gap analysis & remediation', 'Compliance calendar & alerts', 'Regulatory updates & monitoring', 'Policy management & versioning', 'Compliance reporting & dashboards'],
-    benefits: ['Eliminate compliance blind spots', 'Reduce regulatory penalties', 'Streamlined audit readiness'],
+    tagline: 'Legal & Regulatory Compliance Management',
+    desc: 'Keep track of legal and regulatory obligations, complete applicability checks, address gap actions, and ensure continuous operational compliance.',
+    features: [
+      'Regulatory obligations register',
+      'Gap identification & remediation plans',
+      'Recurring compliance calendars & alerts',
+      'Continuous regulatory change feeds',
+      'Controlled document policy linkups',
+      'Conformance evidence registers'
+    ],
+    benefits: ['Zero-compliance blind spots', 'Drastically reduced regulatory penalties', 'Instant evidence of conformance', 'Direct linkage to company policies'],
     image: 'https://images.pexels.com/photos/7433857/pexels-photo-7433857.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
     color: 'from-blue-600 to-indigo-700',
+    details: [
+      { subtitle: 'Obligation Registry', text: 'Tracks all regional, national, and international standards relevant to your tenancy. Ensures every clause has an accountable owner.' },
+      { subtitle: 'Compliance Calendars', text: 'Establishes scheduled checks and regulatory alerts to prevent overdue actions and minimize compliance exposures.' }
+    ]
   },
   {
     icon: 'fa-leaf',
     title: 'OakHSE360',
     tagline: 'Health, Safety & Environment',
-    desc: 'An integrated HSE management solution designed to help organizations achieve zero harm while maintaining peak operational performance.',
-    features: ['Incident reporting & investigation', 'Risk assessment & mitigation', 'Environmental monitoring & reporting', 'Safety compliance & inspections', 'Hazard identification & control', 'Training & competency tracking'],
-    benefits: ['Reduce workplace incidents', 'Environmental compliance', 'Safety culture improvement'],
+    desc: 'Manage safety incidents, mitigate workplace hazards, monitor environmental footprints, and verify safety controls across all operations and sites.',
+    features: [
+      'Incident & near-miss reporting',
+      'Hazard logging & control assessments',
+      'Site safety permits to work',
+      'Environmental KPI & emissions logs',
+      'Safety inspections & site audits',
+      'Contractor safety verification portals'
+    ],
+    benefits: ['Minimized workplace incidents', 'Full environmental standard compliance', 'Better contractor risk visibility', 'Improved internal safety culture'],
     image: 'https://images.pexels.com/photos/37510660/pexels-photo-37510660.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
     color: 'from-emerald-600 to-green-700',
+    details: [
+      { subtitle: 'OHS & Incident Workflows', text: 'Guides investigators from the initial incident report through root-cause analysis up to implementing verified controls.' },
+      { subtitle: 'Contractor Management', text: 'Extends safety policies and compliance checklists to external contractors to prevent operational loopholes.' }
+    ]
   },
   {
     icon: 'fa-triangle-exclamation',
     title: 'OakRisk360',
     tagline: 'Enterprise Risk & Opportunity',
     desc: 'Identify, assess, and simulate risks with scenario intelligence, resilience scoring, and seven risk domains to guarantee complete governance.',
-    features: ['Seven risk domains analysis', 'Scenario intelligence engine', 'Resilience scoring metrics', 'Risk simulator & forecaster', 'Appetite & threshold alerts', 'Combined assurance dashboard'],
-    benefits: ['Proactive threat mitigation', 'Accurate resilience scoring', 'Grounded decision support'],
+    features: [
+      'Seven risk domains analysis',
+      'Scenario intelligence engine',
+      'Resilience scoring metrics',
+      'Risk simulator & forecaster',
+      'Appetite & threshold alerts',
+      'Combined assurance dashboard'
+    ],
+    benefits: ['Proactive threat mitigation', 'Accurate resilience scoring', 'Grounded decision support', 'Simulate worst-case scenarios'],
     image: 'https://images.pexels.com/photos/8636589/pexels-photo-8636589.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
     color: 'from-red-800 to-rose-950', // Maroon theme accent
-  },
+    details: [
+      { subtitle: 'Decision Simulator', text: 'Enables risk officers to model hypothetical market disruptions or operational events to test company thresholds before committing capital.' },
+      { subtitle: 'Resilience Indexing', text: 'Calculates live company-wide governance strength and risk maturity based on verified audit records and control checks.' }
+    ]
+  }
 ]
 
 const differentiators = [
@@ -91,6 +157,21 @@ const differentiators = [
 ]
 
 export default function ProductsPage() {
+  const { hash } = useLocation()
+
+  // Scroll to hash ID if present on render or hash update
+  useEffect(() => {
+    if (hash) {
+      const id = hash.replace('#', '')
+      const element = document.getElementById(id)
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }, 100)
+      }
+    }
+  }, [hash])
+
   return (
     <PageTransition>
       {/* ─────── Hero ─────── */}
@@ -144,7 +225,7 @@ export default function ProductsPage() {
               transition={{ delay: 0.4, duration: 0.6, ease: [0.45, 0.05, 0.55, 0.95] }}
               className="mt-6 text-white/60 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed"
             >
-              Powerful platforms designed to transform how you manage audits, compliance, HSE, and risk intelligence.
+              Powerful modules built on a single, continuous operating model designed to manage strategy, blueprints, audits, compliance, HSE, and risks.
             </motion.p>
           </motion.div>
         </div>
@@ -153,63 +234,93 @@ export default function ProductsPage() {
       {/* ─────── Products ─────── */}
       <section className="py-16 lg:py-24 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center max-w-xl mx-auto mb-12">
-            <SectionHeading label="Product Suite" title="Integrated" highlight="Platforms" light description="Four powerful products built on a unified architecture to give you complete enterprise visibility and control." />
+          <div className="text-center max-w-xl mx-auto mb-16">
+            <SectionHeading label="Product Suite" title="Integrated" highlight="Platforms" light description="Five powerful modules built on a unified database architecture to give you complete enterprise visibility and control." />
           </div>
 
-          <div className="space-y-24">
+          <div className="space-y-36">
             {products.map((product, i) => (
               <motion.div
                 key={product.title}
+                id={product.title}
                 initial={{ opacity: 0, y: 60 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-80px' }}
                 transition={{ type: 'spring', stiffness: 80, damping: 18, delay: i * 0.1 }}
-                className={`grid md:grid-cols-2 gap-8 md:gap-16 items-center ${i % 2 === 1 ? 'md:grid-flow-dense' : ''}`}
+                className="scroll-mt-32"
               >
-                <div className={i % 2 === 1 ? 'md:col-start-2' : ''}>
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className={`w-14 h-14 bg-gradient-to-br ${product.color} flex items-center justify-center text-white text-xl`}>
-                      <i className={`fas ${product.icon}`} />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-extrabold text-neutral-900">{product.title}</h3>
-                      <span className="text-emerald-600 text-sm font-semibold">{product.tagline}</span>
-                    </div>
-                  </div>
-                  <p className="text-neutral-600 leading-relaxed mb-6">{product.desc}</p>
-                  <div className="grid sm:grid-cols-2 gap-3 mb-6">
-                    {product.features.map((f) => (
-                      <div key={f} className="flex items-start gap-2 text-sm text-neutral-600">
-                        <i className="fas fa-check text-emerald-600 mt-0.5 text-xs" />
-                        {f}
+                <div className={`grid lg:grid-cols-2 gap-8 lg:gap-16 items-start ${i % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
+                  
+                  {/* Text Details */}
+                  <div className={i % 2 === 1 ? 'lg:col-start-2' : ''}>
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className={`w-14 h-14 bg-gradient-to-br ${product.color} flex items-center justify-center text-white text-xl`}>
+                        <i className={`fas ${product.icon}`} />
                       </div>
-                    ))}
+                      <div>
+                        <h3 className="text-2xl font-extrabold text-neutral-900">{product.title}</h3>
+                        <span className="text-emerald-600 text-sm font-semibold">{product.tagline}</span>
+                      </div>
+                    </div>
+                    
+                    <p className="text-neutral-600 leading-relaxed mb-6 text-base">{product.desc}</p>
+                    
+                    {/* Key features list */}
+                    <div className="mb-6">
+                      <h4 className="text-neutral-800 text-sm font-bold uppercase tracking-wider mb-3">Key Capabilities</h4>
+                      <div className="grid sm:grid-cols-2 gap-3">
+                        {product.features.map((f) => (
+                          <div key={f} className="flex items-start gap-2 text-sm text-neutral-600">
+                            <i className="fas fa-circle-check text-emerald-600 mt-1 text-xs shrink-0" />
+                            <span>{f}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Detailed breakdown from strategy operating manual */}
+                    {product.details && (
+                      <div className="mb-6 space-y-4 bg-neutral-50 p-4 border border-neutral-200">
+                        <h4 className="text-neutral-800 text-xs font-bold uppercase tracking-wider">Enterprise Framework Details</h4>
+                        {product.details.map((dt) => (
+                          <div key={dt.subtitle} className="text-xs">
+                            <span className="font-bold text-neutral-800 block mb-0.5">{dt.subtitle}</span>
+                            <span className="text-neutral-500 leading-relaxed">{dt.text}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Benefits metrics */}
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {product.benefits.map((b) => (
+                        <span key={b} className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-200">
+                          <i className="fas fa-arrow-trend-up text-[10px]" />
+                          {b}
+                        </span>
+                      ))}
+                    </div>
+
+                    <Link 
+                      to={`/request-demo?product=${product.title}`} 
+                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-emerald-600 to-sky-700 text-white text-sm font-semibold shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+                    >
+                      <span>Request Demo</span>
+                      <i className="fas fa-arrow-right text-xs" />
+                    </Link>
                   </div>
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {product.benefits.map((b) => (
-                      <span key={b} className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-200">
-                        <i className="fas fa-arrow-trend-up text-[10px]" />
-                        {b}
-                      </span>
-                    ))}
+                  
+                  {/* Image Block */}
+                  <div className={i % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}>
+                    <div className="overflow-hidden shadow-xl border border-neutral-100">
+                      <img
+                        src={product.image}
+                        alt={product.title}
+                        className="w-full h-[220px] sm:h-[300px] lg:h-[450px] object-cover transition-transform duration-700 hover:scale-105"
+                      />
+                    </div>
                   </div>
-                  <Link 
-                    to={`/request-demo?product=${product.title}`} 
-                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-emerald-600 to-sky-700 text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-300"
-                  >
-                    <span>Request Demo</span>
-                    <i className="fas fa-arrow-right text-xs" />
-                  </Link>
-                </div>
-                <div className={i % 2 === 1 ? 'md:col-start-1 md:row-start-1' : ''}>
-                  <div className="overflow-hidden shadow-xl">
-                    <img
-                      src={product.image}
-                      alt={product.title}
-                      className="w-full h-[200px] sm:h-[280px] md:h-[350px] object-cover transition-transform duration-700 hover:scale-105"
-                    />
-                  </div>
+                  
                 </div>
               </motion.div>
             ))}

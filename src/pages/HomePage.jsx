@@ -5,6 +5,16 @@ import PageTransition from '../components/PageTransition'
 
 const slides = [
   {
+    product: 'OakForge',
+    tagline: 'Strategy & MS Accelerator',
+    headline: 'Accelerate',
+    highlight: 'Implementation.',
+    description: 'Design, build, implement, and improve your enterprise strategy and ISO management systems program lifecycle.',
+    image: 'https://images.pexels.com/photos/3182766/pexels-photo-3182766.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
+    icon: 'fa-hammer',
+    details: ['Blueprints & programs', 'F1–F6 lifecycle stages', 'Operational gate evaluations', 'Executive Command Center'],
+  },
+  {
     product: 'OakAudix',
     tagline: 'Audit Management',
     headline: 'Enterprise Audit',
@@ -35,14 +45,14 @@ const slides = [
     details: ['Incident reporting', 'Risk assessment', 'Environmental monitoring', 'Safety compliance'],
   },
   {
-    product: 'OakExec',
-    tagline: 'Executive Intelligence',
-    headline: 'Data-Driven.',
-    highlight: 'Decisions.',
-    description: 'Dashboards that matter. Metrics that move the needle. Visibility from boardroom to frontline.',
+    product: 'OakRisk360',
+    tagline: 'Enterprise Risk & Opportunity',
+    headline: 'Scenario Intelligence.',
+    highlight: 'Scoring.',
+    description: 'Assess enterprise risks and opportunities with scenario intelligence, resilience scoring, and integrated dashboards to secure corporate governance.',
     image: 'https://images.pexels.com/photos/8636589/pexels-photo-8636589.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
-    icon: 'fa-chart-pie',
-    details: ['Executive dashboards', 'Predictive analytics', 'Enterprise KPIs', 'Real-time reporting'],
+    icon: 'fa-triangle-exclamation',
+    details: ['Seven risk domains analysis', 'Scenario intelligence engine', 'Resilience scoring metrics', 'Risk simulator & forecaster'],
   },
 ]
 
@@ -124,7 +134,7 @@ const testimonials = [
     company: 'Crestar Energy',
   },
   {
-    quote: 'OakExec has given our executive team unprecedented visibility into enterprise performance. The dashboard transformed how we make strategic decisions.',
+    quote: 'OakRisk360 has given our executive team unprecedented visibility into enterprise threats and opportunities. The simulator transformed how we make strategic decisions.',
     name: 'Lola Adeleke',
     role: 'Chief Executive Officer',
     company: 'Adeleke Group',
@@ -306,8 +316,8 @@ export default function HomePage() {
           </AnimatePresence>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 w-full h-full pt-24 lg:pt-[140px] pb-20 lg:pb-36">
-          <div className="grid lg:grid-cols-2 gap-8 md:gap-16 items-center h-full">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 w-full h-full flex items-center pt-24 lg:pt-[100px] pb-20">
+          <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-8 md:gap-16 items-center w-full">
             <div>
               <AnimatePresence mode="wait">
                 <motion.div
@@ -327,12 +337,12 @@ export default function HomePage() {
                     {slides[currentSlide].product} — {slides[currentSlide].tagline}
                   </motion.span>
 
-                  <h1 className="mt-6 text-white font-extrabold leading-[1.04]">
+                  <h1 className="mt-6 text-white font-extrabold leading-[1.1]">
                     <motion.span
                       initial={{ opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.2, duration: 0.6, ease: [0.45, 0.05, 0.55, 0.95] }}
-                      className="block text-4xl sm:text-6xl lg:text-7xl xl:text-8xl tracking-tight"
+                      className="block text-4xl sm:text-5xl lg:text-5xl xl:text-6xl tracking-tight break-words"
                     >
                       {slides[currentSlide].headline}
                     </motion.span>
@@ -340,7 +350,7 @@ export default function HomePage() {
                       initial={{ opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.3, duration: 0.6, ease: [0.45, 0.05, 0.55, 0.95] }}
-                      className="block text-4xl sm:text-6xl lg:text-7xl xl:text-8xl text-emerald-400 mt-1 tracking-tight"
+                      className="block text-4xl sm:text-5xl lg:text-5xl xl:text-6xl text-emerald-400 mt-1 tracking-tight break-words"
                     >
                       {slides[currentSlide].highlight}
                     </motion.span>
@@ -518,9 +528,9 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4">
           <SectionHeading
             label="The Platform"
-            title="Four Modules."
+            title="Five Modules."
             highlight="One Platform."
-            description="OakEIP unifies audit, compliance, HSE, and executive intelligence into a single enterprise dashboard. No silos. No redundant tools."
+            description="OakEIP unifies strategy implementation, audit, compliance, HSE, and risk & opportunity management into a single operating environment."
           />
 
           <motion.div
@@ -528,7 +538,7 @@ export default function HomePage() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-80px' }}
-            className="mt-16 grid md:grid-cols-2 gap-px bg-white/5"
+            className="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5"
           >
             {slides.map((s, i) => (
               <motion.div
@@ -825,7 +835,7 @@ export default function HomePage() {
               <span className="text-emerald-400">enterprise?</span>
             </h2>
             <p className="mt-4 text-white/40 text-base max-w-xl mx-auto leading-relaxed">
-              One platform. Four modules. Unlimited potential. See what OakEIP can do for your organization.
+              One platform. Five modules. Unlimited potential. See what OakEIP can do for your organization.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link to="/contact" className="group inline-flex items-center gap-2.5 px-8 py-4 bg-emerald-600 text-white text-sm font-bold hover:bg-emerald-500 transition-all duration-300">

@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom'
 
 const products = [
+  { name: 'OakForge', desc: 'Strategy & MS Accelerator' },
   { name: 'OakAudix', desc: 'Audit Management' },
   { name: 'OakComply', desc: 'Compliance Management' },
   { name: 'OakHSE360', desc: 'HSE Management' },
-  { name: 'OakExec', desc: 'Executive Intelligence' },
+  { name: 'OakRisk360', desc: 'Enterprise Risk & Opportunity' },
 ]
 
 export default function Footer() {
