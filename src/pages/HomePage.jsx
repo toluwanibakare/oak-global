@@ -6,53 +6,73 @@ import PageTransition from '../components/PageTransition'
 const slides = [
   {
     product: 'OakForge',
-    tagline: 'Strategy & MS Accelerator',
-    headline: 'Accelerate',
-    highlight: 'Implementation.',
-    description: 'Design, build, implement, and improve your enterprise strategy and ISO management systems program lifecycle.',
+    tagline: 'Management System Establishment & Operations',
+    headline: 'Where the Management',
+    highlight: 'System Comes Alive.',
+    description: 'Build, configure, operate and improve management systems through the complete BUILD → RUN → IMPROVE lifecycle.',
     image: 'https://images.pexels.com/photos/3182766/pexels-photo-3182766.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
     icon: 'fa-hammer',
-    details: ['Blueprints & programs', 'F1–F6 lifecycle stages', 'Operational gate evaluations', 'Executive Command Center'],
+    details: ['F1–F6 governed lifecycle', 'Multi-entity architecture', 'Evidence governance', 'Trace — the complete story'],
   },
   {
     product: 'OakAudix',
     tagline: 'Audit Management',
     headline: 'Enterprise Audit',
     highlight: 'Intelligence.',
-    description: 'Plan, execute, and track audits in one place. Real-time reports, automated findings, and risk-based scheduling.',
+    description: 'Plan, execute, evidence and manage audits and audit-related improvement activities.',
     image: 'https://images.pexels.com/photos/3861077/pexels-photo-3861077.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
     icon: 'fa-clipboard-check',
-    details: ['Automated audit scheduling', 'Real-time reporting', 'Risk-based assessment', 'Finding tracking & closure'],
+    details: ['Knowledge-driven audits', 'Automated finding tracking', 'Curated questionnaires', 'Audit package seals'],
   },
   {
     product: 'OakComply',
     tagline: 'Compliance Management',
-    headline: 'Stay Compliant.',
-    highlight: 'Stay Ahead.',
-    description: 'Know your obligations. Track every requirement. Close gaps before they become findings.',
+    headline: 'Connect Compliance.',
+    highlight: 'Close Every Gap.',
+    description: 'Connect compliance obligations with organisational responsibilities, controls, evidence and follow-up.',
     image: 'https://images.pexels.com/photos/7433857/pexels-photo-7433857.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
     icon: 'fa-shield-halved',
-    details: ['Obligation register', 'Gap analysis', 'Compliance calendar', 'Regulatory updates'],
+    details: ['Obligation register', 'Gap identification', 'Compliance calendars', 'Conformance evidence'],
   },
   {
     product: 'OakHSE360',
     tagline: 'Health, Safety & Environment',
     headline: 'Zero Harm.',
     highlight: 'Maximum Performance.',
-    description: 'Report incidents. Assess risks. Track environmental data. All in one place.',
+    description: 'Support structured HSE management, operational controls, inspections, observations and improvement.',
     image: 'https://images.pexels.com/photos/37510660/pexels-photo-37510660.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
     icon: 'fa-leaf',
-    details: ['Incident reporting', 'Risk assessment', 'Environmental monitoring', 'Safety compliance'],
+    details: ['Incident reporting', 'Hazard logging', 'Environmental KPI', 'Contractor verification'],
   },
   {
-    product: 'OakRisk360',
-    tagline: 'Enterprise Risk & Opportunity',
+    product: 'OakRisk',
+    tagline: 'Risk Management',
     headline: 'Scenario Intelligence.',
-    highlight: 'Scoring.',
-    description: 'Assess enterprise risks and opportunities with scenario intelligence, resilience scoring, and integrated dashboards to secure corporate governance.',
+    highlight: 'Resilience Scoring.',
+    description: 'Provide a governed environment for identifying, assessing, managing and monitoring organisational risks.',
     image: 'https://images.pexels.com/photos/8636589/pexels-photo-8636589.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
     icon: 'fa-triangle-exclamation',
-    details: ['Seven risk domains analysis', 'Scenario intelligence engine', 'Resilience scoring metrics', 'Risk simulator & forecaster'],
+    details: ['Seven risk domains', 'Scenario intelligence engine', 'Resilience scoring', 'Risk simulator'],
+  },
+  {
+    product: 'OakStrategy',
+    tagline: 'Strategy & Performance',
+    headline: 'Strategy to Execution.',
+    highlight: 'Measurable Performance.',
+    description: 'Connect strategic direction with objectives, measures and organisational execution.',
+    image: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
+    icon: 'fa-chess-king',
+    details: ['Strategic objective planning', 'OKR framework', 'Performance dashboards', 'Strategy-to-execution traceability'],
+  },
+  {
+    product: 'Lumina BI',
+    tagline: 'Business Intelligence',
+    headline: 'Governed',
+    highlight: 'Enterprise Insight.',
+    description: 'Provide management insight from governed enterprise information.',
+    image: 'https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
+    icon: 'fa-chart-line',
+    details: ['Cross-module analytics', 'Executive dashboards', 'Board packs', 'Evidence-based decisions'],
   },
 ]
 
@@ -80,11 +100,65 @@ const services = [
 
 const industries = [
   { name: 'Oil & Gas', icon: 'fa-droplet', desc: 'Risk management, compliance, HSE for energy sector operations.' },
-  { name: 'Banking & Finance', icon: 'fa-building', desc: 'Regulatory compliance, audit frameworks, and governance solutions.' },
+  { name: 'Energy', icon: 'fa-bolt', desc: 'Operational excellence, regulatory compliance, and asset integrity.' },
   { name: 'Manufacturing', icon: 'fa-industry', desc: 'Operational excellence, ISO standards, and quality management.' },
-  { name: 'Healthcare', icon: 'fa-heart-pulse', desc: 'Patient safety, regulatory compliance, and quality improvement.' },
-  { name: 'Government', icon: 'fa-landmark', desc: 'Public sector governance, transparency frameworks, and audit readiness.' },
-  { name: 'Education', icon: 'fa-graduation-cap', desc: 'Institutional compliance, quality assurance, and performance management.' },
+  { name: 'Engineering', icon: 'fa-cogs', desc: 'Project governance, risk management, and compliance frameworks.' },
+  { name: 'Logistics', icon: 'fa-truck', desc: 'Supply chain risk, compliance, and operational safety.' },
+  { name: 'Construction', icon: 'fa-hard-hat', desc: 'Site safety, regulatory compliance, and quality assurance.' },
+  { name: 'Professional Services', icon: 'fa-briefcase', desc: 'Governance, risk, and compliance for knowledge-based organisations.' },
+  { name: 'Government & Public Sector', icon: 'fa-landmark', desc: 'Public sector governance, transparency frameworks, and audit readiness.' },
+]
+
+const buildRunImprove = [
+  {
+    phase: 'BUILD',
+    title: 'Establish the Management System',
+    desc: 'A governed establishment architecture provides a structured path from foundation through certification readiness.',
+    points: ['F1 — Foundation & Scope', 'F2 — Gap Assessment', 'F3 — Control Design', 'F4 — Documented Information', 'F5 — Readiness & Certification', 'F6 — Handover & Closure'],
+    icon: 'fa-hammer',
+  },
+  {
+    phase: 'RUN',
+    title: 'See How the System Operates',
+    desc: 'Move beyond "Do we have the required procedure?" to "How is this requirement actually operating in our organisation?"',
+    points: ['Requirement → Applicability', 'Process → Control → Activity', 'Occurrence → Evidence → Review', 'Acceptance → Effectiveness', 'Trace', 'Multi-entity governed contexts'],
+    icon: 'fa-play',
+  },
+  {
+    phase: 'IMPROVE',
+    title: 'Turn Operational Learning into Better Systems',
+    desc: 'A genuine operational weakness may lead to an improvement decision — creating a controlled cycle of continual organisational improvement.',
+    points: ['Change an activity', 'Strengthen a control', 'Improve a process', 'Revise documented information', 'Return to BUILD', 'Continual improvement'],
+    icon: 'fa-arrow-trend-up',
+  },
+]
+
+const engagements = [
+  {
+    icon: 'fa-seedling',
+    name: 'Controlled Pilot',
+    desc: 'Experience OakEIP using a defined organisational scope and real management-system activities before expanding to a broader enterprise deployment.',
+    cta: 'Request a Pilot',
+    link: '/request-demo',
+    points: ['One organisation', 'Selected management-system scope', '2–4 representative processes', 'Real activities, evidence & effectiveness', 'Management insight from day one'],
+  },
+  {
+    icon: 'fa-tags',
+    name: 'Flexible Enterprise Pricing',
+    desc: 'OakEIP pricing is structured according to organisational complexity, number of legal entities, operating contexts, selected products, implementation scope and support requirements.',
+    cta: 'Talk to an OakEIP Specialist',
+    link: '/contact',
+    points: ['Organisational complexity', 'Number of legal entities', 'Operating contexts & selected products', 'Implementation scope & support requirements', 'Tailored proposal after pilot'],
+  },
+]
+
+const differentiators = [
+  { icon: 'fa-puzzle-piece', title: 'Connected Rather Than Fragmented', desc: 'Bring related organisational information into a common governed architecture — not disconnected systems and spreadsheets.' },
+  { icon: 'fa-cogs', title: 'Operational Rather Than Document-Centric', desc: 'Move from "we have a procedure" to "we can demonstrate how the process operates." A document exists ≠ a process operates.' },
+  { icon: 'fa-shield-alt', title: 'Governance by Design', desc: 'Tenant isolation, controlled authority, evidence governance, auditability and segregation-of-duties principles are embedded in the platform architecture.' },
+  { icon: 'fa-sitemap', title: 'Multi-Entity Ready', desc: 'One canonical model can serve multiple governed organisational contexts — subsidiaries, business units, sites and legal entities.' },
+  { icon: 'fa-user-tie', title: 'Human Judgement Preserved', desc: 'The platform supports management decisions without pretending that every governance decision can or should be automated.' },
+  { icon: 'fa-cube', title: 'Modular and Extensible', desc: 'OakEIP can grow as an organisation\'s digital management requirements mature — start small, scale progressively.' },
 ]
 
 const features = [
@@ -97,9 +171,9 @@ const features = [
     statLabel: 'Certified Experts',
   },
   {
-    title: 'Global Perspective',
-    subtitle: 'Local Execution',
-    desc: 'We combine international best practices with deep understanding of the African business landscape. Our solutions are globally benchmarked but locally tailored to your operating environment.',
+    title: 'Technology + Expertise',
+    subtitle: 'Not Just Software',
+    desc: 'Oak Global combines digital platform capability with practical expertise in QMS, EMS, OHS, IMS, risk management, compliance, auditing, management-system implementation and organisational transformation.',
     image: 'https://images.pexels.com/photos/7964355/pexels-photo-7964355.jpeg?auto=compress&cs=tinysrgb&w=1000&h=800&fit=crop',
     stat: '15+',
     statLabel: 'Countries Served',
@@ -134,7 +208,7 @@ const testimonials = [
     company: 'Crestar Energy',
   },
   {
-    quote: 'OakRisk360 has given our executive team unprecedented visibility into enterprise threats and opportunities. The simulator transformed how we make strategic decisions.',
+    quote: 'OakRisk has given our executive team unprecedented visibility into enterprise threats and opportunities. The simulator transformed how we make strategic decisions.',
     name: 'Lola Adeleke',
     role: 'Chief Executive Officer',
     company: 'Adeleke Group',
@@ -372,7 +446,7 @@ export default function HomePage() {
                     className="mt-8 flex flex-wrap gap-4"
                   >
                     <Link
-                      to="/services"
+                      to={`/products#${slides[currentSlide].product}`}
                       className="group inline-flex items-center gap-2.5 px-7 py-3.5 bg-emerald-600 text-white text-sm font-bold hover:bg-emerald-500 transition-all duration-300"
                     >
                       <span>Explore {slides[currentSlide].product}</span>
@@ -492,7 +566,7 @@ export default function HomePage() {
             label="Industries"
             title="Serving"
             highlight="Every Sector."
-            description="Deep industry expertise across six critical sectors. We understand your regulatory landscape, operational challenges, and strategic priorities."
+            description="Deep industry expertise across critical sectors. We understand your regulatory landscape, operational challenges, and strategic priorities."
             light
           />
 
@@ -501,7 +575,7 @@ export default function HomePage() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-80px' }}
-            className="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
+            className="mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-4"
           >
             {industries.map((ind, i) => (
               <motion.div
@@ -528,9 +602,9 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4">
           <SectionHeading
             label="The Platform"
-            title="Five Modules."
-            highlight="One Platform."
-            description="OakEIP unifies strategy implementation, audit, compliance, HSE, and risk & opportunity management into a single operating environment."
+            title="One Platform."
+            highlight="Multiple Domains."
+            description="OakEIP provides a common platform architecture through which specialised capabilities work together — sharing common enterprise services and governed information without creating disconnected systems."
           />
 
           <motion.div
@@ -573,14 +647,71 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ─────── BUILD → RUN → IMPROVE ─────── */}
+      <section className="py-16 lg:py-24 bg-white border-b border-neutral-100 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4">
+          <SectionHeading
+            label="From Documentation to Operation"
+            title="BUILD → RUN →"
+            highlight="IMPROVE."
+            description="A document exists ≠ a process operates ≠ a control operates ≠ a control is effective. OakEIP is designed around that distinction."
+            light
+          />
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            className="mt-16 grid md:grid-cols-3 gap-6"
+          >
+            {buildRunImprove.map((phase, i) => (
+              <motion.div
+                key={phase.phase}
+                variants={itemFadeUp}
+                className="relative bg-white border border-neutral-200 p-8 hover:border-emerald-300 hover:shadow-lg transition-all duration-300 group h-full flex flex-col"
+              >
+                <div className="flex items-center justify-between mb-6">
+                  <div className="w-12 h-12 bg-gradient-to-br from-emerald-600 to-sky-700 flex items-center justify-center text-white text-lg group-hover:scale-110 transition-transform duration-300">
+                    <i className={`fas ${phase.icon}`} />
+                  </div>
+                  <span className="text-5xl font-extrabold text-neutral-100 select-none">{String(i + 1).padStart(2, '0')}</span>
+                </div>
+                <span className="text-emerald-600 font-bold tracking-widest uppercase text-xs">{phase.phase}</span>
+                <h3 className="mt-2 text-lg font-bold text-neutral-900 leading-snug">{phase.title}</h3>
+                <p className="mt-3 text-neutral-500 text-sm leading-relaxed flex-1">{phase.desc}</p>
+                <ul className="mt-5 pt-5 border-t border-neutral-100 space-y-2">
+                  {phase.points.map((p) => (
+                    <li key={p} className="flex items-center gap-2.5 text-xs text-neutral-500">
+                      <span className="w-1 h-1 bg-emerald-500 shrink-0" />
+                      {p}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="mt-10 text-center text-neutral-400 text-sm max-w-2xl mx-auto leading-relaxed"
+          >
+            The objective is continual organisational improvement — not simply closing records. OakEIP helps organisations establish structured management systems, demonstrate how they operate in practice, and generate trusted information for decision-making.
+          </motion.p>
+        </div>
+      </section>
+
       {/* ─────── Why Oak Global ─────── */}
       <section className="bg-neutral-50 border-b border-neutral-100">
         <div className="max-w-7xl mx-auto px-4 py-16 lg:py-24">
           <SectionHeading
             label="Why Oak Global"
-            title="Built for"
-            highlight="Excellence."
-            description="Three pillars that define how we deliver value to every client, every engagement."
+            title="Technology +"
+            highlight="Expertise."
+            description="Oak Global combines digital platform capability with practical management-system expertise. Customers do not have to choose between consulting expertise and digital technology."
             light
           />
         </div>
@@ -594,7 +725,7 @@ export default function HomePage() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true, margin: '-120px' }}
               transition={{ duration: 0.8 }}
-              className={`border-t border-neutral-100 ${isReversed ? '' : ''}`}
+              className="border-t border-neutral-100"
             >
               <div className="max-w-7xl mx-auto px-4">
                 <div className="grid md:grid-cols-2 gap-0 min-h-[500px]">
@@ -627,6 +758,39 @@ export default function HomePage() {
         })}
       </section>
 
+      {/* ─────── Why OakEIP Differentiators ─────── */}
+      <section className="py-16 lg:py-24 bg-neutral-950 relative overflow-hidden border-y border-white/5">
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.012)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.012)_1px,transparent_1px)] bg-[size:48px_48px]" />
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <div className="text-center max-w-xl mx-auto mb-12">
+            <SectionHeading label="Why OakEIP" title="Built" highlight="Different" description="What sets the Enterprise Intelligence Platform apart in the enterprise technology landscape." />
+          </div>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {differentiators.map((d) => (
+              <motion.div key={d.title} variants={itemFadeUp}>
+                <div className="text-center p-8 bg-neutral-900 border border-white/5 hover:-translate-y-2 hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300 h-full group">
+                  <div className="relative w-20 h-20 mx-auto mb-6">
+                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-600 to-sky-700 rotate-45 group-hover:rotate-[135deg] transition-transform duration-500" />
+                    <div className="relative z-10 w-full h-full flex items-center justify-center text-white text-2xl">
+                      <i className={`fas ${d.icon}`} />
+                    </div>
+                  </div>
+                  <h4 className="text-lg font-bold text-white mb-3">{d.title}</h4>
+                  <p className="text-white/50 text-sm leading-relaxed">{d.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
       {/* ─────── Testimonials ─────── */}
       <section className="py-16 lg:py-24 bg-neutral-950 border-b border-white/5 relative overflow-hidden">
         <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-emerald-500/[0.015] rounded-full blur-3xl pointer-events-none" />
@@ -635,7 +799,7 @@ export default function HomePage() {
             label="Testimonials"
             title="What Our"
             highlight="Clients Say."
-            description="Real feedback from organizations we have partnered with across industries."
+            description="Real feedback from organisations we have partnered with across industries."
           />
 
           <div className="relative mt-16">
@@ -681,112 +845,48 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─────── About ─────── */}
-      <section className="py-16 lg:py-24 bg-neutral-50">
+      {/* ─────── Commercial Engagement ─────── */}
+      <section className="py-16 lg:py-24 bg-neutral-50 border-t border-neutral-100">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{ type: 'spring', stiffness: 120, damping: 14 }}
-            >
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 text-emerald-700 text-[11px] font-semibold tracking-widest uppercase border border-emerald-500/20">
-                About
-              </span>
-              <h2 className="mt-6 text-3xl md:text-4xl font-extrabold text-neutral-900 leading-tight tracking-tight">
-                Excellence in Global{' '}
-                <span className="text-emerald-600">Business Solutions</span>
-              </h2>
-              <p className="mt-4 text-neutral-600 text-base leading-relaxed">
-                We help organizations achieve and maintain global status. From operational excellence to regulatory compliance, we guide businesses toward sustainable growth and international recognition.
-              </p>
-              <div className="mt-8 space-y-3">
-                {['Global Standards Compliance', 'Operational Excellence', 'Strategic Growth Planning', 'GRC Advisory Services'].map((f) => (
-                  <motion.div
-                    key={f}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.1, type: 'spring', stiffness: 200, damping: 18 }}
-                    className="flex items-center gap-3 text-sm font-medium text-neutral-800"
-                  >
-                    <span className="w-5 h-5 bg-emerald-600 flex items-center justify-center shrink-0">
-                      <i className="fas fa-check text-white text-[10px]" />
-                    </span>
-                    {f}
-                  </motion.div>
-                ))}
-              </div>
-              <Link to="/about" className="group mt-8 inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white text-sm font-bold hover:bg-emerald-500 transition-all duration-300">
-                <span>Learn More About Us</span>
-                <i className="fas fa-arrow-right text-xs transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{ type: 'spring', stiffness: 100, damping: 16, delay: 0.1 }}
-              className="relative overflow-hidden group"
-            >
-              <div className="relative overflow-hidden">
-                <img
-                  src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
-                  alt="Professional business team collaboration"
-                  className="w-full h-[250px] sm:h-[350px] md:h-[450px] object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-emerald-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─────── Services ─────── */}
-      <section className="py-16 lg:py-24 bg-white border-t border-b border-neutral-100">
-        <div className="max-w-7xl mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ type: 'spring', stiffness: 120, damping: 14 }}
-          >
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 text-emerald-700 text-[11px] font-semibold tracking-widest uppercase border border-emerald-500/20">
-              Our Expertise
-            </span>
-            <h2 className="mt-6 text-3xl md:text-4xl font-extrabold text-neutral-900 leading-tight tracking-tight">
-              Comprehensive{' '}
-              <span className="text-emerald-600">Business Solutions</span>
-            </h2>
-            <p className="mt-4 text-neutral-500 text-base leading-relaxed max-w-xl">
-              Tailored solutions designed to optimize performance, ensure compliance, and drive sustainable growth.
-            </p>
-          </motion.div>
+          <SectionHeading
+            label="Commercial Engagement"
+            title="Start Small."
+            highlight="Scale With Us."
+            description="OakEIP does not require an organisation to digitise everything at once. Begin with a defined scope and expand progressively."
+            light
+          />
 
           <motion.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-80px' }}
-            className="grid md:grid-cols-2 gap-px bg-neutral-200 mt-16"
+            className="mt-16 grid md:grid-cols-2 gap-6 max-w-4xl mx-auto"
           >
-            {services.map((s, i) => (
-              <motion.div key={s.title} variants={itemFadeUp}>
-                <Link to={s.link} className="group block bg-white p-8 lg:p-10 h-full hover:bg-neutral-50 transition-all duration-300">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 bg-emerald-600/10 flex items-center justify-center group-hover:bg-emerald-600/20 transition-colors">
-                      <i className={`fas ${s.icon} text-emerald-600 text-sm`} />
-                    </div>
-                    <h3 className="text-lg font-bold text-neutral-900">{s.title}</h3>
+            {engagements.map((eng) => (
+              <motion.div key={eng.name} variants={itemFadeUp}>
+                <div className="h-full bg-white border border-neutral-200 p-8 lg:p-10 hover:border-emerald-300 hover:shadow-lg transition-all duration-300 flex flex-col">
+                  <div className="w-12 h-12 bg-emerald-100 flex items-center justify-center mb-6">
+                    <i className={`fas ${eng.icon} text-emerald-600 text-lg`} />
                   </div>
-                  <p className="text-neutral-500 text-sm leading-relaxed mb-6">{s.desc}</p>
-                  <span className="inline-flex items-center gap-2 text-emerald-600 font-bold text-sm group-hover:gap-3 transition-all duration-300">
-                    <span>Learn More</span>
-                    <i className="fas fa-arrow-right text-xs" />
-                  </span>
-                </Link>
+                  <h3 className="text-xl font-extrabold text-neutral-900">{eng.name}</h3>
+                  <p className="mt-3 text-neutral-500 text-sm leading-relaxed flex-1">{eng.desc}</p>
+                  <ul className="mt-5 pt-5 border-t border-neutral-100 space-y-2">
+                    {eng.points.map((p) => (
+                      <li key={p} className="flex items-start gap-2.5 text-xs text-neutral-500">
+                        <i className="fas fa-check text-emerald-600 mt-0.5 text-[10px]" />
+                        {p}
+                      </li>
+                    ))}
+                  </ul>
+                  <Link
+                    to={eng.link}
+                    className="group mt-8 inline-flex items-center justify-center gap-2 px-6 py-3 bg-emerald-600 text-white text-sm font-bold hover:bg-emerald-500 transition-all duration-300"
+                  >
+                    <span>{eng.cta}</span>
+                    <i className="fas fa-arrow-right text-xs transition-transform duration-300 group-hover:translate-x-1" />
+                  </Link>
+                </div>
               </motion.div>
             ))}
           </motion.div>
@@ -794,25 +894,13 @@ export default function HomePage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ delay: 0.15, duration: 0.6 }}
-            className="mt-12"
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="mt-12 max-w-3xl mx-auto bg-emerald-50 border-l-[3px] border-emerald-600 p-6 lg:p-8"
           >
-            <div className="bg-emerald-50 border-l-[3px] border-emerald-600 p-8 lg:p-10">
-              <div className="flex flex-col lg:flex-row items-start lg:items-center gap-6 lg:gap-10">
-                <div className="w-12 h-12 bg-emerald-600/10 flex items-center justify-center shrink-0">
-                  <i className="fas fa-shield-alt text-emerald-600 text-lg" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-emerald-900 font-bold text-lg mb-1">Governance, Risk & Compliance Advisory</h3>
-                  <p className="text-emerald-700/70 text-sm">Comprehensive GRC solutions — risk management, compliance frameworks, and board advisory for enterprise resilience.</p>
-                </div>
-                <Link to="/services" className="group shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white text-sm font-bold hover:bg-emerald-500 transition-all duration-300">
-                  <span>View All Services</span>
-                  <i className="fas fa-arrow-right text-xs transition-transform duration-300 group-hover:translate-x-1" />
-                </Link>
-              </div>
-            </div>
+            <p className="text-emerald-900 text-sm leading-relaxed">
+              <strong>Technology backed by management-system expertise.</strong> Oak Global combines digital platform capability with practical expertise across QMS, EMS, OHS, IMS, risk management, compliance, auditing and organisational transformation — so customers never have to choose between consulting expertise and digital technology.
+            </p>
           </motion.div>
         </div>
       </section>
@@ -831,19 +919,19 @@ export default function HomePage() {
               Get Started
             </span>
             <h2 className="mt-6 text-3xl md:text-5xl font-extrabold text-white leading-tight tracking-tight max-w-3xl mx-auto">
-              Ready to transform your{' '}
-              <span className="text-emerald-400">enterprise?</span>
+              Ready to move from documented systems to{' '}
+              <span className="text-emerald-400">operating systems?</span>
             </h2>
             <p className="mt-4 text-white/40 text-base max-w-xl mx-auto leading-relaxed">
-              One platform. Five modules. Unlimited potential. See what OakEIP can do for your organization.
+              OakEIP helps organisations build, operate and continually improve better management systems through one governed digital environment.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to="/contact" className="group inline-flex items-center gap-2.5 px-8 py-4 bg-emerald-600 text-white text-sm font-bold hover:bg-emerald-500 transition-all duration-300">
-                <span>Schedule a Demo</span>
+              <Link to="/request-demo" className="group inline-flex items-center gap-2.5 px-8 py-4 bg-emerald-600 text-white text-sm font-bold hover:bg-emerald-500 transition-all duration-300">
+                <span>Request a Demo</span>
                 <i className="fas fa-arrow-right text-xs transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
-              <Link to="/services" className="inline-flex items-center gap-2.5 px-8 py-4 border border-white/20 text-white text-sm font-bold hover:bg-white/5 transition-all duration-300">
-                Explore Platform
+              <Link to="/contact" className="inline-flex items-center gap-2.5 px-8 py-4 border border-white/20 text-white text-sm font-bold hover:bg-white/5 transition-all duration-300">
+                Talk to Oak Global
               </Link>
             </div>
           </motion.div>

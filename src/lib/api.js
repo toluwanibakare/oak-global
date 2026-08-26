@@ -124,10 +124,89 @@ export async function getBookedSlots() {
 
 
 /**
+ * Fetches all active products with their features, benefits, and details.
+ */
+export async function getProducts({ category, flagshipOnly, activeOnly = true } = {}) {
+  let query = supabase.from('products').select(`
+    *,
+    product_features(feature_text, sort_order),
+    product_benefits(benefit_text, metric_value, sort_order),
+    product_details(subtitle, detail_text, detail_type, sort_order)
+  `).order('sort_order', { ascending: true });
+
+  if (activeOnly) query = query.eq('is_active', true);
+  if (flagshipOnly) query = query.eq('is_flagship', true);
+  if (category) query = query.eq('platform_category', category);
+
+  const { data, error } = await query;
+  if (error) throw new Error(error.message);
+  return data;
+}
+
+/**
+ * Fetches a single product by slug with all related data.
+ */
+export async function getProductBySlug(slug) {
+  const { data, error } = await supabase
+    .from('products')
+    .select(`
+      *,
+      product_features(feature_text, sort_order),
+      product_benefits(benefit_text, metric_value, sort_order),
+      product_details(subtitle, detail_text, detail_type, sort_order)
+    `)
+    .eq('slug', slug)
+    .eq('is_active', true)
+    .single();
+
+  if (error) throw new Error(error.message);
+  return data;
+}
+
+/**
+ * Fetches platform differentiators (Why OakEIP).
+ */
+export async function getPlatformDifferentiators() {
+  const { data, error } = await supabase
+    .from('platform_differentiators')
+    .select('*')
+    .eq('is_active', true)
+    .order('sort_order', { ascending: true });
+  if (error) throw new Error(error.message);
+  return data;
+}
+
+/**
+ * Fetches industries served.
+ */
+export async function getIndustries() {
+  const { data, error } = await supabase
+    .from('industries')
+    .select('*')
+    .eq('is_active', true)
+    .order('sort_order', { ascending: true });
+  if (error) throw new Error(error.message);
+  return data;
+}
+
+/**
+ * Fetches commercial engagement models (Pilot, Enterprise Pricing).
+ */
+export async function getEngagementModels() {
+  const { data, error } = await supabase
+    .from('engagement_models')
+    .select('*')
+    .eq('is_active', true)
+    .order('sort_order', { ascending: true });
+  if (error) throw new Error(error.message);
+  return data;
+}
+
+/**
  * Handles sending admin alerts & customer welcome/confirmation emails using the Resend API.
  */
 async function sendEmails({ type, recipientName, recipientEmail, payload }) {
-  const RESEND_API_KEY = import.meta.env.RESEND_API_KEY
+  const RESEND_API_KEY = import.meta.env.VITE_RESEND_API_KEY || import.meta.env.RESEND_API_KEY
   const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL || 'o.kolawole@oak-global.com.ng'
   const DRIVE_LINK = import.meta.env.VITE_DEMO_DRIVE_LINK || ''
 

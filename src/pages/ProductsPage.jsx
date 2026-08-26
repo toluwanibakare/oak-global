@@ -46,36 +46,44 @@ const products = [
   {
     icon: 'fa-hammer',
     title: 'OakForge',
-    tagline: 'Strategy & Management System Implementation Accelerator',
-    desc: 'Accelerate your enterprise strategy, organizational transformation, and management system lifecycle from blueprinting to complete operational reviews.',
+    tagline: 'Management System Establishment & Operations',
+    desc: 'Build, configure, operate and improve management systems through the complete BUILD → RUN → IMPROVE lifecycle.',
+    category: 'core',
+    isFlagship: true,
     features: [
-      'Strategic objective planning & blueprints',
-      'Phase F1–F6 program lifecycle checks',
-      'Executive Command Centre integrations',
-      'Management system review boards',
-      'Separation of duties approval safety',
-      'ECIE/Improvement CAPA links'
+      'Governed establishment architecture (F1–F6 lifecycle)',
+      'RUN journey: Requirement → Applicability → Process → Control → Activity → Occurrence → Evidence → Review → Acceptance → Effectiveness → Trace',
+      'Multi-subsidiary: One canonical model + multiple governed contexts',
+      'IMPROVE cycle: BUILD → RUN → LEARN → IMPROVE → BUILD / RUN AGAIN',
+      'Evidence lifecycle: Expected → Submitted → Under Review → Accepted',
+      'Human effectiveness evaluation (Effective / Partially Effective / Ineffective / Unable to Determine)',
     ],
     benefits: ['60% faster ISO implementation', 'Pre-configured blueprints', 'Continuous program alignment', 'Executive dashboard visibility'],
     image: 'https://images.pexels.com/photos/3182766/pexels-photo-3182766.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
     color: 'from-emerald-700 to-emerald-900',
     details: [
-      { subtitle: 'Lifecycle Management', text: 'Governs transformation stages from Foundation (F1) through Gap Assessment (F2), design (F3), documentation (F4), readiness verification (F5), to audit handoff (F6).' },
-      { subtitle: 'Unified operating foundation', text: 'Combines structural program blueprints and operational reviews into a single canonical model, eliminating disconnected processes.' }
+      { subtitle: 'BUILD — Establish the Management System', text: 'OakForge\'s governed establishment architecture provides a structured path through: F1 — Foundation & Scope, F2 — Gap Assessment, F3 — Control Design, F4 — Documented Information, F5 — Readiness & Certification, F6 — Handover & Closure. The objective is not simply to produce documents — it is to establish a structured management-system foundation that can subsequently operate within the organisation.' },
+      { subtitle: 'RUN — See How the System Operates', text: 'The RUN journey connects: Requirement → Applicability → Process → Control → Activity → Occurrence → Evidence → Review → Acceptance → Effectiveness → Trace. This allows management to move beyond "Do we have the required procedure?" and ask "How is this requirement actually operating in our organisation?"' },
+      { subtitle: 'Multi-Subsidiary Organisations', text: 'One enterprise model. Multiple governed operating contexts. Instead of creating separate copies of the same management-system structure for every subsidiary, OakForge uses: One canonical enterprise model + multiple governed applicability and operating contexts.' },
+      { subtitle: 'IMPROVE — Turn Learning into Better Systems', text: 'A genuine operational weakness may lead to an improvement decision. That improvement may reveal the need to: change an activity; strengthen a control; improve a process; revise documented information; or return to BUILD to reconfigure the management system. This creates a controlled cycle: BUILD → RUN → LEARN → IMPROVE → BUILD / RUN AGAIN.' },
+      { subtitle: 'Evidence You Can Trust', text: 'OakForge treats evidence as a governed lifecycle: Expected → Submitted → Under Review → Accepted. This distinction prevents a common management-system weakness: Uploaded ≠ Reviewed ≠ Accepted ≠ Effective. Evidence can be traced back to the operational occurrence that generated it.' },
+      { subtitle: 'Trace — Follow the Complete Story', text: 'OakForge provides a read-only Trace journey from: Requirement → Applicability → Process → Control → Activity → Occurrence → Evidence → Review → Acceptance → Effectiveness. Trace helps management, assurance teams and process owners understand not just what exists, but how the management-system story connects.' }
     ]
   },
   {
     icon: 'fa-clipboard-check',
     title: 'OakAudix',
-    tagline: 'Enterprise Audit Management',
-    desc: 'Plan, schedule, execute, and verify audits in one knowledge-driven workspace. Streamlines finding tracking and corrective action plans.',
+    tagline: 'Audit Management',
+    desc: 'Plan, execute, evidence and manage audits and audit-related improvement activities.',
+    category: 'core',
+    isFlagship: false,
     features: [
       'Knowledge-driven, process-based audits',
       'Automated finding tracking & CAPA tasks',
       'Curated clause-level audit questionnaires',
       'Evidence collection & validation repositories',
       'Comprehensive audit package seals & hashes',
-      'Assurance dashboards & review boards'
+      'Assurance dashboards & review boards',
     ],
     benefits: ['45% less audit preparation effort', 'Consolidated evidence and CAPA spine', 'Eliminates audit process variance', 'Automated regulatory reporting'],
     image: 'https://images.pexels.com/photos/3861077/pexels-photo-3861077.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
@@ -88,17 +96,19 @@ const products = [
   {
     icon: 'fa-shield-halved',
     title: 'OakComply',
-    tagline: 'Legal & Regulatory Compliance Management',
-    desc: 'Keep track of legal and regulatory obligations, complete applicability checks, address gap actions, and ensure continuous operational compliance.',
+    tagline: 'Compliance Management',
+    desc: 'Connect compliance obligations with organisational responsibilities, controls, evidence and follow-up.',
+    category: 'core',
+    isFlagship: false,
     features: [
       'Regulatory obligations register',
       'Gap identification & remediation plans',
       'Recurring compliance calendars & alerts',
       'Continuous regulatory change feeds',
       'Controlled document policy linkups',
-      'Conformance evidence registers'
+      'Conformance evidence registers',
     ],
-    benefits: ['Zero-compliance blind spots', 'Drastically reduced regulatory penalties', 'Instant evidence of conformance', 'Direct linkage to company policies'],
+    benefits: ['Zero compliance blind spots', 'Drastically reduced regulatory penalties', 'Instant evidence of conformance', 'Direct linkage to company policies'],
     image: 'https://images.pexels.com/photos/7433857/pexels-photo-7433857.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
     color: 'from-blue-600 to-indigo-700',
     details: [
@@ -110,14 +120,16 @@ const products = [
     icon: 'fa-leaf',
     title: 'OakHSE360',
     tagline: 'Health, Safety & Environment',
-    desc: 'Manage safety incidents, mitigate workplace hazards, monitor environmental footprints, and verify safety controls across all operations and sites.',
+    desc: 'Support structured HSE management, operational controls, inspections, observations and improvement.',
+    category: 'core',
+    isFlagship: false,
     features: [
       'Incident & near-miss reporting',
       'Hazard logging & control assessments',
       'Site safety permits to work',
       'Environmental KPI & emissions logs',
       'Safety inspections & site audits',
-      'Contractor safety verification portals'
+      'Contractor safety verification portals',
     ],
     benefits: ['Minimized workplace incidents', 'Full environmental standard compliance', 'Better contractor risk visibility', 'Improved internal safety culture'],
     image: 'https://images.pexels.com/photos/37510660/pexels-photo-37510660.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
@@ -129,37 +141,88 @@ const products = [
   },
   {
     icon: 'fa-triangle-exclamation',
-    title: 'OakRisk360',
-    tagline: 'Enterprise Risk & Opportunity',
-    desc: 'Identify, assess, and simulate risks with scenario intelligence, resilience scoring, and seven risk domains to guarantee complete governance.',
+    title: 'OakRisk',
+    tagline: 'Risk Management',
+    desc: 'Provide a governed environment for identifying, assessing, managing and monitoring organisational risks.',
+    category: 'core',
+    isFlagship: false,
     features: [
       'Seven risk domains analysis',
       'Scenario intelligence engine',
       'Resilience scoring metrics',
       'Risk simulator & forecaster',
       'Appetite & threshold alerts',
-      'Combined assurance dashboard'
+      'Combined assurance dashboard',
     ],
     benefits: ['Proactive threat mitigation', 'Accurate resilience scoring', 'Grounded decision support', 'Simulate worst-case scenarios'],
     image: 'https://images.pexels.com/photos/8636589/pexels-photo-8636589.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
-    color: 'from-red-800 to-rose-950', // Maroon theme accent
+    color: 'from-red-800 to-rose-950',
     details: [
       { subtitle: 'Decision Simulator', text: 'Enables risk officers to model hypothetical market disruptions or operational events to test company thresholds before committing capital.' },
       { subtitle: 'Resilience Indexing', text: 'Calculates live company-wide governance strength and risk maturity based on verified audit records and control checks.' }
     ]
-  }
+  },
+  {
+    icon: 'fa-chess-king',
+    title: 'OakStrategy',
+    tagline: 'Strategy & Performance',
+    desc: 'Connect strategic direction with objectives, measures and organisational execution.',
+    category: 'strategy',
+    isFlagship: false,
+    features: [
+      'Strategic objective planning & alignment',
+      'Objective & key results (OKR) framework',
+      'Performance measurement & dashboards',
+      'Strategy-to-execution traceability',
+    ],
+    benefits: ['Strategy-execution alignment', 'Measurable organisational performance', 'Governed decision-making'],
+    image: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
+    color: 'from-purple-700 to-indigo-800',
+    details: [
+      { subtitle: 'Strategy Alignment', text: 'Connects strategic direction with measurable objectives and ensures organisational execution is traceable to strategic intent.' }
+    ]
+  },
+  {
+    icon: 'fa-chart-line',
+    title: 'Lumina BI',
+    tagline: 'Business Intelligence',
+    desc: 'Provide management insight from governed enterprise information.',
+    category: 'intelligence',
+    isFlagship: false,
+    features: [
+      'Governed management insight & reporting',
+      'Cross-module analytics & correlation',
+      'Executive dashboards & board packs',
+      'Evidence-based decision support',
+    ],
+    benefits: ['Management insight from governed data', 'Cross-domain correlation', 'Executive-ready reporting'],
+    image: 'https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
+    color: 'from-sky-600 to-blue-700',
+    details: [
+      { subtitle: 'Governed Intelligence', text: 'Turns governed enterprise information into management insight — dashboards, board packs, and cross-module analytics for evidence-based decisions.' }
+    ]
+  },
 ]
 
 const differentiators = [
-  { icon: 'fa-puzzle-piece', title: 'Seamless Integration', desc: 'All Oak products are designed to work together seamlessly, sharing data and providing a unified view of your enterprise operations.' },
-  { icon: 'fa-microchip', title: 'Built for Scale', desc: 'Our cloud-native architecture scales with your organization, from single-site operations to global enterprise deployments.' },
-  { icon: 'fa-headset', title: 'Dedicated Support', desc: 'Every Oak product comes with dedicated implementation support, training, and ongoing technical assistance from our expert team.' },
+  { icon: 'fa-puzzle-piece', title: 'Connected Rather Than Fragmented', desc: 'Bring related organisational information into a common governed architecture — not disconnected systems and spreadsheets.' },
+  { icon: 'fa-cogs', title: 'Operational Rather Than Document-Centric', desc: 'Move from "we have a procedure" to "we can demonstrate how the process operates." A document exists ≠ a process operates.' },
+  { icon: 'fa-shield-alt', title: 'Governance by Design', desc: 'Tenant isolation, controlled authority, evidence governance, auditability and segregation-of-duties principles are embedded in the platform architecture.' },
+  { icon: 'fa-sitemap', title: 'Multi-Entity Ready', desc: 'One canonical model can serve multiple governed organisational contexts — subsidiaries, business units, sites and legal entities.' },
+  { icon: 'fa-user-tie', title: 'Human Judgement Preserved', desc: 'The platform supports management decisions without pretending that every governance decision can or should be automated.' },
+  { icon: 'fa-cube', title: 'Modular and Extensible', desc: 'OakEIP can grow as an organisation\'s digital management requirements mature — start small, scale progressively.' },
 ]
+
+const categoryOrder = ['core', 'strategy', 'intelligence']
+const categoryLabels = {
+  core: 'Core Management Modules',
+  strategy: 'Strategy & Performance',
+  intelligence: 'Business Intelligence',
+}
 
 export default function ProductsPage() {
   const { hash } = useLocation()
 
-  // Scroll to hash ID if present on render or hash update
   useEffect(() => {
     if (hash) {
       const id = hash.replace('#', '')
@@ -171,6 +234,13 @@ export default function ProductsPage() {
       }
     }
   }, [hash])
+
+  const groupedProducts = products.reduce((acc, product) => {
+    const category = product.category || 'core'
+    if (!acc[category]) acc[category] = []
+    acc[category].push(product)
+    return acc
+  }, {})
 
   return (
     <PageTransition>
@@ -197,7 +267,7 @@ export default function ProductsPage() {
               transition={{ delay: 0.15, duration: 0.5 }}
               className="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 text-emerald-400 text-[11px] font-semibold tracking-widest uppercase border border-emerald-500/20"
             >
-              Our Products
+              OakEIP Product Suite
             </motion.span>
 
             <h1 className="mt-6 font-extrabold leading-[1.04]">
@@ -207,7 +277,7 @@ export default function ProductsPage() {
                 transition={{ delay: 0.2, duration: 0.6, ease: [0.45, 0.05, 0.55, 0.95] }}
                 className="block text-4xl sm:text-5xl lg:text-6xl xl:text-7xl tracking-tight text-white"
               >
-                Enterprise-Grade
+                The Enterprise
               </motion.span>
               <motion.span
                 initial={{ opacity: 0, y: 30 }}
@@ -215,7 +285,7 @@ export default function ProductsPage() {
                 transition={{ delay: 0.3, duration: 0.6, ease: [0.45, 0.05, 0.55, 0.95] }}
                 className="block text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-emerald-400 mt-1 tracking-tight"
               >
-                Technology Solutions
+                Intelligence Platform
               </motion.span>
             </h1>
 
@@ -225,115 +295,140 @@ export default function ProductsPage() {
               transition={{ delay: 0.4, duration: 0.6, ease: [0.45, 0.05, 0.55, 0.95] }}
               className="mt-6 text-white/60 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed"
             >
-              Powerful modules built on a single, continuous operating model designed to manage strategy, blueprints, audits, compliance, HSE, and risks.
+              Seven integrated modules on a single governed architecture. Build, operate, and improve management systems across strategy, audit, compliance, HSE, risk, and business intelligence.
             </motion.p>
           </motion.div>
         </div>
       </section>
 
-      {/* ─────── Products ─────── */}
+      {/* ─────── Products by Category ─────── */}
       <section className="py-16 lg:py-24 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center max-w-xl mx-auto mb-16">
-            <SectionHeading label="Product Suite" title="Integrated" highlight="Platforms" light description="Five powerful modules built on a unified database architecture to give you complete enterprise visibility and control." />
+            <SectionHeading label="Product Suite" title="Integrated" highlight="Platforms" light description="Seven powerful modules built on a unified governed architecture to give you complete enterprise visibility and control." />
           </div>
 
-          <div className="space-y-36">
-            {products.map((product, i) => (
+          {categoryOrder.map((category, catIndex) => {
+            const categoryProducts = groupedProducts[category] || []
+            if (categoryProducts.length === 0) return null
+
+            return (
               <motion.div
-                key={product.title}
-                id={product.title}
-                initial={{ opacity: 0, y: 60 }}
+                key={category}
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-80px' }}
-                transition={{ type: 'spring', stiffness: 80, damping: 18, delay: i * 0.1 }}
-                className="scroll-mt-32"
+                transition={{ delay: catIndex * 0.1, type: 'spring', stiffness: 100, damping: 16 }}
+                className={catIndex > 0 ? 'pt-16 border-t border-neutral-100' : ''}
               >
-                <div className={`grid lg:grid-cols-2 gap-8 lg:gap-16 items-start ${i % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
-                  
-                  {/* Text Details */}
-                  <div className={i % 2 === 1 ? 'lg:col-start-2' : ''}>
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className={`w-14 h-14 bg-gradient-to-br ${product.color} flex items-center justify-center text-white text-xl`}>
-                        <i className={`fas ${product.icon}`} />
-                      </div>
-                      <div>
-                        <h3 className="text-2xl font-extrabold text-neutral-900">{product.title}</h3>
-                        <span className="text-emerald-600 text-sm font-semibold">{product.tagline}</span>
-                      </div>
-                    </div>
-                    
-                    <p className="text-neutral-600 leading-relaxed mb-6 text-base">{product.desc}</p>
-                    
-                    {/* Key features list */}
-                    <div className="mb-6">
-                      <h4 className="text-neutral-800 text-sm font-bold uppercase tracking-wider mb-3">Key Capabilities</h4>
-                      <div className="grid sm:grid-cols-2 gap-3">
-                        {product.features.map((f) => (
-                          <div key={f} className="flex items-start gap-2 text-sm text-neutral-600">
-                            <i className="fas fa-circle-check text-emerald-600 mt-1 text-xs shrink-0" />
-                            <span>{f}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
+                <div className="text-center mb-12">
+                  <h3 className="text-2xl md:text-3xl font-extrabold text-neutral-900">
+                    {categoryLabels[category] || category}
+                  </h3>
+                </div>
 
-                    {/* Detailed breakdown from strategy operating manual */}
-                    {product.details && (
-                      <div className="mb-6 space-y-4 bg-neutral-50 p-4 border border-neutral-200">
-                        <h4 className="text-neutral-800 text-xs font-bold uppercase tracking-wider">Enterprise Framework Details</h4>
-                        {product.details.map((dt) => (
-                          <div key={dt.subtitle} className="text-xs">
-                            <span className="font-bold text-neutral-800 block mb-0.5">{dt.subtitle}</span>
-                            <span className="text-neutral-500 leading-relaxed">{dt.text}</span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    {/* Benefits metrics */}
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {product.benefits.map((b) => (
-                        <span key={b} className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-200">
-                          <i className="fas fa-arrow-trend-up text-[10px]" />
-                          {b}
-                        </span>
-                      ))}
-                    </div>
-
-                    <Link 
-                      to={`/request-demo?product=${product.title}`} 
-                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-emerald-600 to-sky-700 text-white text-sm font-semibold shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+                <div className="space-y-36">
+                  {categoryProducts.map((product, i) => (
+                    <motion.div
+                      key={product.title}
+                      id={product.title}
+                      initial={{ opacity: 0, y: 60 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: '-80px' }}
+                      transition={{ type: 'spring', stiffness: 80, damping: 18, delay: i * 0.1 }}
+                      className="scroll-mt-32"
                     >
-                      <span>Request Demo</span>
-                      <i className="fas fa-arrow-right text-xs" />
-                    </Link>
-                  </div>
-                  
-                  {/* Image Block */}
-                  <div className={i % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}>
-                    <div className="overflow-hidden shadow-xl border border-neutral-100">
-                      <img
-                        src={product.image}
-                        alt={product.title}
-                        className="w-full h-[220px] sm:h-[300px] lg:h-[450px] object-cover transition-transform duration-700 hover:scale-105"
-                      />
-                    </div>
-                  </div>
-                  
+                      <div className={`grid lg:grid-cols-2 gap-8 lg:gap-16 items-start ${i % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
+
+                        {/* Text Details */}
+                        <div className={i % 2 === 1 ? 'lg:col-start-2' : ''}>
+                          <div className="flex items-center gap-4 mb-4">
+                            <div className={`w-14 h-14 bg-gradient-to-br ${product.color} flex items-center justify-center text-white text-xl`}>
+                              <i className={`fas ${product.icon}`} />
+                            </div>
+                            <div>
+                              <h3 className="text-2xl font-extrabold text-neutral-900">{product.title}</h3>
+                              <span className="text-emerald-600 text-sm font-semibold">{product.tagline}</span>
+                              {product.isFlagship && (
+                                <span className="ml-2 px-2 py-0.5 bg-emerald-100 text-emerald-700 text-xs font-semibold rounded">Flagship</span>
+                              )}
+                            </div>
+                          </div>
+
+                          <p className="text-neutral-600 leading-relaxed mb-6 text-base">{product.desc}</p>
+
+                          {/* Key features list */}
+                          <div className="mb-6">
+                            <h4 className="text-neutral-800 text-sm font-bold uppercase tracking-wider mb-3">Key Capabilities</h4>
+                            <div className="grid sm:grid-cols-2 gap-3">
+                              {product.features.map((f) => (
+                                <div key={f} className="flex items-start gap-2 text-sm text-neutral-600">
+                                  <i className="fas fa-circle-check text-emerald-600 mt-1 text-xs shrink-0" />
+                                  <span>{f}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Detailed breakdown */}
+                          {product.details && product.details.length > 0 && (
+                            <div className="mb-6 space-y-4 bg-neutral-50 p-4 border border-neutral-200">
+                              <h4 className="text-neutral-800 text-xs font-bold uppercase tracking-wider">Enterprise Framework Details</h4>
+                              {product.details.map((dt) => (
+                                <div key={dt.subtitle} className="text-xs">
+                                  <span className="font-bold text-neutral-800 block mb-0.5">{dt.subtitle}</span>
+                                  <span className="text-neutral-500 leading-relaxed">{dt.text}</span>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+
+                          {/* Benefits metrics */}
+                          <div className="flex flex-wrap gap-2 mb-6">
+                            {product.benefits.map((b) => (
+                              <span key={b} className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-200">
+                                <i className="fas fa-arrow-trend-up text-[10px]" />
+                                {b}
+                              </span>
+                            ))}
+                          </div>
+
+                          <Link
+                            to={`/request-demo?product=${product.title}`}
+                            className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-emerald-600 to-sky-700 text-white text-sm font-semibold shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+                          >
+                            <span>Request Demo</span>
+                            <i className="fas fa-arrow-right text-xs" />
+                          </Link>
+                        </div>
+
+                        {/* Image Block */}
+                        <div className={i % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}>
+                          <div className="overflow-hidden shadow-xl border border-neutral-100">
+                            <img
+                              src={product.image}
+                              alt={product.title}
+                              className="w-full h-[220px] sm:h-[300px] lg:h-[450px] object-cover transition-transform duration-700 hover:scale-105"
+                            />
+                          </div>
+                        </div>
+
+                      </div>
+                    </motion.div>
+                  ))}
                 </div>
               </motion.div>
-            ))}
-          </div>
+            )
+          })}
         </div>
       </section>
 
-      {/* ─────── Why Our Products ─────── */}
+      {/* ─────── Why OakEIP ─────── */}
       <section className="py-16 lg:py-24 bg-neutral-950 relative overflow-hidden border-y border-white/5">
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.012)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.012)_1px,transparent_1px)] bg-[size:48px_48px]" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <div className="text-center max-w-xl mx-auto mb-12">
-            <SectionHeading label="Why Oak" title="Built" highlight="Different" description="What sets our products apart in the enterprise technology landscape." />
+            <SectionHeading label="Why OakEIP" title="Built" highlight="Different" description="What sets the Enterprise Intelligence Platform apart in the enterprise technology landscape." />
           </div>
 
           <motion.div
@@ -341,7 +436,7 @@ export default function ProductsPage() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-80px' }}
-            className="grid md:grid-cols-3 gap-8"
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
             {differentiators.map((d) => (
               <motion.div key={d.title} variants={itemFadeUp}>
@@ -375,15 +470,20 @@ export default function ProductsPage() {
               Get Started
             </span>
             <h2 className="mt-6 text-3xl md:text-5xl font-extrabold leading-tight tracking-tight text-neutral-900">
-              Ready to See Our <span className="text-emerald-600">Platforms in Action?</span>
+              Ready to Experience <span className="text-emerald-600">OakEIP in Action?</span>
             </h2>
             <p className="mt-4 text-neutral-500 text-base leading-relaxed mb-8">
-              Schedule a personalized demo to discover how Oak products can transform your enterprise operations.
+              Start with a Controlled Pilot — see how the platform operates with your real management-system activities before scaling across the enterprise.
             </p>
-            <Link to="/request-demo" className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-sky-700 text-white font-semibold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
-              <span>Request Full Demo</span>
-              <i className="fas fa-arrow-right" />
-            </Link>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link to="/request-demo" className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-sky-700 text-white font-semibold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
+                <span>Request a Pilot</span>
+                <i className="fas fa-arrow-right" />
+              </Link>
+              <Link to="/contact" className="inline-flex items-center gap-2 px-6 py-3 border border-emerald-600 text-emerald-600 font-semibold hover:bg-emerald-50 transition-all duration-300">
+                Talk to a Specialist
+              </Link>
+            </div>
           </motion.div>
         </div>
       </section>
