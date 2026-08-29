@@ -103,6 +103,12 @@ const products = [
     tag: "Health, Safety & Environment",
     body: "Incidents, hazards, risk, permits to work, inspections and HSE performance across sites and contractors.",
   },
+  {
+    icon: Target,
+    name: "OakRisk360",
+    tag: "Enterprise Risk",
+    body: "Strategic and operational risk, opportunity registers, treatments and risk analytics.",
+  },
 ];
 
 const services = [
@@ -255,8 +261,8 @@ export default function OakEIPPage() {
                       key={p.name}
                       className="rounded-lg border border-neutral-100 bg-neutral-50 px-3 py-3 text-center"
                     >
-                      <p.icon className="mx-auto h-4 w-4 text-neutral-500" />
-                      <div className="mt-1.5 text-xs font-semibold">{p.name}</div>
+                      <p.icon className="mx-auto h-5 w-5 text-sky-600" />
+                      <div className="mt-1.5 text-[11px] font-bold text-sky-700">{p.name}</div>
                     </div>
                   ))}
                 </div>

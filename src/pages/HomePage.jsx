@@ -45,7 +45,7 @@ const slides = [
     details: ['Incident reporting', 'Hazard logging', 'Environmental KPI', 'Contractor verification'],
   },
   {
-    product: 'OakRisk',
+    product: 'OakRisk360',
     tagline: 'Risk Management',
     headline: 'Scenario Intelligence.',
     highlight: 'Resilience Scoring.',
@@ -208,7 +208,7 @@ const testimonials = [
     company: 'Crestar Energy',
   },
   {
-    quote: 'OakRisk has given our executive team unprecedented visibility into enterprise threats and opportunities. The simulator transformed how we make strategic decisions.',
+    quote: 'OakRisk360 has given our executive team unprecedented visibility into enterprise threats and opportunities. The simulator transformed how we make strategic decisions.',
     name: 'Lola Adeleke',
     role: 'Chief Executive Officer',
     company: 'Adeleke Group',
