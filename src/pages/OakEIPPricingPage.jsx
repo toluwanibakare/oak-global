@@ -183,8 +183,8 @@ export default function OakEIPPricingPage() {
                     )}
                     <h3 className="text-xl font-bold text-neutral-900 mb-2">{p.name}</h3>
                     <div className="flex items-baseline gap-1 mb-3">
-                      <span className="text-3xl font-extrabold text-neutral-900">{p.price.split(' ')[0]}</span>
-                      {p.price.includes('/') && <span className="text-lg font-medium text-neutral-500">/ year</span>}
+                      <span className="text-3xl font-extrabold text-neutral-900">{p.price}</span>
+                      <span className="text-lg font-medium text-neutral-500">/ year</span>
                     </div>
                     <div className="mb-6">
                       <span className={`inline-flex items-center rounded text-[11px] font-bold px-2.5 py-0.5 ${p.statusColor}`}>
