@@ -203,13 +203,19 @@ export default function OakEIPPage() {
                 Enterprise Platform Baseline v1.0
               </Badge>
               <h1 className="mt-3 max-w-2xl text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl text-white">
-                The enterprise operating platform for governance, assurance and excellence.
+                Transforming ISO from a Compliance Cost into a Business Performance Asset.
               </h1>
-              <p className="mt-4 max-w-xl text-lg text-emerald-50">
-                OakEIP connects strategy, management system implementation, daily operations, audit,
-                compliance, HSE and executive intelligence in one governed platform - so leadership
-                decides from evidence, not spreadsheets.
-              </p>
+              <div className="mt-6 max-w-xl text-sm md:text-base font-medium space-y-4 border border-white/20 bg-black/20 p-5 rounded-xl backdrop-blur-sm shadow-xl">
+                  <div>
+                    <div className="text-white/60 text-xs font-bold uppercase tracking-wider mb-2">Traditional ISO approach</div>
+                    <div className="text-emerald-100/70">Implement &rarr; Document &rarr; Audit &rarr; Correct &rarr; Certify &rarr; Repeat</div>
+                  </div>
+                  <div className="text-white/40 text-[10px] font-bold uppercase tracking-widest text-center w-full">versus</div>
+                  <div>
+                    <div className="text-sky-300 text-xs font-bold uppercase tracking-wider mb-2">OakEIP approach</div>
+                    <div className="text-white font-semibold">Understand &rarr; Align &rarr; Digitise &rarr; Execute &rarr; Measure &rarr; Improve &rarr; Demonstrate Business Value</div>
+                  </div>
+                </div>
               <div className="mt-4 flex flex-wrap gap-3">
                 <Link to={CONTACT}>
                   <Button size="lg" className="bg-white text-emerald-900 hover:bg-emerald-50 shadow-md font-bold border-0">
