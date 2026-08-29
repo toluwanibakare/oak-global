@@ -408,7 +408,7 @@ export default function OakEIPPage() {
         </section>
 
         {/* CTA */}
-        <section className="relative overflow-hidden bg-slate-900 text-neutral-900 border-t border-slate-800">
+        <section className="relative overflow-hidden bg-slate-900 text-white border-t border-slate-800">
           
           <div className="relative mx-auto max-w-4xl px-6 py-20 text-center">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-neutral-900">

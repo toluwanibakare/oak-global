@@ -418,8 +418,8 @@ export default function RequestDemoPage() {
                       <i className="fas fa-circle-info text-emerald-600 mt-0.5" />
                       <div>
                         If none of these days work for you, feel free to submit a custom date/time proposal by contacting us directly at{' '}
-                        <a href="mailto:o.kolawole@oak-global.com.ng" className="text-emerald-600 font-bold hover:underline">
-                          o.kolawole@oak-global.com.ng
+                        <a href="mailto:info@oak-global.com.ng" className="text-emerald-600 font-bold hover:underline">
+                          info@oak-global.com.ng
                         </a>{' '}
                         or through our{' '}
                         <a href="/contact" className="text-emerald-600 font-bold hover:underline">
@@ -517,8 +517,8 @@ export default function RequestDemoPage() {
                     <i className="fas fa-circle-info text-emerald-600 mt-0.5" />
                     <div>
                       If none of these days work for you, feel free to submit a custom date/time proposal by contacting us directly at{' '}
-                      <a href="mailto:o.kolawole@oak-global.com.ng" className="text-emerald-600 font-bold hover:underline">
-                        o.kolawole@oak-global.com.ng
+                      <a href="mailto:info@oak-global.com.ng" className="text-emerald-600 font-bold hover:underline">
+                        info@oak-global.com.ng
                       </a>{' '}
                       or through our{' '}
                       <a href="/contact" className="text-emerald-600 font-bold hover:underline">

@@ -94,7 +94,7 @@ const featureRows = [
   { name: "OakAudix - Audit", values: ["-", "Core", "Y", "Y", "Y"] },
   { name: "OakComply - Compliance", values: ["-", "Core", "Y", "Y", "Y"] },
   { name: "OakHSE360 - HSE", values: ["-", "Optional", "Optional", "Y", "Y"] },
-  { name: "OakRisk - Risk", values: ["-", "Optional", "Optional", "Y", "Y"] },
+  { name: "OakRisk360 - Risk", values: ["-", "Optional", "Optional", "Y", "Y"] },
   { name: "OakStrategy - Strategy", values: ["-", "Optional", "Optional", "Y", "Y"] },
   { name: "Lumina BI", values: ["Basic", "Standard", "Standard", "Advanced", "Enterprise"] },
   { name: "Multi-site Operations", values: ["Limited", "Optional", "Y", "Y", "Y"] },
@@ -266,7 +266,7 @@ export default function OakEIPPricingPage() {
                     { name: "OakAudix - Audit Management", desc: "Audit programmes, planning, execution, findings and audit packs.", price: "₦3m–₦5m" },
                     { name: "OakComply - Compliance Management", desc: "Legal register, obligations, applicability, evaluations and compliance CAPA.", price: "₦3m–₦5m" },
                     { name: "OakHSE360 - HSE Management", desc: "Incidents, investigations, permits, inspections, OHS and environment.", price: "₦4m–₦7.5m" },
-                    { name: "OakRisk - Risk Management", desc: "Enterprise risk and opportunity across governed risk domains.", price: "₦3m–₦5m" },
+                    { name: "OakRisk360 - Risk Management", desc: "Enterprise risk and opportunity across governed risk domains.", price: "₦3m–₦5m" },
                     { name: "OakStrategy - Strategy Management", desc: "Strategic themes, objectives, KPIs and execution governance.", price: "₦2.5m–₦4m" },
                     { name: "Lumina BI Advanced", desc: "Advanced business intelligence, analytics and executive reporting.", status: "Available with selected plans", statusColor: "text-sky-700 bg-sky-50", price: "₦3m–₦6m" }
                   ]}
