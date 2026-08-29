@@ -417,10 +417,10 @@ export default function OakEIPPage() {
         <section className="relative overflow-hidden bg-slate-900 text-white border-t border-slate-800">
           
           <div className="relative mx-auto max-w-4xl px-6 py-20 text-center">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-neutral-900">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-white">
               See OakEIP against your own management system.
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-neutral-700">
+            <p className="mx-auto mt-4 max-w-2xl text-slate-300">
               We run executive briefings using your standards, sites and obligations - so you see
               real readiness, not a generic demo environment.
             </p>
