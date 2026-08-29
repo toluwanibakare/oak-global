@@ -483,6 +483,9 @@ export default function ProductsPage() {
               <Link to="/contact" className="inline-flex items-center gap-2 px-6 py-3 border border-emerald-600 text-emerald-600 font-semibold hover:bg-emerald-50 transition-all duration-300">
                 Talk to a Specialist
               </Link>
+              <Link to="/oakeip" className="inline-flex items-center gap-2 px-6 py-3 bg-sky-700 text-white font-semibold shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+                Visit OakEIP
+              </Link>
             </div>
           </motion.div>
         </div>

@@ -460,6 +460,12 @@ export default function HomePage() {
                     >
                       View All Products
                     </Link>
+                    <Link
+                      to="/oakeip"
+                      className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-sky-700 text-white text-sm font-bold hover:bg-sky-600 transition-all duration-300"
+                    >
+                      Visit OakEIP
+                    </Link>
                   </motion.div>
                 </motion.div>
               </AnimatePresence>
@@ -932,6 +938,9 @@ export default function HomePage() {
               </Link>
               <Link to="/contact" className="inline-flex items-center gap-2.5 px-8 py-4 border border-white/20 text-white text-sm font-bold hover:bg-white/5 transition-all duration-300">
                 Talk to Oak Global
+              </Link>
+              <Link to="/oakeip" className="inline-flex items-center gap-2.5 px-8 py-4 bg-sky-700 text-white text-sm font-bold hover:bg-sky-600 transition-all duration-300">
+                Visit OakEIP
               </Link>
             </div>
           </motion.div>

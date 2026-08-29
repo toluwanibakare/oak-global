@@ -191,10 +191,10 @@ export default function Navbar() {
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center">
             <Link
-              to="/contact"
+              to="/oakeip"
               className="group inline-flex items-center gap-3 px-6 py-2.5 text-sm font-bold text-white bg-gradient-to-r from-emerald-600 to-sky-700 rounded-none shadow-lg hover:shadow-xl hover:shadow-emerald-500/20 hover:-translate-y-0.5 active:scale-[0.97] whitespace-nowrap transition-all duration-300"
             >
-              <span>Get in Touch</span>
+              <span>Visit OakEIP</span>
               <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
@@ -345,11 +345,11 @@ export default function Navbar() {
                 {/* CTA */}
                 <div className="px-6 pt-6 border-t border-neutral-100">
                   <Link
-                    to="/contact"
+                    to="/oakeip"
                     onClick={() => setOpen(false)}
                     className="group flex items-center justify-center gap-3 w-full px-6 py-3.5 text-base font-bold text-white bg-gradient-to-r from-emerald-600 to-sky-700 rounded-none shadow-lg hover:shadow-xl hover:shadow-emerald-500/20 transition-all"
                   >
-                    <span>Get in Touch</span>
+                    <span>Visit OakEIP</span>
                     <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                     </svg>

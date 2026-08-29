@@ -296,7 +296,7 @@ async function sendEmails({ type, recipientName, recipientEmail, payload }) {
               </ul>
               <p>We will review your selection and send a calendar invitation soon.</p>`
          }
-         ${DRIVE_LINK ? `<p>In the meantime, you can explore some of our materials and documentation here: <a href="${DRIVE_LINK}" style="color: #047857; font-weight: bold; text-decoration: underline;">Google Drive Resources Link</a></p>` : ''}
+         <p>Please watch our <a href="https://drive.google.com/drive/folders/1FsIFf9nqzo6pMrm3iOfIBT10k-MeZ_Lz" style="color: #047857; font-weight: bold; text-decoration: underline;">demo video</a> to know more about the product before the live demo.</p>
          <br>
          <p>Best regards,<br><strong>OAK Global Team</strong></p>
        </div>`
