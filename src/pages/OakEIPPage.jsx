@@ -226,11 +226,11 @@ export default function OakEIPPage() {
                   </Button>
                 </Link>
               </div>
-              <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-sm text-neutral-500">
+              <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-sm text-emerald-50/90">
                 {["Multi-tenant & ISO-aware", "Board-ready reporting", "Evidence grounded in governed knowledge"].map(
                   (i) => (
                     <span key={i} className="flex items-center gap-1.5">
-                      <CheckCircle2 className="h-4 w-4 text-neutral-9000" /> {i}
+                      <CheckCircle2 className="h-4 w-4 text-emerald-300" /> {i}
                     </span>
                   ),
                 )}
@@ -238,7 +238,7 @@ export default function OakEIPPage() {
             </div>
 
             {/* Architecture visual */}
-            <div className="rounded-2xl border border-neutral-200 bg-white shadow-sm p-5">
+            <div className="rounded-2xl border border-neutral-200 bg-white shadow-sm p-5 text-neutral-900">
               <div className="text-[11px] font-medium uppercase tracking-[0.16em] text-neutral-500">
                 Platform architecture
               </div>
@@ -249,7 +249,7 @@ export default function OakEIPPage() {
                       key={p.name}
                       className="rounded-lg border border-neutral-100 bg-neutral-50 px-3 py-3 text-center"
                     >
-                      <p.icon className="mx-auto h-4 w-4 text-neutral-9000" />
+                      <p.icon className="mx-auto h-4 w-4 text-neutral-500" />
                       <div className="mt-1.5 text-xs font-semibold">{p.name}</div>
                     </div>
                   ))}
