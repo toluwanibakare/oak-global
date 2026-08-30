@@ -209,8 +209,11 @@ export default function OakEIPPage() {
                 Enterprise Platform Baseline v1.0
               </Badge>
               <h1 className="mt-3 max-w-2xl text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl text-white">
-                Transforming ISO from a Compliance Cost into a Business Performance Asset.
+                The enterprise operating platform for governance, assurance and excellence.
               </h1>
+              <p className="mt-3 max-w-xl text-base text-emerald-100/70 md:text-lg">
+                Transforming ISO from a Compliance Cost into a Business Performance Asset.
+              </p>
               <div className="mt-6 max-w-xl text-sm md:text-base font-medium space-y-4 border border-white/20 bg-black/20 p-5 rounded-xl backdrop-blur-sm shadow-xl">
                   <div>
                     <div className="text-white/60 text-xs font-bold uppercase tracking-wider mb-2">Traditional ISO approach</div>
