@@ -301,6 +301,14 @@ export default function OakEIPPage() {
                     )}
                   </div>
                 </div>
+                <video
+                  className="w-full rounded-lg border border-neutral-200 shadow-sm"
+                  src="/assets/video/OakEIP%20Platform.mp4"
+                  controls
+                  muted
+                  playsInline
+                  preload="metadata"
+                ></video>
               </div>
             </div>
           </div>
